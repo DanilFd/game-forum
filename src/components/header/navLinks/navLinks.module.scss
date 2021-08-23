@@ -1,0 +1,28 @@
+.nav{
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+}
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  li, a {
+    list-style: none;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+  }
+}
+.search {
+  div {
+    display: flex;
+    cursor: pointer;
+  }
+
+  img {
+    padding-right: 5px;
+    width: 15px;
+    height: 19px;
+  }
+}

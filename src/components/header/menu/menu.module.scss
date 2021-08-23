@@ -1,0 +1,35 @@
+.menu {
+  display: none;
+
+  nav, ul {
+    display: block;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background-color: #24252A;
+  }
+
+  li {
+    width: 100%;
+    text-align: center;
+    padding: 3% 0;
+    div{
+      display: inline-flex;
+    }
+  }
+}
+
+.menu.active {
+  .blur {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  display: block;
+}
+
+
