@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import searchIcon from "./searchIcon.svg";
 import styles from "./navLinks.module.scss"
+import {AiOutlineSearch} from "react-icons/all";
 
 export const NavLinks = () => {
     return (
@@ -14,7 +14,7 @@ export const NavLinks = () => {
                 <li><NavLink to="">Помощь</NavLink></li>
                 <li className={styles.search}>
                     <div>
-                        <img src={searchIcon} alt=""/>
+                        <AiOutlineSearch/>
                         <span>Поиск</span>
                     </div>
                 </li>

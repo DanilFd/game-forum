@@ -6,7 +6,6 @@ type Props = {
     active: boolean,
     setActive: (active: boolean) => void
 }
-
 export const Menu = ({active, setActive}: Props) => {
     return (
         <nav className={active ? `${styles.menu} ${styles.active}` : styles.menu} >

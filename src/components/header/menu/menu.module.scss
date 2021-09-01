@@ -1,3 +1,4 @@
+@import "src/variables";
 .menu {
   display: none;
 
@@ -7,7 +8,7 @@
     position: absolute;
     right: 0;
     width: 100%;
-    background-color: #24252A;
+    background-color: $mainBackgroundColor;
   }
 
   li {

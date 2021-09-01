@@ -2,12 +2,10 @@ import React, {useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./header.module.scss"
 import logo from "./images/logo.svg"
-import loginIcon from "./images/loginIcon.svg"
 import logoIcon from "./images/logoIcon.svg"
-import menuIcon from "./images/menuIcon.svg"
-import closeIcon from "./images/close.svg"
 import {NavLinks} from "./navLinks/navLinks";
 import {Menu} from "./menu/menu";
+import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
 
 
 export const Header = () => {
@@ -15,11 +13,12 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
+
                 <div className={styles.menu}>
                     {
                         active ?
-                            <img onClick={() => setActive(!active)} src={closeIcon} alt=""/> :
-                            <img onClick={() => setActive(!active)} src={menuIcon} alt=""/>
+                            <AiOutlineClose onClick={() => setActive(!active)}/> :
+                            <GiHamburgerMenu onClick={() => setActive(!active)}/>
                     }
                 </div>
                 <NavLink className={styles.logo} to="/">
@@ -28,8 +27,10 @@ export const Header = () => {
                 </NavLink>
                 <NavLinks/>
                 <div className={styles.login}>
-                    <img src={loginIcon} alt=""/>
+                    <span>
+                    <IoMdLogIn/>
                     <span>Войти</span>
+                    </span>
                 </div>
             </nav>
             <Menu active={active} setActive={setActive}/>
