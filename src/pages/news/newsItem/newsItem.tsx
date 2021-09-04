@@ -5,7 +5,7 @@ import {FaRegComment} from "react-icons/all";
 import {NewsItemType} from "../../../types/NewsItemType";
 
 type Props = {
-    item:NewsItemType
+    item: NewsItemType
 }
 
 export const NewsItem = ({item}: Props) => {
@@ -19,7 +19,7 @@ export const NewsItem = ({item}: Props) => {
                     <NavLink to="/">{item.title}</NavLink>
                 </div>
                 <div className={styles.articleInfo}>
-                    <span>{item.creationDate}</span>
+                    <span>{item.creation_date}</span>
                     <span className={styles.commentsInfo}> <FaRegComment/></span>
                 </div>
             </div>

@@ -8,6 +8,7 @@ export const Routes = () => {
         <div className={styles.pageContent}>
             <Switch>
                 <Route exact path="/news" component={News}/>
+                <Route exact path="/news/:categorySlug" component={News}/>
             </Switch>
         </div>
     );

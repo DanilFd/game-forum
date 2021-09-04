@@ -1,0 +1,47 @@
+@import "./src/variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+
+.aside {
+  background-color: #f6f6f6;
+  position: relative;
+  width: 290px;
+  padding: 0 30px;
+  .navigation {
+    h3{
+      font-size: 32px;
+      font-weight: 300;
+    }
+    ul {
+      display: block;
+      margin: 10px 0;
+
+      li {
+        display: list-item;
+        padding: 4px 0;
+      }
+      a{
+        color: black;
+        font-size: 15px;
+        font-family: Roboto, sans-serif;
+        &:hover{
+          color: $secondaryColor;
+        }
+      }
+    }
+
+    span {
+      color: black;
+    }
+
+    position: sticky;
+    top: 99px;
+
+    .active{
+      border-bottom: 2px solid $secondaryColor;
+      &:hover{
+        color: black;
+      }
+    }
+  }
+}
