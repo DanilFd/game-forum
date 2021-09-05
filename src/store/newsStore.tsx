@@ -10,6 +10,7 @@ class NewsStore {
     error = ''
     index = 0
 
+
     constructor() {
         makeAutoObservable(this)
     }
@@ -17,7 +18,7 @@ class NewsStore {
     fetchNews(slug: string) {
         this.isLoading = true
         api.get<NewsItemType[]>('news/list/news/',
-            {params: {category: this.categories.find(item => item.slug === slug)?.id}})
+            {params: {category: slug}})
             .then(res => {
                 res.data.forEach(item => {
                     item.creation_date = new Date(item.creation_date).toLocaleDateString()
@@ -28,7 +29,7 @@ class NewsStore {
                         item.creation_date = "Вчера"
                     }
                 })
-               runInAction(() => this.news = res.data)
+                runInAction(() => this.news = res.data)
             })
             .catch(e => this.error = e.message)
             .finally(() => this.isLoading = false)
