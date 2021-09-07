@@ -6,9 +6,10 @@ import {NewsItemType} from "../../../types/NewsItemType";
 
 type Props = {
     item: NewsItemType
+    categorySlug:string
 }
 
-export const NewsItem = ({item}: Props) => {
+export const NewsItem = ({item,categorySlug}: Props) => {
     return (
         <div className={styles.newsItem}>
             <NavLink className={styles.articleImg} to="/">
@@ -16,7 +17,7 @@ export const NewsItem = ({item}: Props) => {
             </NavLink>
             <div className={styles.articleDescription}>
                 <div className={styles.description}>
-                    <NavLink to="/">{item.title}</NavLink>
+                    <NavLink to={`/news/${categorySlug ? categorySlug: "all"}/${item.id}`}>{item.title}</NavLink>
                 </div>
                 <div className={styles.articleInfo}>
                     <span>{item.creation_date}</span>

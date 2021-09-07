@@ -9,9 +9,6 @@ import {useParams} from 'react-router-dom';
 export const News = observer(() => {
     const params = useParams<{ categorySlug: string }>()
     useEffect(() => {
-        newsStore.fetchCategories()
-    }, [])
-    useEffect(() => {
         newsStore.fetchNews(params.categorySlug)
     }, [params.categorySlug])
     return (
@@ -25,7 +22,7 @@ export const News = observer(() => {
                 <section>
                     <div className={styles.wrapper}>
                         <div className={styles.items}>
-                            {newsStore.news.map(item => <NewsItem key={item.id} item={item}/>)}
+                            {newsStore.news.map(item => <NewsItem categorySlug={params.categorySlug} key={item.id} item={item}/>)}
                         </div>
                         <div className={styles.pagination}>
                         </div>

@@ -1,7 +1,9 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {NewsItemType} from "../types/NewsItemType";
-import {api} from "../http";
 import {CategoryType} from "../types/CategoryType";
+import {NewsItemContentType} from "../types/NewsItemContentType";
+import {dateConversion} from "../utils/dateConversion";
+import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
 
 class NewsStore {
     news = [] as NewsItemType[]
@@ -9,26 +11,18 @@ class NewsStore {
     isLoading = false
     error = ''
     index = 0
-
+    newsItemContent = {} as NewsItemContentType
 
     constructor() {
         makeAutoObservable(this)
+        this.fetchCategories()
     }
 
     fetchNews(slug: string) {
         this.isLoading = true
-        api.get<NewsItemType[]>('news/list/news/',
-            {params: {category: slug}})
+        getNews(slug)
             .then(res => {
-                res.data.forEach(item => {
-                    item.creation_date = new Date(item.creation_date).toLocaleDateString()
-                    if (new Date().toLocaleDateString() === item.creation_date) {
-                        item.creation_date = "Сегодня"
-                    } else if (new Date(new Date().setDate(new Date().getDate() - 1))
-                        .toLocaleDateString() === item.creation_date) {
-                        item.creation_date = "Вчера"
-                    }
-                })
+                res.data.forEach(item => dateConversion(item))
                 runInAction(() => this.news = res.data)
             })
             .catch(e => this.error = e.message)
@@ -37,8 +31,19 @@ class NewsStore {
 
     fetchCategories() {
         this.isLoading = true
-        api.get<CategoryType[]>('news/list/categories/')
-            .then(res => runInAction(() => this.categories = res.data ) )
+        getCategories()
+            .then(res => runInAction(() => this.categories = res.data))
+            .catch(e => this.error = e.message)
+            .finally(() => this.isLoading = false)
+    }
+
+    fetchNewsItemDetail(newsId: string) {
+        this.isLoading = true
+        getNewsItemDetail(newsId)
+            .then(res => {
+                dateConversion(res.data)
+                runInAction(() => this.newsItemContent = res.data)
+            })
             .catch(e => this.error = e.message)
             .finally(() => this.isLoading = false)
     }
