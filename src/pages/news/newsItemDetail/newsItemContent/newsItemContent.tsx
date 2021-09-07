@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./newsItemContent.module.scss"
 import {NewsItemContentType} from "../../../../types/NewsItemContentType";
+import {AiOutlineEye, BsBookmark, FaRegComment} from "react-icons/all";
 
 type Props = {
     newsItemDetail: NewsItemContentType
@@ -13,14 +14,19 @@ const NewsItemContent = ({newsItemDetail}: Props) => {
                 <h1>{newsItemDetail.title}</h1>
                 <div className={styles.info}>
                     <div className={styles.user}>
-                        Жмищенко
+                        <img
+                            src="https://yt3.ggpht.com/ytc/AKedOLSDfkyRyvD8wZlHqtlKyNqE5H5BqUI2CxqOKU7wAg=s900-c-k-c0x00ffffff-no-rj"
+                            alt=""/>
+                        <span>Жмищенко Олег</span>
                     </div>
-                    <div>1  </div>
+                    <div><span>{newsItemDetail.creation_date}</span></div>
+                    <div className={styles.comments}><span>0</span> <FaRegComment/></div>
+                    <div className={styles.views}><span>0</span> <AiOutlineEye/></div>
+                    <div className={styles.favorite}><BsBookmark/><span>Избранное(0)</span></div>
                 </div>
             </section>
             <section className={styles.content}>
-                <div dangerouslySetInnerHTML={{__html: newsItemDetail.content}} />
-
+                <div dangerouslySetInnerHTML={{__html: newsItemDetail.content}}/>
             </section>
         </div>
     );

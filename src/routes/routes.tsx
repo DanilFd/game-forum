@@ -8,7 +8,7 @@ export const Routes = () => {
     return (
         <div className={styles.pageContent}>
             <Switch>
-                <Route exact path="/news" component={News}/>
+                <Route exact path="/news/all" component={News}/>
                 <Route exact path="/news/:categorySlug" component={News}/>
                 <Route exact path="/news/:categorySlug/:newsId" component={NewsItemDetail}/>
             </Switch>

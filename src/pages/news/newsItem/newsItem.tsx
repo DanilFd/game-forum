@@ -12,7 +12,7 @@ type Props = {
 export const NewsItem = ({item,categorySlug}: Props) => {
     return (
         <div className={styles.newsItem}>
-            <NavLink className={styles.articleImg} to="/">
+            <NavLink className={styles.articleImg} to={`/news/${categorySlug ? categorySlug: "all"}/${item.id}`}>
                 <img src={item.image} alt=""/>
             </NavLink>
             <div className={styles.articleDescription}>
