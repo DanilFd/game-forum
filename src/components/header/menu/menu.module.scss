@@ -1,7 +1,6 @@
 @import "src/variables";
-.menu {
-  display: none;
 
+.menu {
   nav, ul {
     display: block;
     margin: 0;
@@ -11,14 +10,22 @@
     background-color: $mainBackgroundColor;
   }
 
+  ul {
+    height: 0;
+    overflow: hidden;
+    transition: 0.4s all;
+  }
+
   li {
     width: 100%;
     text-align: center;
     padding: 3% 0;
-    div{
+
+    div {
       display: inline-flex;
     }
-    a{
+
+    a {
       display: block;
     }
   }
@@ -32,7 +39,37 @@
     left: 0;
     bottom: 0;
   }
-  display: block;
+  ul {
+    height: 460px;
+    transition: 0.4s all;
+  }
 }
 
+@media (max-width:880px ) {
+    .menu.active{
+      .blur{
+        ul{
+          height: 405px;
+        }
+      }
+    }
+}
+@media (max-width:650px ) {
+  .menu.active{
+    .blur{
+      ul{
+        height: 350px;
+      }
+    }
+  }
+}
+@media (max-width:490px ) {
+  .menu.active{
+    .blur{
+      ul{
+        height: 280px;
+      }
+    }
+  }
+}
 
