@@ -5,17 +5,17 @@
 .aside {
   background-color: #f6f6f6;
   position: relative;
-  padding: 0 50px;
+  padding: 0 30px;
 
   .navigation {
-    h3 {
-      font-size: 32px;
-      font-weight: 300;
-    }
-
     .heading {
       svg {
         display: none;
+      }
+
+      h3 {
+        font-size: 32px;
+        font-weight: 300;
       }
     }
 
@@ -62,15 +62,18 @@
       .heading {
         padding: 10px 0;
       }
+
       ul {
         li {
           padding-right: 15px;
           display: inline-block;
         }
+
         height: 0;
         overflow: hidden;
         transition: 0.4s all;
       }
+
       .activeMenu {
         height: auto;
         padding: 10px 0;
@@ -99,6 +102,13 @@
           display: block;
           padding-bottom: 10px;
         }
+      .heading{
+
+        h3 {
+          font-size: 26px!important;
+          font-weight: 300;
+        }
+      }
       }
     }
   }

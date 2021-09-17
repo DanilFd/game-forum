@@ -1,4 +1,5 @@
 @import "./src/variables";
+
 .newsItem {
   margin-top: 16px;
   padding-bottom: 15px;
@@ -9,49 +10,66 @@
 
 
   .articleImg {
-    width: 25%;
+    border-radius: 15px;
     margin-right: 15px;
-
+    padding: 8% 15%;
+    position: relative;
+    overflow: hidden;
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: 129px;
-      border-radius: 7px;
+      height: 100%;
       object-fit: cover;
     }
   }
 
   .articleDescription {
     width: 70%;
+
     .description {
       a {
         text-decoration: none;
         color: black;
         font-size: 18px;
-        font-family: Rubik,sans-serif;
+        font-family: Rubik, sans-serif;
         font-weight: 500;
         line-height: 1.4;
-        &:hover{
+
+        &:hover {
           color: $secondaryColor;
           border-bottom: 1px solid $secondaryColor;
         }
       }
     }
+
     .articleInfo {
       display: flex;
       align-items: center;
       font-size: 12px;
       margin-top: 8px;
-      font-family: Roboto,sans-serif;
+      font-family: Roboto, sans-serif;
       font-style: italic;
       color: $infoBarColor;
-      .commentsInfo{
+
+      .commentsInfo {
         display: flex;
         margin-left: 10px;
-        svg{
+
+        svg {
           margin-left: 3px;
         }
       }
+    }
+  }
+}
 
+
+@media (max-width: 590px) {
+  .newsItem {
+    .articleImg {
+      padding: 55px 55px;
     }
   }
 }
