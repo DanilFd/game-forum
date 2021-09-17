@@ -19,33 +19,33 @@ class NewsStore {
     }
 
     fetchNews(slug: string) {
-        this.isLoading = true
+        runInAction(() => this.isLoading = true)
         getNews(slug)
             .then(res => {
                 res.data.forEach(item => dateConversion(item))
                 runInAction(() => this.news = res.data)
             })
             .catch(e => this.error = e.message)
-            .finally(() => this.isLoading = false)
+            .finally( () => runInAction(() => this.isLoading = false))
     }
 
     fetchCategories() {
-        this.isLoading = true
+        runInAction(() => this.isLoading = true)
         getCategories()
             .then(res => runInAction(() => this.categories = res.data))
             .catch(e => this.error = e.message)
-            .finally(() => this.isLoading = false)
+            .finally( () => runInAction(() => this.isLoading = false))
     }
 
     fetchNewsItemDetail(newsId: string) {
-        this.isLoading = true
+        runInAction(() => this.isLoading = true)
         getNewsItemDetail(newsId)
             .then(res => {
                 dateConversion(res.data)
                 runInAction(() => this.newsItemContent = res.data)
             })
             .catch(e => this.error = e.message)
-            .finally(() => this.isLoading = false)
+            .finally( () => runInAction(() => this.isLoading = false))
     }
 }
 

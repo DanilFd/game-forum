@@ -14,7 +14,7 @@ export const NewsItemDetail = observer(() => {
     }, [params.newsId])
     return (
         <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
-            <SideBar categories={newsStore.categories}/>
+            <SideBar  categories={newsStore.categories}/>
             <div className={styles.content}>
                 <NewsItemContent newsItemDetail={newsStore.newsItemContent}/>
             </div>

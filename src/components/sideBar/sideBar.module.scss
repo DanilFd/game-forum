@@ -6,25 +6,34 @@
   background-color: #f6f6f6;
   position: relative;
   padding: 0 50px;
+
   .navigation {
-    h3{
+    h3 {
       font-size: 32px;
       font-weight: 300;
     }
+
+    .heading {
+      svg {
+        display: none;
+      }
+    }
+
     ul {
       display: block;
-      margin: 10px 0;
 
       li {
         display: list-item;
         padding: 4px 0;
       }
-      a{
+
+      a {
         color: black;
         font-size: 15px;
         font-family: Roboto, sans-serif;
         font-weight: 500;
-        &:hover{
+
+        &:hover {
           color: $secondaryColor;
         }
       }
@@ -37,10 +46,60 @@
     position: sticky;
     top: 99px;
 
-    .active{
+    .active {
       border-bottom: 2px solid $secondaryColor;
-      &:hover{
+
+      &:hover {
         color: black;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .aside {
+    .navigation {
+      .heading {
+        padding: 10px 0;
+      }
+      ul {
+        li {
+          padding-right: 15px;
+          display: inline-block;
+        }
+        height: 0;
+        overflow: hidden;
+        transition: 0.4s all;
+      }
+
+      .activeMenu {
+        height: auto;
+        padding: 10px 0;
+        transition: 0.4s all;
+      }
+
+      .heading {
+        display: flex;
+
+        svg {
+          font-size: 25px;
+          color: $secondaryColor;
+          display: block;
+          transform: translateY(9px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  .aside {
+    .navigation {
+      ul {
+        li {
+          display: block;
+          padding-bottom: 10px;
+        }
       }
     }
   }

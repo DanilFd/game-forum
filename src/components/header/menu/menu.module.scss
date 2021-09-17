@@ -18,18 +18,20 @@
     div{
       display: inline-flex;
     }
+    a{
+      display: block;
+    }
   }
 }
 
 .menu.active {
   .blur {
     position: fixed;
-    top: 80px;
+    top: 73px;
     right: 0;
     left: 0;
     bottom: 0;
   }
-
   display: block;
 }
 
