@@ -18,7 +18,6 @@ export const NewsItemDetail = observer(() => {
             <div className={styles.content}>
                 <NewsItemContent newsItemDetail={newsStore.newsItemContent}/>
             </div>
-
         </div>
     );
 });

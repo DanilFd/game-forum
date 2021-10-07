@@ -3,7 +3,6 @@
 
 .wrapper {
   padding: 50px 0;
-
   .header {
     h1 {
       margin-bottom: 16px;
@@ -14,10 +13,9 @@
     }
 
     .info {
-      margin: 15px 0;
       display: flex;
       align-items: center;
-
+      margin-bottom: 15px;
       div {
         font-family: Roboto, sans-serif;
         font-size: 13px;
@@ -58,10 +56,15 @@
           font-size: 16px;
         }
       }
-      .favorite{
-        svg{
+
+      .favorite {
+        svg {
           font-size: 18px;
         }
+      }
+
+      > * {
+        padding-top: 10px;
       }
     }
   }
@@ -127,3 +130,19 @@
     }
   }
 }
+
+@media (max-width: 590px) {
+  .wrapper {
+    .header {
+      .info {
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+      }
+    }
+
+    section {
+      padding: 0 15px;
+    }
+  }
+}
+
