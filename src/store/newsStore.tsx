@@ -12,21 +12,25 @@ class NewsStore {
     error = ''
     index = 0
     newsItemContent = {} as NewsItemContentType
+    totalPages = 0
 
     constructor() {
         makeAutoObservable(this)
         this.fetchCategories()
     }
 
-    fetchNews(slug: string) {
+    fetchNews(slug: string, page: number) {
         runInAction(() => this.isLoading = true)
-        getNews(slug)
+        getNews(slug, page)
             .then(res => {
-                res.data.forEach(item => dateConversion(item))
-                runInAction(() => this.news = res.data)
+                res.data.results.forEach(item => dateConversion(item))
+                runInAction(() => {
+                    this.news = res.data.results
+                    this.totalPages = Math.ceil(res.data.count / 5)
+                })
             })
             .catch(e => this.error = e.message)
-            .finally( () => runInAction(() => this.isLoading = false))
+            .finally(() => runInAction(() => this.isLoading = false))
     }
 
     fetchCategories() {
@@ -34,7 +38,7 @@ class NewsStore {
         getCategories()
             .then(res => runInAction(() => this.categories = res.data))
             .catch(e => this.error = e.message)
-            .finally( () => runInAction(() => this.isLoading = false))
+            .finally(() => runInAction(() => this.isLoading = false))
     }
 
     fetchNewsItemDetail(newsId: string) {
@@ -45,8 +49,9 @@ class NewsStore {
                 runInAction(() => this.newsItemContent = res.data)
             })
             .catch(e => this.error = e.message)
-            .finally( () => runInAction(() => this.isLoading = false))
+            .finally(() => runInAction(() => this.isLoading = false))
     }
+
 }
 
 export default new NewsStore()
