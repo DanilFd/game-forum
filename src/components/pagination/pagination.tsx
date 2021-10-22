@@ -2,40 +2,62 @@ import styles from "./pagination.module.scss"
 import {pagination} from "../../utils/paginations";
 import {RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/all";
 import {useHistory} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useMemo} from "react";
 import {usePage} from "../../hooks/usePage";
+import {scrollToTop} from "../../utils/scrollToTop";
 
 type Props = {
     pagesCount: number
 }
 export const Pagination = (props: Props) => {
+    const history = useHistory()
+    const currentPage = usePage()
     const changePage = (page: number) => {
-        history.push({
+        currentPage !== page && history.push({
             search: `?page=${page}`
         })
     }
-    const history = useHistory()
-    let currentPage = usePage()
     useEffect(() => {
         changePage(+currentPage)
         // eslint-disable-next-line
     }, [])
+    const pages = useMemo(() => {
+        return pagination(props.pagesCount, currentPage)
+    }, [props.pagesCount, currentPage])
     return (
-        <div className={styles.pagination}>
-            <button onClick={() => {
-                currentPage > 1 && changePage(currentPage - 1)
-            }}><RiArrowLeftSLine/></button>
+        <div>
             {
-                pagination(props.pagesCount, currentPage).map(p => <button
-                    className={currentPage === p ? styles.current__page : ''}
-                    onClick={() => changePage(p)
-                    }
-                    key={p}>{p}</button>)
+                currentPage > props.pagesCount ? "Ничего не найдено" :
+
+                    <div className={styles.pagination}>
+                        {
+                            currentPage === 1 ? <div/> :
+                                <button onClick={() => {
+                                    changePage(currentPage - 1)
+                                    scrollToTop()
+                                }}><RiArrowLeftSLine/></button>
+
+                        }
+                        {
+                            pages.map(p => <button
+                                className={currentPage === p ? styles.current__page : ''}
+                                onClick={() => {
+                                    changePage(p)
+                                    scrollToTop()
+                                }
+                                }
+                                key={p}>{p}</button>)
+                        }
+                        {
+                            currentPage !== props.pagesCount &&
+                            <button onClick={() => {
+                                changePage(currentPage + 1)
+                                scrollToTop()
+                            }
+                            }><RiArrowRightSLine/></button>
+                        }
+                    </div>
             }
-            <button onClick={() => {
-                currentPage < props.pagesCount && changePage(currentPage + 1)
-            }
-            }><RiArrowRightSLine/></button>
         </div>
     );
 };

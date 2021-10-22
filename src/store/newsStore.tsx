@@ -51,7 +51,6 @@ class NewsStore {
             .catch(e => this.error = e.message)
             .finally(() => runInAction(() => this.isLoading = false))
     }
-
 }
 
 export default new NewsStore()

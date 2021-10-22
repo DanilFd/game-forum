@@ -11,8 +11,7 @@ import {useQuery} from "../../hooks/useQuery";
 
 export const News = observer(() => {
     const params = useParams<{ categorySlug: string }>()
-    const query = useQuery()
-    const page = query.get('page')
+    const page = useQuery().get('page')
     useEffect(() => {
         newsStore.fetchNews(params.categorySlug, page ? +page : 1)
         newsStore.fetchCategories()
@@ -36,9 +35,11 @@ export const News = observer(() => {
                                                                           item={item}/>)}
                                 </div>
                                 <div>
-                                    <Pagination
-                                        pagesCount={newsStore.totalPages}
-                                    />
+                                    {
+                                       !newsStore.isLoading && <Pagination
+                                            pagesCount={newsStore.totalPages}
+                                        />
+                                    }
                                 </div>
                             </div>
                         </section>

@@ -17,9 +17,9 @@ export const SideBar = (props: Props) => {
                     {active ? <TiArrowUpOutline/> : <TiArrowDownOutline/>}
                 </div>
                 <ul className={active ? `${styles.activeMenu}` : ''}>
-                    <li><NavLink activeClassName={styles.active} to='/news/all'>Все</NavLink></li>
+                    <li><NavLink activeClassName={styles.active} to='/news/all?page=1'>Все</NavLink></li>
                     {props.categories.map(category => <li key={category.id}><NavLink activeClassName={styles.active}
-                                                                                     to={`/news/${category.slug}`}>{category.title}</NavLink>
+                                                                                     to={`/news/${category.slug}?page=1`}>{category.title}</NavLink>
                     </li>)}
                 </ul>
             </nav>

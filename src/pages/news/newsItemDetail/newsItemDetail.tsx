@@ -5,19 +5,24 @@ import newsStore from "../../../store/newsStore";
 import styles from "./newsItemDetail.module.scss"
 import NewsItemContent from "./newsItemContent/newsItemContent";
 import {useParams} from "react-router-dom";
+import Loader from "../../../components/loader/loader";
 
 export const NewsItemDetail = observer(() => {
-    const params = useParams<{ newsId:string }>()
+    const params = useParams<{ newsId: string }>()
 
     useEffect(() => {
         newsStore.fetchNewsItemDetail(params.newsId)
     }, [params.newsId])
     return (
-        <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
-            <SideBar  categories={newsStore.categories}/>
-            <div className={styles.content}>
-                <NewsItemContent newsItemDetail={newsStore.newsItemContent}/>
-            </div>
+        <div>
+            {newsStore.isLoading ? <Loader/> :
+                <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
+                    <SideBar categories={newsStore.categories}/>
+                    <div className={styles.content}>
+                        <NewsItemContent newsItemDetail={newsStore.newsItemContent}/>
+                    </div>
+                </div>
+            }
         </div>
     );
 });
