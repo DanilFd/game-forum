@@ -22,7 +22,7 @@ export const News = observer(() => {
             {newsStore.isLoading ? <Loader/> :
                 <div style={{backgroundColor: "white"}} className={styles.news}>
                     <SideBar categories={newsStore.categories}/>
-                    <div className={styles.content}>
+                    <main className={styles.content}>
                         <section className={styles.header}>
                             <h1>{params.categorySlug ? "новости " + newsStore.categories.find(category =>
                                 category.slug === params.categorySlug)?.title : "Игровые новости"}</h1>
@@ -36,14 +36,14 @@ export const News = observer(() => {
                                 </div>
                                 <div>
                                     {
-                                       !newsStore.isLoading && <Pagination
+                                        !newsStore.isLoading && <Pagination
                                             pagesCount={newsStore.totalPages}
                                         />
                                     }
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    </main>
                 </div>
             }
         </div>

@@ -9,7 +9,7 @@ type Props = {
 export const Menu = ({active, setActive}: Props) => {
     return (
         <nav className={active ? `${styles.menu} ${styles.active}` : styles.menu} >
-            <div className={styles.blur} onClick={() => setActive(false)}>
+            <div className={styles.blur}  onClick={() => setActive(false)}>
                 <NavLinks/>
             </div>
         </nav>

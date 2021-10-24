@@ -36,7 +36,6 @@ export const Pagination = (props: Props) => {
                                     changePage(currentPage - 1)
                                     scrollToTop()
                                 }}><RiArrowLeftSLine/></button>
-
                         }
                         {
                             pages.map(p => <button

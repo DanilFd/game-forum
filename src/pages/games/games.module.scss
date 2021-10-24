@@ -1,0 +1,11 @@
+@import "./src/variables";
+
+.layout {
+  height: 100vh;
+  background-color: white;
+}
+.items{
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 50px;
+}

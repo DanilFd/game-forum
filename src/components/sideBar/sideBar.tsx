@@ -10,7 +10,7 @@ type Props = {
 export const SideBar = (props: Props) => {
     const [active, setActive] = useState(false);
     return (
-        <div className={styles.aside}>
+        <aside className={styles.aside}>
             <nav className={styles.navigation}>
                 <div onClick={() => setActive(!active)} className={styles.heading}>
                     <h3>Новости</h3>
@@ -23,7 +23,7 @@ export const SideBar = (props: Props) => {
                     </li>)}
                 </ul>
             </nav>
-        </div>
+        </aside>
     );
 };
 
