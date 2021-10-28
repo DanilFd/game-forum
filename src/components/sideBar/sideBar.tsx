@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import {NavLink} from "react-router-dom";
 import styles from "./sideBar.module.scss"
-import {CategoryType} from "../../types/CategoryType";
+import {CategoryType} from "../../types/News/CategoryType";
 import {TiArrowDownOutline, TiArrowUpOutline} from "react-icons/all";
 
 type Props = {

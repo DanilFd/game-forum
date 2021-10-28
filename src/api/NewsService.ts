@@ -1,6 +1,6 @@
 import {api} from "../http";
-import {CategoryType} from "../types/CategoryType";
-import {NewsItemContentType} from "../types/NewsItemContentType";
+import {CategoryType} from "../types/News/CategoryType";
+import {NewsItemContentType} from "../types/News/NewsItemContentType";
 import {PaginatedNewsItems} from "../types/PaginatedNewsItems";
 
 export const getNews = (slug: string, page = 1) => {

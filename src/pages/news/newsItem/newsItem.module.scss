@@ -80,6 +80,11 @@
       border-bottom: 1px $secondaryColor dotted;
     }
   }
+  span{
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    font-style: italic;
+  }
 }
 
 @media (max-width: 590px) {

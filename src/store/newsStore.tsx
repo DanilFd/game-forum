@@ -1,7 +1,7 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {NewsItemType} from "../types/NewsItemType";
-import {CategoryType} from "../types/CategoryType";
-import {NewsItemContentType} from "../types/NewsItemContentType";
+import {NewsItemType} from "../types/News/NewsItemType";
+import {CategoryType} from "../types/News/CategoryType";
+import {NewsItemContentType} from "../types/News/NewsItemContentType";
 import {dateConversion} from "../utils/dateConversion";
 import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
 

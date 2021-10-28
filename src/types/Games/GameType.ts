@@ -1,0 +1,19 @@
+export type GameType = {
+    id:number
+    img:string
+    title:string,
+    platform:[
+        {
+            id:number
+            title:string
+        }
+    ],
+    genre:[
+        {
+            id:number
+            title:string
+        }
+    ],
+    release_date:string,
+    score:number
+}

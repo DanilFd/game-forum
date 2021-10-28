@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./newsItem.module.scss"
 import {FaRegComment} from "react-icons/all";
-import {NewsItemType} from "../../../types/NewsItemType";
+import {NewsItemType} from "../../../types/News/NewsItemType";
 
 type Props = {
     item: NewsItemType
@@ -26,7 +26,7 @@ export const NewsItem = ({item, categorySlug}: Props) => {
                 <div className={styles.categories}>
                     {item.categories.map((category, index) => <>
                         <NavLink to={`/news/${category.slug}`}>{category.title}</NavLink>
-                        {index !== item.categories.length - 1   && ", "}
+                        {index !== item.categories.length - 1   && <span>, </span>}
                     </>)}
                 </div>
             </div>
