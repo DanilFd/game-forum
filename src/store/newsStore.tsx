@@ -4,13 +4,13 @@ import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemContentType} from "../types/News/NewsItemContentType";
 import {dateConversion} from "../utils/dateConversion";
 import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
+import {CalcNumberPages} from "../utils/CalcNumberPages";
 
 class NewsStore {
     news = [] as NewsItemType[]
     categories = [] as CategoryType[]
     isLoading = false
     error = ''
-    index = 0
     newsItemContent = {} as NewsItemContentType
     totalPages = 0
 
@@ -26,7 +26,7 @@ class NewsStore {
                 res.data.results.forEach(item => dateConversion(item))
                 runInAction(() => {
                     this.news = res.data.results
-                    this.totalPages = Math.ceil(res.data.count / 5)
+                    this.totalPages = CalcNumberPages(res.data.count)
                 })
             })
             .catch(e => this.error = e.message)

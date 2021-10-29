@@ -27,10 +27,10 @@ export const Game = ({game}: Props) => {
                 </div>
                 <div className={styles.detail}>
                     <div>
-                        Платформа: {game.platform.map(p => <span key={p.id}>{p.title}</span>)}
+                        Платформа: {game.platform.map(p => <NavLink to="#" key={p.id}>{p.title}</NavLink>)}
                     </div>
                     <div>
-                        Жанр: {game.genre.map(g => <span key={g.id}>{g.title}</span>)}
+                        Жанр: {game.genre.map(g => <NavLink to="#" key={g.id}>{g.title}</NavLink>)}
                     </div>
                     <div>
                         Дата выхода: {game.release_date}

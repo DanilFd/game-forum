@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import styles from "./newsItem.module.scss"
 import {FaRegComment} from "react-icons/all";
 import {NewsItemType} from "../../../types/News/NewsItemType";
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 type Props = {
     item: NewsItemType
@@ -24,10 +25,12 @@ export const NewsItem = ({item, categorySlug}: Props) => {
                     <span className={styles.commentsInfo}> <FaRegComment/></span>
                 </div>
                 <div className={styles.categories}>
-                    {item.categories.map((category, index) => <>
-                        <NavLink to={`/news/${category.slug}`}>{category.title}</NavLink>
-                        {index !== item.categories.length - 1   && <span>, </span>}
-                    </>)}
+                    {item.categories.map((category, index) =>
+                        <span key={generateUniqueID()}>
+                        <NavLink
+                            to={`/news/${category.slug}`}>{category.title}</NavLink>
+                            {index !== item.categories.length - 1 && <span>, </span>}
+                        </span>)}
                 </div>
             </div>
         </div>

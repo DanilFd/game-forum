@@ -1,7 +1,11 @@
 import {api} from "../http";
-import {GameType} from "../types/Games/GameType";
+import {PaginatedGame} from "../types/Games/PaginatedGame";
 
 
-export const getGames = () => {
-    return api.get<GameType[]>('/games/list/games/')
+export const getGames = (page = 1) => {
+    return api.get<PaginatedGame>('/games/list/games/', {
+        params: {
+            page
+        }
+    })
 }

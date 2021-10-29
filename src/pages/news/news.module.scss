@@ -1,6 +1,7 @@
 
 .news {
   display: flex;
+  min-height: 92vh;
   .content {
     flex: 1 1 auto;
     .header {

@@ -15,7 +15,7 @@
   position: relative;
   padding: 14% 22%;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 5px;
 
   img {
     position: absolute;
@@ -43,13 +43,27 @@
       border-bottom: 1px solid $secondaryColor;
     }
   }
-
 }
 
 .detail {
   font-family: Roboto, sans-serif;
   font-size: 12px;
   padding: 10px 0;
+
+  a {
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    font-style: italic;
+    color: #666;
+    border-bottom: 1px #666 dotted;
+    margin-right: 5px;
+
+    &:hover {
+      color: $secondaryColor;
+      border-bottom: 1px $secondaryColor dotted;
+    }
+  }
 
   div {
     padding-top: 5px;
@@ -64,4 +78,38 @@
     border-radius: 5px;
     padding: 5px;
   }
+}
+
+@media (max-width: 850px) {
+  .item {
+    &:nth-child(even) {
+      margin-left: 0;
+    }
+
+    width: 100%;
+  }
+  .img {
+    padding: 13% 22%;
+  }
+}
+
+@media (max-width: 550px) {
+  .item{
+    flex-direction: column;
+  }
+  .img {
+    padding: 25% 12%;
+  }
+  .info{
+    padding-left: 0;
+    padding-top: 20px;
+    position: relative;
+  }
+  .score{
+    padding-top: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
 }

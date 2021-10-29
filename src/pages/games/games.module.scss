@@ -1,11 +1,18 @@
 @import "./src/variables";
 
 .layout {
-  height: 100vh;
   background-color: white;
+  min-height: 92vh;
 }
-.items{
+
+.items {
   display: flex;
   flex-wrap: wrap;
   padding-top: 50px;
+}
+
+@media (max-width: 850px) {
+  .items{
+    display: block;
+  }
 }

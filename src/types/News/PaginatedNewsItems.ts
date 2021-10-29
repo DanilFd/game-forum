@@ -1,4 +1,4 @@
-import {NewsItemType} from "./News/NewsItemType";
+import {NewsItemType} from "./NewsItemType";
 
 export type PaginatedNewsItems = {
     count:number
