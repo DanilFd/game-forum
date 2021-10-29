@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
+import {Switch} from "../../../components/switch/switch";
 
 type Props = {
     game: GameType
@@ -38,6 +39,10 @@ export const Game = ({game}: Props) => {
                 </div>
                 <div className={styles.score}>
                     <span style={{backgroundColor: backColorForScore}}>{game.score}</span>
+                </div>
+                <div className={styles.subForGame}>
+                    <span>Следить за игрой:</span>
+                    <Switch/>
                 </div>
             </div>
         </div>
