@@ -6,6 +6,7 @@ import gamesStore from "../../store/gamesStore";
 import Loader from "../../components/loader/loader";
 import {Pagination} from "../../components/pagination/pagination";
 import {useQuery} from "../../hooks/useQuery";
+import {Toaster} from "react-hot-toast";
 
 export const Games = observer(() => {
         const page = useQuery().get('page')
@@ -29,8 +30,8 @@ export const Games = observer(() => {
                         </section>
                     </main>
                 }
+                <Toaster toastOptions={{duration: 3000, position: "top-right"}}/>
             </>
         );
     }
 );
-

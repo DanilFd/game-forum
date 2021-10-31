@@ -26,11 +26,11 @@ export const NewsItem = ({item, categorySlug}: Props) => {
                 </div>
                 <div className={styles.categories}>
                     {item.categories.map((category, index) =>
-                        <span key={generateUniqueID()}>
+                        <React.Fragment key={generateUniqueID()}>
                         <NavLink
                             to={`/news/${category.slug}`}>{category.title}</NavLink>
                             {index !== item.categories.length - 1 && <span>, </span>}
-                        </span>)}
+                        </React.Fragment>)}
                 </div>
             </div>
         </div>

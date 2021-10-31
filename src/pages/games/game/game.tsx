@@ -3,12 +3,15 @@ import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
 import {Switch} from "../../../components/switch/switch";
+import {toast} from "react-hot-toast";
 
 type Props = {
     game: GameType
 }
 
 export const Game = ({game}: Props) => {
+    const subNotify = () => toast.success('Игра добавленна в "Избранное"')
+    const unsubNotify = () => toast.error('Игра удаленна из "Избранного"')
     const backColorForScore = useMemo(() => {
         return game.score > 4.0 ?
             game.score > 7.5 ? "green" : "#fb9400"
@@ -41,8 +44,8 @@ export const Game = ({game}: Props) => {
                     <span style={{backgroundColor: backColorForScore}}>{game.score}</span>
                 </div>
                 <div className={styles.subForGame}>
-                    <span>Следить за игрой:</span>
-                    <Switch/>
+                    <span>Следить за игрой</span>
+                    <Switch onCheck={subNotify} onUnCheck={unsubNotify}/>
                 </div>
             </div>
         </div>
