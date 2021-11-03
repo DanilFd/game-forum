@@ -8,6 +8,8 @@ import {useParams} from 'react-router-dom';
 import {Pagination} from "../../components/pagination/pagination";
 import Loader from "../../components/loader/loader";
 import {useQuery} from "../../hooks/useQuery";
+import {useError} from "../../hooks/useError";
+import {Toaster} from "react-hot-toast";
 
 export const News = observer(() => {
     const params = useParams<{ categorySlug: string }>()
@@ -17,8 +19,9 @@ export const News = observer(() => {
         newsStore.fetchCategories()
         // eslint-disable-next-line
     }, [params.categorySlug, page])
+    useError(newsStore.error)
     return (
-        <div>
+        <>
             {newsStore.isLoading ? <Loader/> :
                 <div style={{backgroundColor: "white"}} className={styles.news}>
                     <SideBar categories={newsStore.categories}/>
@@ -46,8 +49,8 @@ export const News = observer(() => {
                     </main>
                 </div>
             }
-        </div>
-
+            <Toaster position={"top-right"} toastOptions={{duration:2000}}/>
+        </>
     );
 });
 

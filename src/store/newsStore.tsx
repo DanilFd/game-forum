@@ -20,7 +20,7 @@ class NewsStore {
     }
 
     fetchNews(slug: string, page: number) {
-        runInAction(() => this.isLoading = true)
+        this.isLoading = true
         getNews(slug, page)
             .then(res => {
                 res.data.results.forEach(item => dateConversion(item))
@@ -29,26 +29,26 @@ class NewsStore {
                     this.totalPages = CalcNumberPages(res.data.count)
                 })
             })
-            .catch(e => this.error = e.message)
+            .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
     }
 
     fetchCategories() {
-        runInAction(() => this.isLoading = true)
+        this.isLoading = true
         getCategories()
             .then(res => runInAction(() => this.categories = res.data))
-            .catch(e => this.error = e.message)
+            .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
     }
 
     fetchNewsItemDetail(newsId: string) {
-        runInAction(() => this.isLoading = true)
+        this.isLoading = true
         getNewsItemDetail(newsId)
             .then(res => {
                 dateConversion(res.data)
                 runInAction(() => this.newsItemContent = res.data)
             })
-            .catch(e => this.error = e.message)
+            .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
     }
 }

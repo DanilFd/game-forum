@@ -3,7 +3,6 @@ import {Header} from "./components/header/header";
 import {BrowserRouter} from "react-router-dom";
 import "./index.scss"
 import {Routes} from "./routes/routes";
-
 function App() {
     return (
         <BrowserRouter>
