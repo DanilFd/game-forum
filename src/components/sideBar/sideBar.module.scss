@@ -82,12 +82,16 @@
 
       .heading {
         display: flex;
-
+        align-items: center;
         svg {
           font-size: 25px;
           color: $secondaryColor;
           display: block;
-          transform: translateY(9px);
+          transform: rotate(0);
+          transition: all ease 0.5s;
+        }
+        .isActive{
+          transform: rotate(180deg);
         }
       }
     }

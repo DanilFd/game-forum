@@ -3,15 +3,17 @@ import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
 import {Switch} from "../../../components/switch/switch";
-import {toast} from "react-hot-toast";
+import {toast} from "react-toastify";
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 type Props = {
     game: GameType
 }
 
 export const Game = ({game}: Props) => {
-    const subNotify = () => toast.success('Игра добавленна в "Избранное"')
-    const unsubNotify = () => toast.error('Игра удаленна из "Избранного"')
+    const subNotify = () => toast.info("Вы добавили игру в избранное")
+    const unsubNotify = () => toast.info("Вы удалили игру из избранного")
+
     const backColorForScore = useMemo(() => {
         return game.score > 4.0 ?
             game.score > 7.5 ? "green" : "#fb9400"
@@ -31,10 +33,16 @@ export const Game = ({game}: Props) => {
                 </div>
                 <div className={styles.detail}>
                     <div>
-                        Платформа: {game.platform.map(p => <NavLink to="#" key={p.id}>{p.title}</NavLink>)}
+                        Платформа: {game.platforms.map((p, index) => <React.Fragment key={generateUniqueID()}>
+                        <NavLink to="#" key={p.id}>{p.title}</NavLink>
+                        {index !== game.platforms.length - 1 && <span>, </span>}
+                    </React.Fragment>)}
                     </div>
                     <div>
-                        Жанр: {game.genre.map(g => <NavLink to="#" key={g.id}>{g.title}</NavLink>)}
+                        Жанр: {game.genres.map((g,index) => <React.Fragment key={generateUniqueID()}>
+                        <NavLink to="#" key={g.id}>{g.title}</NavLink>
+                        {index !== game.genres.length - 1 && <span>, </span>}
+                    </React.Fragment>)}
                     </div>
                     <div>
                         Дата выхода: {game.release_date}

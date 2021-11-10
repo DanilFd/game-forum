@@ -7,7 +7,6 @@ import Loader from "../../components/loader/loader";
 import {Pagination} from "../../components/pagination/pagination";
 import {useQuery} from "../../hooks/useQuery";
 import {useError} from "../../hooks/useError";
-import {Toaster} from "react-hot-toast";
 
 export const Games = observer(() => {
         const page = useQuery().get('page')
@@ -18,7 +17,7 @@ export const Games = observer(() => {
     return (
             <>
                 {gamesStore.isLoading ? <Loader/> :
-                    <main className={styles.layout}>
+                    <main  className={styles.layout}>
                         <section className={styles.filters}>
 
                         </section>
@@ -26,14 +25,13 @@ export const Games = observer(() => {
                             {
                                 gamesStore.games.map(game => <Game game={game} key={game.id}/>)
                             }
-                            {gamesStore.games.fo}
                         </section>
                         <section>
                             <Pagination pagesCount={gamesStore.totalPages}/>
                         </section>
                     </main>
+
                 }
-                <Toaster position={"top-right"} toastOptions={{duration:2000}}/>
             </>
         );
     }

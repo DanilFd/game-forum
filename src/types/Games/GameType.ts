@@ -2,13 +2,13 @@ export type GameType = {
     id:number
     img:string
     title:string,
-    platform:[
+    platforms:[
         {
             id:number
             title:string
         }
     ],
-    genre:[
+    genres:[
         {
             id:number
             title:string

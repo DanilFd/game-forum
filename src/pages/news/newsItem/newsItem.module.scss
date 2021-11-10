@@ -13,7 +13,7 @@
   .articleImg {
     border-radius: 15px;
     margin-right: 15px;
-    padding: 8% 15%;
+    padding: 9% 15%;
     position: relative;
     overflow: hidden;
     img {
@@ -86,11 +86,24 @@
     font-style: italic;
   }
 }
-
+@media (max-width: 690px) {
+  .newsItem{
+    .articleImg{
+      padding: 15% 20%;
+    }
+  }
+}
 @media (max-width: 590px) {
   .newsItem {
+    flex-direction: column;
+    align-items: normal;
     .articleImg {
-      padding: 55px 55px;
+      border-radius: 7px;
+      padding: 22% 15%;
+    }
+    .articleDescription{
+      padding-top: 8px;
+      width: 100%;
     }
   }
 }

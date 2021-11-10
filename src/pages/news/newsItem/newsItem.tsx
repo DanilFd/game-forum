@@ -23,7 +23,7 @@ export const NewsItem = ({item, categorySlug}: Props) => {
                                 to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>{item.title}</NavLink>
                         </div>
                         <div className={styles.articleInfo}>
-                            <span>{item.creation_date}</span>
+                            <span >{item.creation_date}</span>
                             <span className={styles.commentsInfo}> <FaRegComment/></span>
                         </div>
                         <div className={styles.categories}>

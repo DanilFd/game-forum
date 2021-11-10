@@ -9,7 +9,6 @@ import {Pagination} from "../../components/pagination/pagination";
 import Loader from "../../components/loader/loader";
 import {useQuery} from "../../hooks/useQuery";
 import {useError} from "../../hooks/useError";
-import {Toaster} from "react-hot-toast";
 
 export const News = observer(() => {
     const params = useParams<{ categorySlug: string }>()
@@ -17,7 +16,6 @@ export const News = observer(() => {
     useEffect(() => {
         newsStore.fetchNews(params.categorySlug, page ? +page : 1)
         newsStore.fetchCategories()
-        // eslint-disable-next-line
     }, [params.categorySlug, page])
     useError(newsStore.error)
     return (
@@ -49,7 +47,6 @@ export const News = observer(() => {
                     </main>
                 </div>
             }
-            <Toaster position={"top-right"} toastOptions={{duration:2000}}/>
         </>
     );
 });

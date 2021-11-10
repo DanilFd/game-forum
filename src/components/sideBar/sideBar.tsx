@@ -1,8 +1,8 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import styles from "./sideBar.module.scss"
 import {CategoryType} from "../../types/News/CategoryType";
-import {TiArrowDownOutline, TiArrowUpOutline} from "react-icons/all";
+import {TiArrowDownOutline} from "react-icons/all";
 
 type Props = {
     categories: CategoryType[]
@@ -14,7 +14,8 @@ export const SideBar = (props: Props) => {
             <nav className={styles.navigation}>
                 <div onClick={() => setActive(!active)} className={styles.heading}>
                     <h3>Новости</h3>
-                    {active ? <TiArrowUpOutline/> : <TiArrowDownOutline/>}
+                    <TiArrowDownOutline className={active ? `${styles.isActive}` : ''}/>
+
                 </div>
                 <ul className={active ? `${styles.activeMenu}` : ''}>
                     <li><NavLink activeClassName={styles.active} to='/news/all?page=1'>Все</NavLink></li>
