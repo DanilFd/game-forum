@@ -1,21 +1,27 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
-import {getGames} from "../api/GamesService";
+import {getGames, getGenresAndPlatforms} from "../api/GamesService";
 import {CalcNumberPages} from "../utils/CalcNumberPages";
+import {PlatformType} from "../types/Games/PlatformType";
+import {GenreType} from "../types/Games/GenreType";
 
 class GamesStore {
     games = [] as GameType[]
-    isLoading = false
+    isLoadingGames = false
+    isLoadingGnsAndPls = false
     error = ''
-    totalPages = 0
+    totalPages = null as number | null
+    platforms = [] as PlatformType[]
+    genres = [] as GenreType[]
+    selectedGenre = ''
 
     constructor() {
         makeAutoObservable(this)
     }
 
     fetchGames(page: number) {
-        runInAction(() => this.isLoading = true)
-        getGames(page)
+        runInAction(() => this.isLoadingGames = true)
+        getGames(page, this.selectedGenre)
             .then(res => {
                 runInAction(() => {
                     this.totalPages = CalcNumberPages(res.data.count)
@@ -23,8 +29,24 @@ class GamesStore {
                 })
             })
             .catch(e => this.error = e.message)
-            .finally(() => runInAction(() => this.isLoading = false))
+            .finally(() => runInAction(() => this.isLoadingGames = false))
     }
+
+    fetchGenresAndPlatforms() {
+        runInAction(() => this.isLoadingGnsAndPls = true)
+        getGenresAndPlatforms()
+            .then(([genres, platforms]) => runInAction(() => {
+                this.genres = genres
+                this.platforms = platforms
+            }))
+            .catch(e => this.error = e.message)
+            .finally(() => runInAction(() => this.isLoadingGnsAndPls = false))
+    }
+
+    setGenre = (genre: string) => {
+        this.selectedGenre = genre
+    }
+
 }
 
 export default new GamesStore()

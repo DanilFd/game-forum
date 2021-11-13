@@ -7,19 +7,25 @@ import Loader from "../../components/loader/loader";
 import {Pagination} from "../../components/pagination/pagination";
 import {useQuery} from "../../hooks/useQuery";
 import {useError} from "../../hooks/useError";
+import {Filters} from "./filters/filters";
+import {useParams} from "react-router-dom";
 
 export const Games = observer(() => {
         const page = useQuery().get('page')
+        const params = useParams<{ genre: string }>()
         useEffect(() => {
             gamesStore.fetchGames(page ? +page : 1)
-        }, [page])
-    useError(gamesStore.error)
-    return (
+        }, [params.genre, page])
+        useEffect(() => {
+            gamesStore.fetchGenresAndPlatforms()
+        }, [])
+        useError(gamesStore.error)
+        return (
             <>
-                {gamesStore.isLoading ? <Loader/> :
-                    <main  className={styles.layout}>
+                {gamesStore.isLoadingGames ? <Loader/> :
+                    <main className={styles.layout}>
                         <section className={styles.filters}>
-
+                            <Filters/>
                         </section>
                         <section className={styles.items}>
                             {
@@ -30,7 +36,6 @@ export const Games = observer(() => {
                             <Pagination pagesCount={gamesStore.totalPages}/>
                         </section>
                     </main>
-
                 }
             </>
         );

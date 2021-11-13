@@ -13,6 +13,7 @@ export const Routes = () => {
                 <Route exact path="/news/:categorySlug" component={News}/>
                 <Route exact path="/news/:categorySlug/:newsId" component={NewsItemDetail}/>
                 <Route exact path="/games" component={Games}/>
+                <Route exact path="/games/:genre" component={Games}/>
             </Switch>
         </div>
     );

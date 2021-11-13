@@ -36,11 +36,8 @@ export const News = observer(() => {
                                                                           item={item}/>)}
                                 </div>
                                 <div>
-                                    {
-                                        !newsStore.isLoading && <Pagination
-                                            pagesCount={newsStore.totalPages}
-                                        />
-                                    }
+                                    <Pagination pagesCount={newsStore.totalPages}/>
+
                                 </div>
                             </div>
                         </section>

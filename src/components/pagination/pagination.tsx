@@ -7,7 +7,7 @@ import {usePage} from "../../hooks/usePage";
 import {scrollToTop} from "../../utils/scrollToTop";
 
 type Props = {
-    pagesCount: number
+    pagesCount: number | null
 }
 export const Pagination = (props: Props) => {
     const history = useHistory()
@@ -22,13 +22,14 @@ export const Pagination = (props: Props) => {
         // eslint-disable-next-line
     }, [])
     const pages = useMemo(() => {
-        return pagination(props.pagesCount, currentPage)
+        return pagination(props.pagesCount || 0, currentPage)
     }, [props.pagesCount, currentPage])
+    if (props.pagesCount === null)
+        return <></>
     return (
         <div>
             {
                 currentPage > props.pagesCount ? "Ничего не найдено" :
-
                     <div className={styles.pagination}>
                         {
                             currentPage === 1 ? <div/> :
