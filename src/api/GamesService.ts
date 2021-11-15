@@ -4,10 +4,9 @@ import {GenreType} from "../types/Games/GenreType";
 import {PlatformType} from "../types/Games/PlatformType";
 
 
-export const getGames = (page = 1, genre: string) => {
-    return api.get<PaginatedGame>('/games/list/games/', {
+export const getGames = (page = 1, genres: string[]) => {
+    return api.get<PaginatedGame>(`/games/list/games/?${genres?.map(item => `genre=${item}`)?.join('&')}`, {
         params: {
-            genre,
             page
         }
     })

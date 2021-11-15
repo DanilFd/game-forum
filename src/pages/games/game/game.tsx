@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useMemo} from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";

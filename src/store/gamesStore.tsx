@@ -13,7 +13,7 @@ class GamesStore {
     totalPages = null as number | null
     platforms = [] as PlatformType[]
     genres = [] as GenreType[]
-    selectedGenre = ''
+    selectedGenres = ['']
 
     constructor() {
         makeAutoObservable(this)
@@ -21,7 +21,7 @@ class GamesStore {
 
     fetchGames(page: number) {
         runInAction(() => this.isLoadingGames = true)
-        getGames(page, this.selectedGenre)
+        getGames(page, this.selectedGenres)
             .then(res => {
                 runInAction(() => {
                     this.totalPages = CalcNumberPages(res.data.count)
@@ -43,8 +43,8 @@ class GamesStore {
             .finally(() => runInAction(() => this.isLoadingGnsAndPls = false))
     }
 
-    setGenre = (genre: string) => {
-        this.selectedGenre = genre
+    setGenres = (genres: string[]) => {
+        this.selectedGenres = genres
     }
 
 }

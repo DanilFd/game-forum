@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 import {useEffect, useMemo} from "react";
 import {usePage} from "../../hooks/usePage";
 import {scrollToTop} from "../../utils/scrollToTop";
+import {useQuery} from "../../hooks/useQuery";
 
 type Props = {
     pagesCount: number | null
@@ -12,9 +13,11 @@ type Props = {
 export const Pagination = (props: Props) => {
     const history = useHistory()
     const currentPage = usePage()
+    const query = useQuery()
     const changePage = (page: number) => {
+        query.set('page', page.toString())
         currentPage !== page && history.push({
-            search: `?page=${page}`
+            search: query.toString()
         })
     }
     useEffect(() => {

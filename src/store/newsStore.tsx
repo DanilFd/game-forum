@@ -12,7 +12,7 @@ class NewsStore {
     isLoading = false
     error = ''
     newsItemContent = {} as NewsItemContentType
-    totalPages = 0
+    totalPages = null as number | null
 
     constructor() {
         makeAutoObservable(this)

@@ -7,14 +7,13 @@ type Props = {
             id: number,
             title: string
         }[]
-    setGenre: (genre: string) => void
-    genre: string
+    selectProps: object
 }
-export const DropDownList = ({defaultItemText, items, setGenre, genre}: Props) => {
+export const DropDownList = ({defaultItemText, items, selectProps}: Props) => {
     return (
         <div>
             <label className={styles.select} htmlFor="select">
-                <select onChange={e => setGenre(e.target.value)} value={genre}>
+                <select {...selectProps} >
                     <option key={defaultItemText} value="">{defaultItemText}</option>
                     {items.map(item => <option key={item.id} value={item.title}>{item.title}</option>)}
                 </select>
