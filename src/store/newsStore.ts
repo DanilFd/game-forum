@@ -2,7 +2,7 @@ import {makeAutoObservable, runInAction} from "mobx";
 import {NewsItemType} from "../types/News/NewsItemType";
 import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemContentType} from "../types/News/NewsItemContentType";
-import {dateConversion} from "../utils/dateConversion";
+import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
 import {CalcNumberPages} from "../utils/CalcNumberPages";
 
@@ -23,7 +23,7 @@ class NewsStore {
         this.isLoading = true
         getNews(slug, page)
             .then(res => {
-                res.data.results.forEach(item => dateConversion(item))
+                res.data.results.forEach(item => convertToTodayYesterday(item))
                 runInAction(() => {
                     this.news = res.data.results
                     this.totalPages = CalcNumberPages(res.data.count)
@@ -45,7 +45,7 @@ class NewsStore {
         this.isLoading = true
         getNewsItemDetail(newsId)
             .then(res => {
-                dateConversion(res.data)
+                convertToTodayYesterday(res.data)
                 runInAction(() => this.newsItemContent = res.data)
             })
             .catch(e => runInAction(() => this.error = e.message))

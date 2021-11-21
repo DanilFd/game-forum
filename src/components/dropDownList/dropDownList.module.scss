@@ -1,3 +1,4 @@
+@import "./src/variables";
 .select {
   position: relative;
   max-width: 200px;
@@ -17,7 +18,7 @@
   }
   select{
     -webkit-appearance: none;
-    padding: 7px 40px 7px 12px;
+    padding: 16px 48px 15px 16px;
     width: 100%;
     border: 1px solid #E8EAED;
     border-radius: 5px;
@@ -38,11 +39,11 @@
     }
     &:focus{
       outline: none;
-      border-color: #0077FF;
+      border-color: $secondaryColor;
       box-shadow: 0 0 0 2px rgba(#0077FF,.2);
     }
     &:hover + svg{
-        stroke: #0077FF;
+        stroke:  $secondaryColor;
     }
   }
 }

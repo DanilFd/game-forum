@@ -1,0 +1,45 @@
+@import "./src/variables";
+
+.list {
+  width: 31%;
+}
+
+.filter {
+  position: relative;
+  padding: 0 0 15px 0;
+}
+
+.close {
+  position: absolute;
+  right: -28px;
+  top: 0;
+  transform: translateY(50%);
+  cursor: pointer;
+  color: #666666;
+
+  &:hover {
+    color: $secondaryColor;
+  }
+
+  svg {
+    font-size: 24px;
+  }
+}
+.append{
+  cursor: pointer;
+  padding: 16px 5px 16px 16px;
+  color: #666666;
+  span{
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    flex-grow: 1;
+  }
+  svg{
+    font-size: 24px;
+  }
+  display: flex;
+  align-items: center;
+  &:hover{
+    color: $secondaryColor;
+  }
+}

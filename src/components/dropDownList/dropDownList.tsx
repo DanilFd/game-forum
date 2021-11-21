@@ -1,11 +1,12 @@
 import styles from "./dropDownList.module.scss"
 
 type Props = {
-    defaultItemText: string
+    defaultItemText?: string
     items:
         {
             id: number,
             title: string
+            value?:string
         }[]
     selectProps: object
 }
@@ -13,8 +14,8 @@ export const DropDownList = ({defaultItemText, items, selectProps}: Props) => {
     return (
         <div>
             <label className={styles.select} htmlFor="select">
-                <select {...selectProps} >
-                    <option key={defaultItemText} value="">{defaultItemText}</option>
+                <select {...selectProps}>
+                    {defaultItemText && <option key={defaultItemText} value="">{defaultItemText}</option>}
                     {items.map(item => <option key={item.id} value={item.title}>{item.title}</option>)}
                 </select>
                 <svg>

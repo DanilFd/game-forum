@@ -4,10 +4,12 @@ import {GenreType} from "../types/Games/GenreType";
 import {PlatformType} from "../types/Games/PlatformType";
 
 
-export const getGames = (page = 1, genres: string[]) => {
-    return api.get<PaginatedGame>(`/games/list/games/?${genres?.map(item => `genre=${item}`)?.join('&')}`, {
+export const getGames = (page = 1, genres: string[], platforms: string[],ordering:string | null) => {
+    const params = [genres?.map(item => `genre=${item}`).join('&'), platforms?.map(item => `platform=${item}`).join('&')].filter(param => param !== '').join('&')
+    return api.get<PaginatedGame>(`/games/list/games/?${params}`, {
         params: {
-            page
+            page,
+            ordering
         }
     })
 }
