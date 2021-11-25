@@ -1,0 +1,43 @@
+@import "./src/variables";
+
+.list {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.ordering {
+  width: 30%;
+}
+
+.form {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #666;;
+}
+
+.submit {
+  padding: 15px 40px;
+  border-radius: 8px;
+  border: 2px solid $secondaryColor;
+  background-color: transparent;
+  cursor: pointer;
+  transform: skew(-11deg);
+  transition: all ease 200ms;
+  box-shadow: 5px 5px 3px #0003;
+
+  span {
+    display: block;
+    color: $secondaryColor;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    transform: skew(11deg);
+  }
+  &:hover {
+    span {
+      color: white;
+    }
+    background-color: $secondaryColor;
+  }
+}

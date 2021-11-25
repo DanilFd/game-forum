@@ -1,4 +1,4 @@
-import React, { useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
@@ -33,13 +33,15 @@ export const Game = ({game}: Props) => {
                 </div>
                 <div className={styles.detail}>
                     <div>
-                        Платформа: {game.platforms.map((p, index) => <React.Fragment key={generateUniqueID()}>
+                        Платформа: {game.platforms.map((p, index) =>
+                        <React.Fragment key={generateUniqueID()}>
                         <NavLink to="#" key={p.id}>{p.title}</NavLink>
                         {index !== game.platforms.length - 1 && <span>, </span>}
                     </React.Fragment>)}
                     </div>
                     <div>
-                        Жанр: {game.genres.map((g,index) => <React.Fragment key={generateUniqueID()}>
+                        Жанр: {game.genres.map((g, index) =>
+                        <React.Fragment key={generateUniqueID()}>
                         <NavLink to="#" key={g.id}>{g.title}</NavLink>
                         {index !== game.genres.length - 1 && <span>, </span>}
                     </React.Fragment>)}
