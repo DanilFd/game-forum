@@ -16,20 +16,23 @@ export type FiltersForm = {
     genres: { item: string }[]
     platforms: { item: string }[]
     ordering: { title: string | null }
-    slider1:{value:number}
-    slider2:{value:number}
+    slider1: { value: number }
+    slider2: { value: number }
 }
 
+const DEFAULT_MIN_YEAR = 2015
+const DEFAULT_MAX_YEAR = 2021
 export const Filters = observer(() => {
     const history = useHistory()
     const query = useQuery()
-    const {register, handleSubmit, control, setValue,watch} = useForm<FiltersForm>({
-        defaultValues: {slider1: {value:2020} , slider2:{value:2023}}
+    const {register, handleSubmit, control, setValue, watch, getValues} = useForm<FiltersForm>({
+        defaultValues: {slider1: {value: DEFAULT_MIN_YEAR}, slider2: {value: DEFAULT_MAX_YEAR}}
     });
     const syncFiltersWithQuery = () => {
         gamesStore.setGenres(query.getAll('genre'))
         gamesStore.setPlatforms(query.getAll('platform'))
         gamesStore.setOrdering(query.get('ordering'))
+        gamesStore.setDate(query.get('year_start'), query.get('year_end'))
         gamesStore.selectedGenres.length === 0 ?
             setValue('genres', [{item: ''}]) :
             setValue('genres', gamesStore.selectedGenres.map(item => ({item})))
@@ -40,36 +43,52 @@ export const Filters = observer(() => {
         orderingTitle ?
             setValue('ordering', {title: orderingTitle}) :
             setValue('ordering', {title: 'По дате добавления'})
+        gamesStore.selectedYearFilter.min ?
+            setValue('slider1', {value: +gamesStore.selectedYearFilter.min}) :
+            setValue('slider1', {value: getValues('slider1.value')})
+        gamesStore.selectedYearFilter.max ?
+            setValue('slider2', {value: +gamesStore.selectedYearFilter.max}) :
+            setValue('slider2', {value: getValues('slider2.value')})
     }
     useEffect(() => {
         syncFiltersWithQuery()
         // eslint-disable-next-line
-    }, [query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering')])
+    }, [query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering'),query.get('year_start'),query.get('year_end')])
     const onSubmit: SubmitHandler<FiltersForm> = data => {
         const genres = selectUniqueItems(data.genres.map(g => g.item)).filter(item => item !== '')
         const platforms = selectUniqueItems(data.platforms.map(p => p.item)).filter(item => item !== '')
         let ordering = gamesStore.orderings.find(o => o.title === data.ordering.title && o.title)?.value
+        const minDateValue = data.slider1.value
+        const maxDateValue = data.slider2.value
         if (query.getAll('genre').toString() === genres.toString() ||
             query.getAll('platform').toString() === platforms.toString() ||
             query.get('ordering') === ordering) {
             syncFiltersWithQuery()
         }
-        const allParams: any = {genre: genres, platform: platforms}
+        const allParams: any = {
+            genre: genres,
+            platform: platforms,
+        }
         if (ordering !== '') {
             allParams.ordering = ordering
         }
-        genres.length !== 0 || platforms.length !== 0 || ordering ?
+        if(minDateValue !== DEFAULT_MIN_YEAR){
+            allParams.year_start = minDateValue
+        }
+        if(maxDateValue !== DEFAULT_MAX_YEAR){
+            allParams.year_end = maxDateValue
+        }
+        genres.length !== 0 || platforms.length !== 0 || ordering || minDateValue || maxDateValue ?
             history.push(`/games?${querystring.stringify(allParams)}&page=1`
                 .replaceAll('&&', '&')
                 .replaceAll('?&', '?')
             ) :
             history.push(`/games?page=1`)
-        console.log(data)
     }
     return (
         <form className={styles2.form} onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <RangeSlider watch={watch}  control={control}/>
+                <RangeSlider dateValue={gamesStore.yearValue} watch={watch} control={control}/>
             </div>
             <div className={styles.list}>
                 <ManyFieldsFilter collectionName='genres' defaultItemText="Все жанры" register={register}
@@ -83,6 +102,7 @@ export const Filters = observer(() => {
                                   selectProps={{...register('ordering.title')}}/>
                 </div>
             </div>
+
             <button className={styles.submit} type="submit"><span>показать</span></button>
         </form>
     )

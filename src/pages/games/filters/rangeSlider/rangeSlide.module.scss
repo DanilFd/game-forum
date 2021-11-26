@@ -1,14 +1,17 @@
 @import "./src/variables";
+
 .wrapper {
   position: relative;
-  padding: 50px;
+  padding: 20px 0;
+  width: 96%;
+  margin: 0 auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .container {
   position: relative;
   width: 100%;
   height: 100px;
-  border: 1px solid black;
 }
 
 input[type="range"] {
@@ -27,7 +30,7 @@ input[type="range"] {
 
 .track {
   width: 100%;
-  height: 8px;
+  height: 5px;
   position: absolute;
   margin: auto;
   top: 0;
@@ -38,46 +41,64 @@ input[type="range"] {
 input[type="range"]::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   height: 7px;
-  pointer-events: none;
-}
-input[type="range"]::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  height: 7px;
-  pointer-events: none;
 }
 
-input[type="range"]::-webkit-slider-thumb{
+input[type="range"]::-moz-range-track {
+  -moz-appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-ms-track {
+  appearance: none;
+  height: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 23px;
   width: 23px;
   background-color: $secondaryColor;
-  cursor: pointer ;
+  cursor: pointer;
   border-radius: 5px;
   margin-top: -9px;
   pointer-events: auto;
   display: block;
+  transform: skewX(-14deg);
+
 }
 
-.values{
-  background-color: #3264fe;
-  position: relative;
-  margin: auto;
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: $secondaryColor;
+  pointer-events: auto;
 }
-.sliderValueOne{
+
+input[type="range"]::-ms-thumb {
+  appearance: none;
+  height: 1.7em;
+  width: 1.7em;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: $secondaryColor;
+  pointer-events: auto;
+}
+
+.displayValueOne, .displayValueTwo, .displayMinValue, .displayMaxValue {
   position: absolute;
   border: 1px solid #d9d9d9;
   background-color: white;
-  z-index: 1;
-  padding-top: 9px;
+  font-size: 14px;
+  padding: 3px;
 }
-.sliderValueTwo{
-  position: absolute;
+
+.displayValueOne, .displayMinValue {
+  transform: translate(-50%, 300%);
 }
-.metric{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  span{
-    padding-right: 110px;
-  }
+
+.displayValueTwo, .displayMaxValue {
+  transform: translateX(-50%);
 }

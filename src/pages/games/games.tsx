@@ -16,7 +16,7 @@ export const Games = observer(() => {
             gamesStore.fetchGames(page ? +page : 1)
         }, [
             // eslint-disable-next-line
-            query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering'), page
+            query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering'), query.get('year_start'), query.get('year_end'), page
         ])
         useEffect(() => {
             gamesStore.fetchGenresAndPlatforms()
@@ -25,7 +25,7 @@ export const Games = observer(() => {
         return (
             <div>
                 <main className={styles.layout}>
-                    {gamesStore.isLoadingGnsAndPls ? <Loader/> :
+                    {gamesStore.isLoadingGnsAndPls || gamesStore.isLoadingGames ? <Loader/> :
                         <section className={styles.filters}>
                             <Filters/>
                         </section>

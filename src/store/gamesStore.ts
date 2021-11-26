@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction} from "mobx";
+import {makeAutoObservable, runInAction, toJS} from "mobx";
 import {GameType} from "../types/Games/GameType";
 import {getGames, getGenresAndPlatforms} from "../api/GamesService";
 import {CalcNumberPages} from "../utils/CalcNumberPages";
@@ -22,7 +22,15 @@ class GamesStore {
     ]
     selectedGenres = ['']
     selectedPlatforms = ['']
-    selectedOrdering = 'По дате добавления' as  null | string
+    selectedOrdering = 'По дате добавления' as null | string
+    yearValue = {
+        min: 2010,
+        max: 2021
+    }
+    selectedYearFilter = {
+        min: '' as null | string,
+        max: '' as null | string
+    }
 
     constructor() {
         makeAutoObservable(this)
@@ -30,11 +38,21 @@ class GamesStore {
 
     fetchGames(page: number) {
         runInAction(() => this.isLoadingGames = true)
-        getGames(page, this.selectedGenres, this.selectedPlatforms, this.selectedOrdering)
+        console.log('из стора', toJS(this.selectedYearFilter))
+        getGames(
+            page,
+            this.selectedGenres,
+            this.selectedPlatforms,
+            this.selectedOrdering,
+            this.selectedYearFilter.min,
+            this.selectedYearFilter.max
+        )
             .then(res => {
                 runInAction(() => {
                     this.totalPages = CalcNumberPages(res.data.count)
                     this.games = res.data.results
+                    this.yearValue.min = res.data.min_date
+                    this.yearValue.max = res.data.max_date
                 })
             })
             .catch(e => this.error = e.message)
@@ -61,6 +79,11 @@ class GamesStore {
     setOrdering = (ordering: string | null) => {
         this.selectedOrdering = ordering
     }
+    setDate = (min: string | null, max: string | null) => {
+        this.selectedYearFilter.min = min
+        this.selectedYearFilter.max = max
+    }
 }
+
 
 export default new GamesStore()

@@ -2,20 +2,21 @@ import {ChangeEvent} from "react";
 import {Control, Controller, UseFormWatch} from "react-hook-form";
 import styles from "./rangeSlide.module.scss"
 import {FiltersForm} from "../filters";
-import {range} from "../../../../utils/range";
 
 type Props = {
     control: Control<FiltersForm, Object>
     watch: UseFormWatch<FiltersForm>
+    dateValue: {
+        min: number,
+        max: number
+    }
 }
 
-export const RangeSlider = ({control, watch}: Props) => {
+export const RangeSlider = ({control, watch, dateValue}: Props) => {
     const [sliderOneValue, sliderTwoValue] = watch(["slider1", "slider2"])
 
-    const max = 2023
-    const min = 1990
-    const percentOne = ((sliderOneValue.value - min) / (max - min)) * 100
-    const percentTwo = ((sliderTwoValue.value - min) / (max - min)) * 100
+    const percentOne = ((sliderOneValue.value - dateValue.min) / (dateValue.max - dateValue.min)) * 100
+    const percentTwo = ((sliderTwoValue.value - dateValue.min) / (dateValue.max - dateValue.min)) * 100
 
     const slideOne = (e: ChangeEvent<HTMLInputElement>, onChange: any, value2: number) => {
         if (+e.target.value <= value2) {
@@ -30,33 +31,27 @@ export const RangeSlider = ({control, watch}: Props) => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.values}>
-                <span>
-                    {sliderOneValue.value}
-            </span>
-                <span> - </span>
-                <span>
-                    {sliderTwoValue.value}
-            </span>
             </div>
             <div className={styles.container}>
                 <div className={styles.track}
                      style={{
                          background: `linear-gradient(to right, #dadae5 ${percentOne}% , 
-                     #00C9FFFF ${percentOne}% , #00C9FFFF ${percentTwo}%, #dadae5 ${percentTwo}%)`
+                     #00C9FFFF ${percentOne}% , #00C9FFFF ${percentTwo}%, #dadae5 ${percentTwo}%)`,
+                         pointerEvents: "auto"
                      }}/>
                 <Controller
                     control={control}
                     name="slider1.value"
                     render={({
-                                 field: {onChange,  value,  ref},
+                                 field: {onChange, value, ref},
                              }) => (
                         <input
                             onChange={e => slideOne(e, onChange, sliderTwoValue.value)} // send value to hook form
                             value={value}
                             ref={ref}
                             type="range"
-                            min={min}
-                            max={max}
+                            min={dateValue.min}
+                            max={dateValue.max}
                         />
                     )}
                 />
@@ -64,22 +59,23 @@ export const RangeSlider = ({control, watch}: Props) => {
                     control={control}
                     name="slider2.value"
                     render={({
-                                 field: {onChange,  value,  ref},
-
+                                 field: {onChange, value, ref},
                              }) => (
                         <input
                             onChange={e => slideTwo(e, onChange, sliderOneValue.value)} // send value to hook form
                             value={value}
                             ref={ref}
                             type="range"
-                            min={min}
-                            max={max}
+                            min={dateValue.min}
+                            max={dateValue.max}
                         />
                     )}
                 />
-                <div className={styles.metric}>
-                    {range(min, max, 5).map(d => <span key={d}>{d}</span>)}
-                </div>
+                <span style={{left: '0%'}} className={styles.displayMinValue}>{dateValue.min}</span>
+                <span style={{left: '100%'}} className={styles.displayMaxValue}>{dateValue.max}</span>
+                <span style={{left: `${percentOne}%`}} className={styles.displayValueOne}>{sliderOneValue.value}</span>
+                <span style={{left: `${percentTwo}%`}} className={styles.displayValueTwo}>{sliderTwoValue.value}</span>
+
             </div>
         </div>
 

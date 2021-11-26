@@ -5,4 +5,6 @@ export type PaginatedGame = {
     next: null | string
     previous: null | string
     results: GameType[]
+    min_date:number
+    max_date:number
 }
