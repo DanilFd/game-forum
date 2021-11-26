@@ -15,10 +15,10 @@ class GamesStore {
     genres = [] as GenreType[]
     orderings = [
         {id: 1, title: 'По дате добавления', value: ''},
-        {id: 2, title: 'По дате выхода ↓', value: '-release_date'},
-        {id: 3, title: 'По дате выхода ↑', value: 'release_date'},
-        {id: 4, title: 'По оценкам ↓', value: '-score'},
-        {id: 5, title: 'По оценкам ↑', value: 'score'},
+        {id: 2, title: 'По дате выхода 🡣', value: '-release_date'},
+        {id: 3, title: 'По дате выхода 🡡', value: 'release_date'},
+        {id: 4, title: 'По оценкам 🡣', value: '-score'},
+        {id: 5, title: 'По оценкам 🡡', value: 'score'},
     ]
     selectedGenres = ['']
     selectedPlatforms = ['']

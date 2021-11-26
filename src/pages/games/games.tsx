@@ -27,6 +27,7 @@ export const Games = observer(() => {
                 <main className={styles.layout}>
                     {gamesStore.isLoadingGnsAndPls || gamesStore.isLoadingGames ? <Loader/> :
                         <section className={styles.filters}>
+                            <h3>поиск игр по фильтру</h3>
                             <Filters/>
                         </section>
                     }

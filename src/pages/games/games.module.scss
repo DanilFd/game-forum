@@ -10,7 +10,14 @@
   flex-wrap: wrap;
   padding-top: 20px;
 }
+.filters{
+  h3{
+    font-size: 24px;
+    text-transform: uppercase;
+    padding-top: 20px;
+  }
 
+}
 @media (max-width: 850px) {
   .items{
     display: block;

@@ -9,7 +9,6 @@ import {useEffect} from "react";
 import {useQuery} from "../../../hooks/useQuery";
 import {DropDownList} from "../../../components/dropDownList/dropDownList";
 import styles from './filters.module.scss'
-import styles2 from './rangeSlider/rangeSlide.module.scss'
 import {RangeSlider} from "./rangeSlider/rangeSlider";
 
 export type FiltersForm = {
@@ -86,7 +85,7 @@ export const Filters = observer(() => {
             history.push(`/games?page=1`)
     }
     return (
-        <form className={styles2.form} onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <div>
                 <RangeSlider dateValue={gamesStore.yearValue} watch={watch} control={control}/>
             </div>

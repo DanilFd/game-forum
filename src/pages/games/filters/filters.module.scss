@@ -5,14 +5,13 @@
   justify-content: space-between;
 
 }
-
 .ordering {
   width: 30%;
 }
 
 .form {
   padding-bottom: 30px;
-  border-bottom: 1px solid #666;;
+  border-bottom: 1px solid #c4c4c4;;;
 }
 
 .submit {
@@ -24,6 +23,7 @@
   transform: skew(-11deg);
   transition: all ease 200ms;
   box-shadow: 5px 5px 3px #0003;
+  margin-top: 10px;
 
   span {
     display: block;
@@ -39,5 +39,18 @@
       color: white;
     }
     background-color: $secondaryColor;
+  }
+}
+
+@media (max-width: 700px) {
+  .list{
+    flex-direction: column;
+    align-items: center;
+  }
+  .ordering{
+    width:93%;
+  }
+  .submit{
+    margin: 20px 0 0 10px;
   }
 }
