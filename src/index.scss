@@ -12,19 +12,39 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-section{
+
+section {
   padding: 0 30px;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
+
 .container {
   max-width: 1170px;
   margin: auto;
 }
+
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input {
+  all: unset;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset!important;
+}
+
 @media (max-width: 700px) {
-  section{
+  section {
     padding: 0 10px;
   }
 }

@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction, toJS} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
 import {getGames, getGenresAndPlatforms} from "../api/GamesService";
 import {CalcNumberPages} from "../utils/CalcNumberPages";
@@ -38,7 +38,6 @@ class GamesStore {
 
     fetchGames(page: number) {
         runInAction(() => this.isLoadingGames = true)
-        console.log('из стора', toJS(this.selectedYearFilter))
         getGames(
             page,
             this.selectedGenres,

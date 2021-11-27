@@ -52,7 +52,7 @@ export const Filters = observer(() => {
     useEffect(() => {
         syncFiltersWithQuery()
         // eslint-disable-next-line
-    }, [query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering'),query.get('year_start'),query.get('year_end')])
+    }, [query.getAll('genre').toString(), query.getAll('platform').toString(), query.get('ordering'), query.get('year_start'), query.get('year_end')])
     const onSubmit: SubmitHandler<FiltersForm> = data => {
         const genres = selectUniqueItems(data.genres.map(g => g.item)).filter(item => item !== '')
         const platforms = selectUniqueItems(data.platforms.map(p => p.item)).filter(item => item !== '')
@@ -71,10 +71,10 @@ export const Filters = observer(() => {
         if (ordering !== '') {
             allParams.ordering = ordering
         }
-        if(minDateValue !== DEFAULT_MIN_YEAR){
+        if (minDateValue !== DEFAULT_MIN_YEAR) {
             allParams.year_start = minDateValue
         }
-        if(maxDateValue !== DEFAULT_MAX_YEAR){
+        if (maxDateValue !== DEFAULT_MAX_YEAR) {
             allParams.year_end = maxDateValue
         }
         genres.length !== 0 || platforms.length !== 0 || ordering || minDateValue || maxDateValue ?
@@ -101,7 +101,6 @@ export const Filters = observer(() => {
                                   selectProps={{...register('ordering.title')}}/>
                 </div>
             </div>
-
             <button className={styles.submit} type="submit"><span>показать</span></button>
         </form>
     )

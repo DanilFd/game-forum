@@ -6,14 +6,16 @@ import logoIcon from "./images/logoIcon.svg"
 import {NavLinks} from "./navLinks/navLinks";
 import {Menu} from "./menu/menu";
 import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
+import {Modal} from "../modal/modal";
+import {LoginForm} from "./loginForm/loginForm";
 
 
 export const Header = () => {
     const [active, setActive] = useState(false)
+    const [activeModal, setActiveModal] = useState(false)
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
-
                 <div className={styles.menu}>
                     {
                         active ?
@@ -27,13 +29,16 @@ export const Header = () => {
                 </NavLink>
                 <NavLinks/>
                 <div className={styles.login}>
-                    <span>
+                    <span onClick={() => setActiveModal(true)}>
                     <IoMdLogIn/>
                     <span>Войти</span>
                     </span>
                 </div>
             </nav>
             <Menu active={active} setActive={setActive}/>
+            <Modal active={activeModal} setActive={setActiveModal}>
+                <LoginForm/>
+            </Modal>
         </header>
     );
 };
