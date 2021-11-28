@@ -2,15 +2,20 @@ import styles from "./loginForm.module.scss"
 import {useState} from "react";
 import {FcGoogle} from "react-icons/all";
 import {SetState} from "../../../types/utils/utils";
+import { motion } from "framer-motion";
+
 
 type Props = {
     switchForm: SetState<boolean>
 }
 
-export const LoginForm = ({switchForm}:Props) => {
+export const LoginForm = ({switchForm}: Props) => {
     const [isShow, setIsShow] = useState(false)
     return (
-        <>
+        <motion.div
+        initial={{translateX:-300}}
+        animate={{translateX:0}}
+        >
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <h1>Войти</h1>
@@ -33,9 +38,10 @@ export const LoginForm = ({switchForm}:Props) => {
                         <button><FcGoogle/></button>
                     </div>
                 </div>
+                -
             </div>
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
                 соглашением.</p>
-        </>
+        </motion.div>
     )
 }

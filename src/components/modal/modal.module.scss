@@ -22,7 +22,7 @@
   max-width: 90%;
   transform: scale(0.5);
   transition: 400ms all;
-
+  overflow: hidden;
 }
 
 .modal.active {

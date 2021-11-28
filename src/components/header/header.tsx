@@ -15,6 +15,7 @@ export const Header = () => {
     const [active, setActive] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
     const [isLogin, setIsLogin] = useState(true)
+
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>

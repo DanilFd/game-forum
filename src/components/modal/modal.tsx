@@ -6,7 +6,7 @@ type Props = {
     setActive: (active: boolean) => void
 }
 
-export const Modal: FC<Props> = ({active, setActive, children}) =>  {
+export const Modal: FC<Props> = ({active, setActive, children}) => {
     return (
         <div className={active ? `${styles.modal} ${styles.active}` : `${styles.modal}`}
              onClick={() => setActive(false)}>

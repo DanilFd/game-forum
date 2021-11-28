@@ -65,24 +65,18 @@
 
       ul {
         li {
-          padding-right: 15px;
+          padding: 0 20px 20px 0;
           display: inline-block;
         }
 
-        height: 0;
         overflow: hidden;
-        transition: 0.4s all;
       }
 
-      .activeMenu {
-        height: auto;
-        padding: 10px 0;
-        transition: 0.4s all;
-      }
 
       .heading {
         display: flex;
         align-items: center;
+
         svg {
           font-size: 25px;
           color: $secondaryColor;
@@ -90,7 +84,8 @@
           transform: rotate(0);
           transition: all ease 0.5s;
         }
-        .isActive{
+
+        .isActive {
           transform: rotate(180deg);
         }
       }
@@ -104,7 +99,7 @@
       ul {
         li {
           display: block;
-          padding-bottom: 10px;
+          padding-bottom: 15px;
         }
       }
     }

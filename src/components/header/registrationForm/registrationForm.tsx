@@ -1,6 +1,7 @@
 import styles from "./registrationForm.module.scss"
 import {useForm} from "react-hook-form";
 import {SetState} from "../../../types/utils/utils";
+import {motion} from "framer-motion";
 
 type Props = {
     switchForm: SetState<boolean>
@@ -10,7 +11,10 @@ export const RegistrationForm = ({switchForm}: Props) => {
     const {register} = useForm();
 
     return (
-        <>
+        <motion.div
+            initial={{translateX: 300}}
+            animate={{translateX: 0}}
+        >
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <h1>Регистрация</h1>
@@ -28,6 +32,6 @@ export const RegistrationForm = ({switchForm}: Props) => {
             </div>
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
                 соглашением.</p>
-        </>
+        </motion.div>
     )
 }
