@@ -1,8 +1,13 @@
 import styles from "./loginForm.module.scss"
 import {useState} from "react";
 import {FcGoogle} from "react-icons/all";
+import {SetState} from "../../../types/utils/utils";
 
-export const LoginForm = () => {
+type Props = {
+    switchForm: SetState<boolean>
+}
+
+export const LoginForm = ({switchForm}:Props) => {
     const [isShow, setIsShow] = useState(false)
     return (
         <>
@@ -10,12 +15,12 @@ export const LoginForm = () => {
                 <div className={styles.header}>
                     <h1>Войти</h1>
                     <div>
-                        или <span>зарегистрироваться</span>
+                        или <span onClick={() => switchForm(prev => !prev)}>зарегистрироваться</span>
                     </div>
                 </div>
                 <form className={styles.form}>
                     <input placeholder="Почта/логин" type="text"/>
-                    <input placeholder="Пароль" name="password" autoComplete="on" type="password"/>
+                    <input id="test" placeholder="Пароль" name="password" autoComplete="on" type="password"/>
                     <div className={styles.row}>
                         <button type="submit"><span>войти</span></button>
                         <span>Я не помню пароль</span>
@@ -32,6 +37,5 @@ export const LoginForm = () => {
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
                 соглашением.</p>
         </>
-
     )
 }

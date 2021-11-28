@@ -8,11 +8,13 @@ import {Menu} from "./menu/menu";
 import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
 import {Modal} from "../modal/modal";
 import {LoginForm} from "./loginForm/loginForm";
+import {RegistrationForm} from "./registrationForm/registrationForm";
 
 
 export const Header = () => {
     const [active, setActive] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
+    const [isLogin, setIsLogin] = useState(true)
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
@@ -37,7 +39,11 @@ export const Header = () => {
             </nav>
             <Menu active={active} setActive={setActive}/>
             <Modal active={activeModal} setActive={setActiveModal}>
-                <LoginForm/>
+                {
+                    isLogin ?
+                        <LoginForm switchForm={setIsLogin}/> :
+                        <RegistrationForm switchForm={setIsLogin}/>
+                }
             </Modal>
         </header>
     );
