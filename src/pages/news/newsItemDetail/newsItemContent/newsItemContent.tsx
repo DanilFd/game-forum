@@ -25,9 +25,7 @@ const NewsItemContent = ({newsItemDetail}: Props) => {
                     <div className={styles.favorite}><BsBookmark/><span>Избранное(0)</span></div>
                 </div>
             </section>
-            <section className={styles.content}>
-                <div dangerouslySetInnerHTML={{__html: newsItemDetail.content}}/>
-            </section>
+            <section className={styles.content} dangerouslySetInnerHTML={{__html: newsItemDetail.content}}/>
         </div>
     );
 };

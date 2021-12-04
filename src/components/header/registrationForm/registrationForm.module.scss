@@ -3,7 +3,7 @@
 .wrapper {
   font-family: Roboto, sans-serif;
   font-size: 14px;
-  padding: 50px 0 25px 0;
+  padding: 50px 0 44px 0;
   height: 100%;
 }
 
@@ -42,7 +42,7 @@
     border: 1px solid #c2c2c2;
     border-radius: 5px;
     font-size: 14px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 12px 15px;
     width: 90%;
     color: black;
@@ -51,6 +51,12 @@
       border-color: black;
       transition: border-color 500ms;
     }
+  }
+
+  span:not(:last-child) {
+    margin-bottom: 10px;
+    align-self: flex-start;
+    font-size: 12px;
   }
 
   button {
@@ -68,8 +74,9 @@
       text-transform: uppercase;
       color: #878787;
     }
-    &:hover{
-      transition:  400ms;
+
+    &:hover {
+      transition: 400ms;
       border-color: black;
     }
   }

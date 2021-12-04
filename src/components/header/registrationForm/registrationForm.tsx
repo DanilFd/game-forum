@@ -1,15 +1,25 @@
 import styles from "./registrationForm.module.scss"
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {SetState} from "../../../types/utils/utils";
 import {motion} from "framer-motion";
+import {UserRegisterCredential} from "../../../types/Users/UserRegisterCredential";
 
 type Props = {
     switchForm: SetState<boolean>
+    registerUser: (data:UserRegisterCredential) => void
 }
-
-export const RegistrationForm = ({switchForm}: Props) => {
-    const {register} = useForm();
-
+type RegisterForm = {
+    login: string
+    email: string
+    password: string
+}
+export const RegistrationForm = ({switchForm, registerUser}: Props) => {
+    const {register, formState: {errors}, handleSubmit} = useForm<RegisterForm>({
+        mode: "onChange"
+    });
+    const onSubmit: SubmitHandler<RegisterForm> = data => {
+        registerUser(data)
+    }
     return (
         <motion.div
             initial={{translateX: 300}}
@@ -19,14 +29,36 @@ export const RegistrationForm = ({switchForm}: Props) => {
                 <div className={styles.header}>
                     <h1>Регистрация</h1>
                     <div>
-                        или <span onClick={() => switchForm(prev => !prev)}>войти через почтку/логин</span>
+                        или <span onClick={() => switchForm(prev => !prev)}>войти в аккаунт</span>
                     </div>
                 </div>
-                <form className={styles.form}>
-                    <input {...register('Login')} placeholder="Логин" type="text"/>
-                    <input {...register('Email')} placeholder="Email" type="text"/>
-                    <input {...register('Password')} placeholder="Пароль" name="password" autoComplete="on"
+                <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                    <input style={{borderColor: errors.login && "red"}} {...register('login', {
+                        required: 'Заполните это поле.',
+                        maxLength: {value: 20, message: 'Длина логина слишком большая.'},
+                        minLength: {value: 6, message: 'Минимальная длина логина 6.'},
+                        pattern: {
+                            value: /^[a-zA-Z\d]+$/,
+                            message: 'Логин должен содержать только буквы латинского алфавита и цифры.'
+                        }
+                    })} placeholder="Логин"
+                           type="text"/>
+                    {errors.login && <span style={{color: "red"}}>{errors.login.message}</span>}
+                    <input style={{borderColor: errors.email && "red"}} {...register('email', {
+                        required: 'Заполните это поле.',
+                        pattern: {
+                            value: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
+                            message: "Это не email."
+                        }
+                    })} placeholder="Email"
+                           type="text"/>
+                    {errors.email && <span style={{color: "red"}}>{errors.email.message}</span>}
+                    <input style={{borderColor: errors.password && "red"}} {...register('password', {
+                        required: 'Заполните это поле.',
+                        minLength: {value: 8, message: 'Минимальная длинна пароля 8.'}
+                    })} placeholder="Пароль" name="password" autoComplete="on"
                            type="password"/>
+                    {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
                     <button type="submit"><span>зарегистрироваться</span></button>
                 </form>
             </div>

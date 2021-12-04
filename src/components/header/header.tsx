@@ -9,13 +9,14 @@ import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
 import {Modal} from "../modal/modal";
 import {LoginForm} from "./loginForm/loginForm";
 import {RegistrationForm} from "./registrationForm/registrationForm";
+import {observer} from "mobx-react-lite";
+import usersStore from "../../store/usersStore";
 
 
-export const Header = () => {
+export const Header = observer(() => {
     const [active, setActive] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
     const [isLogin, setIsLogin] = useState(true)
-
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
@@ -43,10 +44,10 @@ export const Header = () => {
                 {
                     isLogin ?
                         <LoginForm switchForm={setIsLogin}/> :
-                        <RegistrationForm switchForm={setIsLogin}/>
+                        <RegistrationForm registerUser={usersStore.registerUser} switchForm={setIsLogin}/>
                 }
             </Modal>
         </header>
     );
-};
+});
 
