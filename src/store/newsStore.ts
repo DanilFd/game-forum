@@ -4,7 +4,7 @@ import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemContentType} from "../types/News/NewsItemContentType";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
-import {CalcNumberPages} from "../utils/CalcNumberPages";
+import {calcNumberPages} from "../utils/calcNumberPages";
 
 class NewsStore {
     news = [] as NewsItemType[]
@@ -26,7 +26,7 @@ class NewsStore {
                 res.data.results.forEach(item => convertToTodayYesterday(item))
                 runInAction(() => {
                     this.news = res.data.results
-                    this.totalPages = CalcNumberPages(res.data.count)
+                    this.totalPages = calcNumberPages(res.data.count)
                 })
             })
             .catch(e => runInAction(() => this.error = e.message))

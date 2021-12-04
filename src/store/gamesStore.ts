@@ -1,7 +1,7 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
 import {getGames, getGenresAndPlatforms} from "../api/GamesService";
-import {CalcNumberPages} from "../utils/CalcNumberPages";
+import {calcNumberPages} from "../utils/calcNumberPages";
 import {PlatformType} from "../types/Games/PlatformType";
 import {GenreType} from "../types/Games/GenreType";
 
@@ -48,7 +48,7 @@ class GamesStore {
         )
             .then(res => {
                 runInAction(() => {
-                    this.totalPages = CalcNumberPages(res.data.count)
+                    this.totalPages = calcNumberPages(res.data.count)
                     this.games = res.data.results
                     this.yearValue.min = res.data.min_date
                     this.yearValue.max = res.data.max_date

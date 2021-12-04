@@ -3,10 +3,13 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {SetState} from "../../../types/utils/utils";
 import {motion} from "framer-motion";
 import {UserRegisterCredential} from "../../../types/Users/UserRegisterCredential";
+import {AxiosResponse} from "axios";
+import {RegisterUserError} from "../../../types/Users/RegisterUserError";
+import {handleRegistrationErrors} from "../../../utils/handleRegistrationErrors";
 
 type Props = {
     switchForm: SetState<boolean>
-    registerUser: (data:UserRegisterCredential) => void
+    registerUser: (data: UserRegisterCredential) => Promise<AxiosResponse<RegisterUserError>>
 }
 type RegisterForm = {
     login: string
@@ -14,11 +17,17 @@ type RegisterForm = {
     password: string
 }
 export const RegistrationForm = ({switchForm, registerUser}: Props) => {
-    const {register, formState: {errors}, handleSubmit} = useForm<RegisterForm>({
+    const {register, formState: {errors}, handleSubmit, reset} = useForm<RegisterForm>({
         mode: "onChange"
     });
     const onSubmit: SubmitHandler<RegisterForm> = data => {
         registerUser(data)
+            .then(() => {
+                reset()
+            })
+            .catch(handleRegistrationErrors)
+            .finally()
+
     }
     return (
         <motion.div
@@ -44,15 +53,17 @@ export const RegistrationForm = ({switchForm, registerUser}: Props) => {
                     })} placeholder="Логин"
                            type="text"/>
                     {errors.login && <span style={{color: "red"}}>{errors.login.message}</span>}
+
                     <input style={{borderColor: errors.email && "red"}} {...register('email', {
                         required: 'Заполните это поле.',
                         pattern: {
                             value: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
-                            message: "Это не email."
+                            message: "Введите правильный адрес электронной почты."
                         }
                     })} placeholder="Email"
                            type="text"/>
                     {errors.email && <span style={{color: "red"}}>{errors.email.message}</span>}
+
                     <input style={{borderColor: errors.password && "red"}} {...register('password', {
                         required: 'Заполните это поле.',
                         minLength: {value: 8, message: 'Минимальная длинна пароля 8.'}

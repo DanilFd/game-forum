@@ -7,12 +7,8 @@ class UsersStore {
         makeAutoObservable(this)
     }
 
-
     registerUser(userRegisterCredential: UserRegisterCredential) {
-        registerUser(userRegisterCredential)
-            .then()
-            .catch()
-            .finally()
+        return registerUser(userRegisterCredential)
     }
 }
 
