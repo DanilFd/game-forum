@@ -8,15 +8,17 @@ import {Menu} from "./menu/menu";
 import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
 import {Modal} from "../modal/modal";
 import {LoginForm} from "./loginForm/loginForm";
-import {RegistrationForm} from "./registrationForm/registrationForm";
 import {observer} from "mobx-react-lite";
+import {SelectedForm} from "../../types/Users/SelectedForm";
+import {RegistrationForm} from "./registrationForm/registrationForm";
 import usersStore from "../../store/usersStore";
+import {AcceptingForm} from "./acceptingForm/acceptingForm";
 
 
 export const Header = observer(() => {
     const [active, setActive] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
-    const [isLogin, setIsLogin] = useState(true)
+    const [selectedForm, setSelectedForm] = useState<SelectedForm>('login')
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
@@ -42,9 +44,12 @@ export const Header = observer(() => {
             <Menu active={active} setActive={setActive}/>
             <Modal active={activeModal} setActive={setActiveModal}>
                 {
-                    isLogin ?
-                        <LoginForm switchForm={setIsLogin}/> :
-                        <RegistrationForm registerUser={usersStore.registerUser} switchForm={setIsLogin}/>
+                    (selectedForm === 'login' &&
+                        <LoginForm switchForm={setSelectedForm}/>) ||
+                    (selectedForm === 'register' &&
+                        <RegistrationForm registerUser={usersStore.registerUser} switchForm={setSelectedForm}/>) ||
+                    (selectedForm === 'accepting' &&
+                        <AcceptingForm switchForm={setSelectedForm}/>)
                 }
             </Modal>
         </header>

@@ -6,9 +6,11 @@ import {UserRegisterCredential} from "../../../types/Users/UserRegisterCredentia
 import {AxiosResponse} from "axios";
 import {RegisterUserError} from "../../../types/Users/RegisterUserError";
 import {handleRegistrationErrors} from "../../../utils/handleRegistrationErrors";
+import {SelectedForm} from "../../../types/Users/SelectedForm";
+
 
 type Props = {
-    switchForm: SetState<boolean>
+    switchForm: SetState<SelectedForm>
     registerUser: (data: UserRegisterCredential) => Promise<AxiosResponse<RegisterUserError>>
 }
 type RegisterForm = {
@@ -24,11 +26,12 @@ export const RegistrationForm = ({switchForm, registerUser}: Props) => {
         registerUser(data)
             .then(() => {
                 reset()
+                switchForm('accepting')
             })
             .catch(handleRegistrationErrors)
-            .finally()
 
     }
+
     return (
         <motion.div
             initial={{translateX: 300}}
@@ -38,10 +41,11 @@ export const RegistrationForm = ({switchForm, registerUser}: Props) => {
                 <div className={styles.header}>
                     <h1>Регистрация</h1>
                     <div>
-                        или <span onClick={() => switchForm(prev => !prev)}>войти в аккаунт</span>
+                        или <span onClick={() => switchForm("login")}>войти в аккаунт</span>
                     </div>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <form onSubmit={handleSubmit(onSubmit)}
+                      className={styles.form}>
                     <input style={{borderColor: errors.login && "red"}} {...register('login', {
                         required: 'Заполните это поле.',
                         maxLength: {value: 20, message: 'Длина логина слишком большая.'},
@@ -70,7 +74,9 @@ export const RegistrationForm = ({switchForm, registerUser}: Props) => {
                     })} placeholder="Пароль" name="password" autoComplete="on"
                            type="password"/>
                     {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
-                    <button type="submit"><span>зарегистрироваться</span></button>
+
+                    <button type="submit">
+                        <span>зарегистрироваться</span></button>
                 </form>
             </div>
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским

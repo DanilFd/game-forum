@@ -1,0 +1,1 @@
+export type SelectedForm = 'login' | 'register' | 'accepting'
