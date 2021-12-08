@@ -13,12 +13,13 @@ import {SelectedForm} from "../../types/Users/SelectedForm";
 import {RegistrationForm} from "./registrationForm/registrationForm";
 import usersStore from "../../store/usersStore";
 import {AcceptingForm} from "./acceptingForm/acceptingForm";
+import {ResetForm} from "./resetForm/resetFormType";
 
 
 export const Header = observer(() => {
     const [active, setActive] = useState(false)
     const [activeModal, setActiveModal] = useState(false)
-    const [selectedForm, setSelectedForm] = useState<SelectedForm>('login')
+    const [selectedForm, setSelectedForm] = useState<SelectedForm>('reset')
     return (
         <header className={styles.header}>
             <nav className={`container ${styles.content}`}>
@@ -43,14 +44,14 @@ export const Header = observer(() => {
             </nav>
             <Menu active={active} setActive={setActive}/>
             <Modal active={activeModal} setActive={setActiveModal}>
-                {
-                    (selectedForm === 'login' &&
-                        <LoginForm switchForm={setSelectedForm}/>) ||
-                    (selectedForm === 'register' &&
-                        <RegistrationForm registerUser={usersStore.registerUser} switchForm={setSelectedForm}/>) ||
-                    (selectedForm === 'accepting' &&
-                        <AcceptingForm switchForm={setSelectedForm}/>)
-                }
+                {selectedForm === 'login' &&
+                <LoginForm switchForm={setSelectedForm}/>}
+                {selectedForm === 'register' &&
+                <RegistrationForm registerUser={usersStore.registerUser} switchForm={setSelectedForm}/>}
+                {selectedForm === 'accepting' &&
+                <AcceptingForm switchForm={setSelectedForm}/>}
+                {selectedForm === 'reset' &&
+                <ResetForm switchForm={setSelectedForm} resetPassword={usersStore.resetPassword}/>}
             </Modal>
         </header>
     );

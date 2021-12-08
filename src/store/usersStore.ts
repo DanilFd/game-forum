@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {UserRegisterCredential} from "../types/Users/UserRegisterCredential";
-import {registerUser} from "../api/UsersService";
+import {registerUser, resetPassword} from "../api/UsersService";
 
 class UsersStore {
     constructor() {
@@ -9,6 +9,10 @@ class UsersStore {
 
     registerUser(userRegisterCredential: UserRegisterCredential) {
         return registerUser(userRegisterCredential)
+    }
+
+    resetPassword(email: { email: string }) {
+        return resetPassword(email)
     }
 }
 

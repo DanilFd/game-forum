@@ -76,7 +76,8 @@ export const RegistrationForm = ({switchForm, registerUser}: Props) => {
                     {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
 
                     <button type="submit">
-                        <span>зарегистрироваться</span></button>
+                        <span>зарегистрироваться</span>
+                    </button>
                 </form>
             </div>
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским

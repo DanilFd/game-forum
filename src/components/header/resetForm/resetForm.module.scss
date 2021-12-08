@@ -1,0 +1,71 @@
+@import "./src/variables";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  font-family: Roboto, sans-serif;
+  padding: 60px 0 30px 0;
+  p{
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+  button:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px 20px;
+    color: #9d9d9d;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 20px;
+  }
+
+  input {
+    transition: 500ms;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 12px 15px;
+    width: 90%;
+    color: black;
+
+    &:focus {
+      border-color: black;
+      transition: border-color 500ms;
+    }
+  }
+
+  button:last-child {
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: 1px solid $secondaryColor;
+    transform: skew(-11deg);
+    width: 100%;
+    margin-top: 20px;
+
+    span {
+      font-size: 14px;
+      display: block;
+      transform: skew(11deg);
+      text-transform: uppercase;
+      color: $secondaryColor;
+    }
+
+    &:hover {
+      background-color: $secondaryColor;
+
+      span {
+        color: white;
+      }
+    }
+  }
+}

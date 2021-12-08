@@ -1,1 +1,1 @@
-export type SelectedForm = 'login' | 'register' | 'accepting'
+export type SelectedForm = 'login' | 'register' | 'accepting' | 'reset'

@@ -29,7 +29,7 @@ export const LoginForm = ({switchForm}: Props) => {
                     <input id="test" placeholder="Пароль" name="password" autoComplete="on" type="password"/>
                     <div className={styles.row}>
                         <button type="submit"><span>войти</span></button>
-                        <span>Я не помню логин/пароль</span>
+                        <span onClick={() => switchForm('reset')}>Я не помню логин/пароль</span>
                     </div>
                 </form>
                 <div className={styles.additional}>
