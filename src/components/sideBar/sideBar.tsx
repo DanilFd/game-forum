@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState} from 'react';
 import {NavLink} from "react-router-dom";
 import styles from "./sideBar.module.scss"
 import {CategoryType} from "../../types/News/CategoryType";
@@ -8,8 +8,10 @@ import {AnimatePresence, motion} from 'framer-motion';
 type Props = {
     categories: CategoryType[]
 }
+const windowWidth = window.innerWidth
+
 export const SideBar = (props: Props) => {
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(windowWidth > 800);
     return (
         <aside className={styles.aside}>
             <nav className={styles.navigation}>
@@ -19,7 +21,6 @@ export const SideBar = (props: Props) => {
 
                 </div>
                 <AnimatePresence>
-
                     {active &&
                     <motion.ul
                         initial={{height: 0}}
