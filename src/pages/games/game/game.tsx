@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
 import {Switch} from "../../../components/switch/switch";
@@ -11,15 +11,20 @@ type Props = {
 }
 
 export const Game = ({game}: Props) => {
+    const history = useHistory()
     const subNotify = () => toast.info("Вы добавили игру в избранное")
     const unsubNotify = () => toast.info("Вы удалили игру из избранного")
-
     const backColorForScore = useMemo(() => {
         return game.score > 4.0 ?
             game.score > 7.5 ? "green" : "#fb9400"
             :
             game.score > 0 ? "red" : "#ddd"
     }, [game.score])
+    const pushQuery = (query: string, value: string) => {
+        history.push({
+            search: `${query}=${value}&page=1`
+        })
+    }
     return (
         <div className={styles.item}>
             <NavLink to="#" className={styles.img}>
@@ -35,16 +40,18 @@ export const Game = ({game}: Props) => {
                     <div>
                         Платформа: {game.platforms.map((p, index) =>
                         <React.Fragment key={generateUniqueID()}>
-                        <NavLink to="#" key={p.id}>{p.title}</NavLink>
-                        {index !== game.platforms.length - 1 && <span>, </span>}
-                    </React.Fragment>)}
+                            <span onClick={() => pushQuery('platform', p.slug)} className={styles.platform}
+                                  key={p.id}>{p.title}</span>
+                            {index !== game.platforms.length - 1 && <span>, </span>}
+                        </React.Fragment>)}
                     </div>
                     <div>
                         Жанр: {game.genres.map((g, index) =>
                         <React.Fragment key={generateUniqueID()}>
-                        <NavLink to="#" key={g.id}>{g.title}</NavLink>
-                        {index !== game.genres.length - 1 && <span>, </span>}
-                    </React.Fragment>)}
+                            <span onClick={() => pushQuery('genre', g.slug)} className={styles.genre}
+                                  key={g.id}>{g.title}</span>
+                            {index !== game.genres.length - 1 && <span>, </span>}
+                        </React.Fragment>)}
                     </div>
                     <div>
                         Дата выхода: {game.release_date}

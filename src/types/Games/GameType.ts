@@ -1,19 +1,12 @@
+import {GenreType} from "./GenreType";
+import {PlatformType} from "./PlatformType";
+
 export type GameType = {
-    id:number
-    img:string
-    title:string,
-    platforms:[
-        {
-            id:number
-            title:string
-        }
-    ],
-    genres:[
-        {
-            id:number
-            title:string
-        }
-    ],
-    release_date:string,
-    score:number
+    id: number
+    img: string
+    title: string,
+    platforms: PlatformType[],
+    genres: GenreType[]
+    release_date: string,
+    score: number
 }
