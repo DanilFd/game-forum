@@ -16,7 +16,6 @@ class NewsStore {
 
     constructor() {
         makeAutoObservable(this)
-        this.fetchCategories()
     }
 
     fetchNews(slug: string, page: number) {

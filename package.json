@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "framer-motion": "^4.1.17",
+    "jwt-decode": "^3.1.2",
     "mobx": "^6.3.2",
     "mobx-react-lite": "^3.2.0",
     "react": "^17.0.2",

@@ -7,6 +7,7 @@ import usersStore from "../../store/usersStore";
 import {toast} from "react-toastify";
 import {HandleResetPasswordError} from "../../utils/handleResetPasswordError";
 import Loader from "../../components/loader/loader";
+import authStore from "../../store/authStore";
 
 type ResetPasswordConfirm = {
     password: string,
@@ -30,7 +31,7 @@ export const ResetPassword = observer(() => {
         if (data.password !== data.passwordConfirm) {
             return setError('passwordConfirm', {message: 'Пароли не совпадают'})
         }
-        usersStore.resetPasswordConfirm(resetPasswordData)
+        authStore.resetPasswordConfirm(resetPasswordData)
             .then(() => {
                 toast.success('Ваш пароль изменен.')
                 history.replace('/')

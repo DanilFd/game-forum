@@ -14,8 +14,8 @@ export const News = observer(() => {
         const params = useParams<{ categorySlug: string }>()
         const page = useQuery().get('page')
         useEffect(() => {
-            newsStore.fetchNews(params.categorySlug, page ? +page : 1)
             newsStore.fetchCategories()
+            newsStore.fetchNews(params.categorySlug, page ? +page : 1)
         }, [params.categorySlug, page])
         useError(newsStore.error)
         return (

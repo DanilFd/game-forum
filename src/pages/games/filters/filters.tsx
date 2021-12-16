@@ -13,7 +13,7 @@ import {RangeSlider} from "./rangeSlider/rangeSlider";
 
 export type FiltersForm = {
     genres: { item: string }[]
-    platforms: { item: string }[]
+    platforms: { item: string}[]
     ordering: { title: string | null }
     slider1: { value: number }
     slider2: { value: number }

@@ -1,13 +1,12 @@
 import {useEffect} from "react";
-import {observer} from "mobx-react-lite";
-import usersStore from "../../store/usersStore";
 import {useParams} from "react-router-dom";
 import {AccountActivationData} from "../../types/Users/AccountActivationData";
+import authStore from "../../store/authStore";
 
-export const ActivationEmail = observer(() => {
+export const ActivationEmail = () => {
     const params = useParams<AccountActivationData>()
     useEffect(() => {
-        usersStore.accountActivation(params)
+        authStore.accountActivation(params)
             .then(res => {
                 console.log('успех', res.data)
             })
@@ -19,4 +18,4 @@ export const ActivationEmail = observer(() => {
             <h1 style={{color: "white"}}>работаем</h1>
         </div>
     )
-})
+}
