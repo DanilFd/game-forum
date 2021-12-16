@@ -8,6 +8,7 @@ import {DecodedToken} from "../types/Auth/DecodedToken";
 import {UserRegisterCredential} from "../types/Users/UserRegisterCredential";
 import {AccountActivationData} from "../types/Users/AccountActivationData";
 import {PasswordResetData} from "../types/Users/PasswordResetData";
+import {AuthResponse} from "../types/Auth/AuthResponse";
 
 export const ACCESS_TOKEN = 'access_token'
 export const REFRESH_TOKEN = 'refresh_token'
@@ -18,6 +19,7 @@ class AuthStore {
 
     user = null as null | AuthenticatedUser
     isLoading = true
+    isLoadingBetweenForms = false
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true})
@@ -40,6 +42,13 @@ class AuthStore {
             .catch(e => console.log(e.message))
     }
 
+    loginAfterRegistration(tokens: AuthResponse) {
+        localStorage.setItem(ACCESS_TOKEN, tokens.access)
+        localStorage.setItem(REFRESH_TOKEN, tokens.refresh)
+        this.loginByToken(tokens.access)
+
+    }
+
     logout() {
         localStorage.removeItem(ACCESS_TOKEN)
         localStorage.removeItem(REFRESH_TOKEN)
@@ -48,11 +57,11 @@ class AuthStore {
     }
 
     loginByToken(token: string) {
-        const {login, user_id, role, exp} = jwtDecode<DecodedToken>(token)
+        const {login, user_id, role, exp, profile_img} = jwtDecode<DecodedToken>(token)
         if (isDeprecated(exp)) {
             return true
         }
-        this.user = {id: user_id, login, role}
+        this.user = {id: user_id, login, role, profile_img}
         this.isLoading = false
         setTimeout(this.refresh, 1000 * 60 * 29)
     }
@@ -81,27 +90,27 @@ class AuthStore {
     }
 
     registerUser(userRegisterCredential: UserRegisterCredential) {
-        this.isLoading = true
+        this.isLoadingBetweenForms = true
         return registerUser(userRegisterCredential)
-            .finally(() => this.isLoading = false)
+            .finally(() => this.isLoadingBetweenForms = false)
     }
 
     accountActivation(data: AccountActivationData) {
-        this.isLoading = true
+        this.isLoadingBetweenForms = true
         return accountActivation(data)
-            .finally(() => this.isLoading = false)
+            .finally(() => this.isLoadingBetweenForms = false)
     }
 
-    resetPassword(email: { email: string }) {
-        this.isLoading = true
-        return resetPassword(email)
-            .finally(() => this.isLoading = false)
+    resetPassword(data: { email: string }) {
+        this.isLoadingBetweenForms = true
+        return resetPassword(data)
+            .finally(() => this.isLoadingBetweenForms = false)
     }
 
     resetPasswordConfirm(passwordResetData: PasswordResetData) {
-        this.isLoading = true
+        this.isLoadingBetweenForms = true
         return resetPasswordConfirm(passwordResetData)
-            .finally(() => this.isLoading = false)
+            .finally(() => this.isLoadingBetweenForms = false)
     }
 }
 

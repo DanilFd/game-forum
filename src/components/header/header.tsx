@@ -11,10 +11,10 @@ import {LoginForm} from "./loginForm/loginForm";
 import {observer} from "mobx-react-lite";
 import {SelectedForm} from "../../types/Users/SelectedForm";
 import {RegistrationForm} from "./registrationForm/registrationForm";
-import usersStore from "../../store/usersStore";
 import {AcceptingForm} from "./acceptingForm/acceptingForm";
 import {ResetForm} from "./resetForm/resetForm";
 import authStore from "../../store/authStore";
+import {Profile} from "./profile/profile";
 
 
 export const Header = observer(() => {
@@ -36,24 +36,32 @@ export const Header = observer(() => {
                     <img className={styles.logoIcon} src={logoIcon} alt=""/>
                 </NavLink>
                 <NavLinks/>
-                <div className={styles.login}>
-                    <span onClick={() => setActiveModal(true)}>
-                    <IoMdLogIn/>
-                    <span>Войти</span>
-                    </span>
-                </div>
+
+                {
+                    !authStore.isLoading &&
+                    authStore.isAuth ?
+                        <Profile user={authStore.user!}/> :
+
+                        <div className={styles.login}>
+                            <span onClick={() => setActiveModal(true)}>
+                            <IoMdLogIn/>
+                            <span>Войти</span>
+                            </span>
+                        </div>
+                }
             </nav>
             <Menu active={active} setActive={setActive}/>
             <Modal active={activeModal} setActive={setActiveModal}>
                 {selectedForm === 'login' &&
                 <LoginForm login={authStore.login} switchForm={setSelectedForm}/>}
                 {selectedForm === 'register' &&
-                <RegistrationForm isLoading={usersStore.isLoading} registerUser={authStore.registerUser}
+                <RegistrationForm isLoading={authStore.isLoadingBetweenForms} registerUser={authStore.registerUser}
                                   switchForm={setSelectedForm}/>}
                 {selectedForm === 'accepting' &&
                 <AcceptingForm switchForm={setSelectedForm}/>}
                 {selectedForm === 'reset' &&
-                <ResetForm isLoading={usersStore.isLoading} switchForm={setSelectedForm} resetPassword={authStore.resetPassword}/>}
+                <ResetForm isLoading={authStore.isLoadingBetweenForms} switchForm={setSelectedForm}
+                           resetPassword={authStore.resetPassword}/>}
             </Modal>
         </header>
     );

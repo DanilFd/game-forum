@@ -3,7 +3,6 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
 import {PasswordResetData} from "../../types/Users/PasswordResetData";
 import {observer} from "mobx-react-lite";
-import usersStore from "../../store/usersStore";
 import {toast} from "react-toastify";
 import {HandleResetPasswordError} from "../../utils/handleResetPasswordError";
 import Loader from "../../components/loader/loader";
@@ -34,14 +33,14 @@ export const ResetPassword = observer(() => {
         authStore.resetPasswordConfirm(resetPasswordData)
             .then(() => {
                 toast.success('Ваш пароль изменен.')
-                history.replace('/')
+                setTimeout(() => history.replace('/'), 1500)
             })
             .catch(HandleResetPasswordError)
     }
     return (
         <div className={styles.wrapper}>
             {
-                usersStore.isLoading ? <Loader/> :
+                authStore.isLoadingBetweenForms ? <Loader/> :
                     <>
                         <h1>Восстановление пароля</h1>
                         <form onSubmit={handleSubmit(onSubmit)}>

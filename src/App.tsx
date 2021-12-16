@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import authStore from "./store/authStore";
 
 function App() {
-    useEffect(() => authStore.checkAuth, [])
+    useEffect(() => authStore.checkAuth(), [])
     return (
         <>
             <BrowserRouter>

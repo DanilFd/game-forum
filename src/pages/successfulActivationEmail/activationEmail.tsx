@@ -3,12 +3,13 @@ import {useParams} from "react-router-dom";
 import {AccountActivationData} from "../../types/Users/AccountActivationData";
 import authStore from "../../store/authStore";
 
+
 export const ActivationEmail = () => {
     const params = useParams<AccountActivationData>()
     useEffect(() => {
         authStore.accountActivation(params)
             .then(res => {
-                console.log('успех', res.data)
+                authStore.loginAfterRegistration(res.data)
             })
             .catch(() => console.log('неудача'))
         // eslint-disable-next-line
