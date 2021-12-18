@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {News} from "../pages/news/news";
 import styles from "./routes.module.scss"
-import {NewsItemDetail} from "../pages/news/newsItemDetail/newsItemDetail";
+import {NewsItemDetail} from "../pages/newsItemDetail/newsItemDetail";
 import {Games} from "../pages/games/games";
 import {ResetPassword} from "../pages/resetPassword/resetPassword";
 import {ActivationEmail} from "../pages/successfulActivationEmail/activationEmail";

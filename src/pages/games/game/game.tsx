@@ -1,17 +1,17 @@
 import React, {useMemo} from 'react';
-import {NavLink, useHistory} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
 import {Switch} from "../../../components/switch/switch";
 import {toast} from "react-toastify";
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
+import {Genres} from "./genres/genres";
+import {Platforms} from './platforms/platforms';
 
 type Props = {
     game: GameType
 }
-
 export const Game = ({game}: Props) => {
-    const history = useHistory()
+    console.log('из гейма:', game)
     const subNotify = () => toast.info("Вы добавили игру в избранное")
     const unsubNotify = () => toast.info("Вы удалили игру из избранного")
     const backColorForScore = useMemo(() => {
@@ -20,11 +20,6 @@ export const Game = ({game}: Props) => {
             :
             game.score > 0 ? "red" : "#ddd"
     }, [game.score])
-    const pushQuery = (query: string, value: string) => {
-        history.push({
-            search: `${query}=${value}&page=1`
-        })
-    }
     return (
         <div className={styles.item}>
             <NavLink to="#" className={styles.img}>
@@ -37,22 +32,8 @@ export const Game = ({game}: Props) => {
                     </NavLink>
                 </div>
                 <div className={styles.detail}>
-                    <div>
-                        Платформа: {game.platforms.map((p, index) =>
-                        <React.Fragment key={generateUniqueID()}>
-                            <span onClick={() => pushQuery('platform', p.slug)} className={styles.platform}
-                                  key={p.id}>{p.title}</span>
-                            {index !== game.platforms.length - 1 && <span>, </span>}
-                        </React.Fragment>)}
-                    </div>
-                    <div>
-                        Жанр: {game.genres.map((g, index) =>
-                        <React.Fragment key={generateUniqueID()}>
-                            <span onClick={() => pushQuery('genre', g.slug)} className={styles.genre}
-                                  key={g.id}>{g.title}</span>
-                            {index !== game.genres.length - 1 && <span>, </span>}
-                        </React.Fragment>)}
-                    </div>
+                    <Platforms game={game}/>
+                    <Genres game={game}/>
                     <div>
                         Дата выхода: {game.release_date}
                     </div>

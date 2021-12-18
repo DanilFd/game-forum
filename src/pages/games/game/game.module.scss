@@ -57,23 +57,6 @@
   }
 }
 
-.platform, .genre {
-  font-family: Roboto, sans-serif;
-  font-size: 12px;
-  text-decoration: none;
-  font-style: italic;
-  color: #666;
-  border-bottom: 1px #666 dotted;
-  margin-right: 5px;
-  cursor: pointer;
-
-  &:hover {
-    color: $secondaryColor;
-    border-bottom: 1px $secondaryColor dotted;
-  }
-
-}
-
 .score {
   margin-top: 7px;
   padding: 0 5px;
