@@ -12,7 +12,7 @@ import {observer} from "mobx-react-lite";
 import {SelectedForm} from "../../types/Users/SelectedForm";
 import {RegistrationForm} from "./registrationForm/registrationForm";
 import {AcceptingForm} from "./acceptingForm/acceptingForm";
-import {ResetForm} from "./resetForm/resetForm";
+import {ResetPasswordForm} from "./resetPasswordForm/resetPasswordForm";
 import authStore from "../../store/authStore";
 import {Profile} from "./profile/profile";
 
@@ -53,15 +53,15 @@ export const Header = observer(() => {
             <Menu active={active} setActive={setActive}/>
             <Modal active={activeModal} setActive={setActiveModal}>
                 {selectedForm === 'login' &&
-                <LoginForm login={authStore.login} switchForm={setSelectedForm}/>}
+                <LoginForm setActiveModal={setActiveModal} login={authStore.login} switchForm={setSelectedForm}/>}
                 {selectedForm === 'register' &&
                 <RegistrationForm isLoading={authStore.isLoadingBetweenForms} registerUser={authStore.registerUser}
                                   switchForm={setSelectedForm}/>}
                 {selectedForm === 'accepting' &&
                 <AcceptingForm switchForm={setSelectedForm}/>}
                 {selectedForm === 'reset' &&
-                <ResetForm isLoading={authStore.isLoadingBetweenForms} switchForm={setSelectedForm}
-                           resetPassword={authStore.resetPassword}/>}
+                <ResetPasswordForm isLoading={authStore.isLoadingBetweenForms} switchForm={setSelectedForm}
+                                   resetPassword={authStore.resetPassword}/>}
             </Modal>
         </header>
     );

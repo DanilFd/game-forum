@@ -1,4 +1,4 @@
-import styles from "./resetForm.module.scss"
+import styles from "./resetPasswordForm.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {AiOutlineLeft} from "react-icons/all";
 import {SetState} from "../../../types/utils/utils";
@@ -8,6 +8,7 @@ import {ResetPasswordError} from "../../../types/Users/ResetPasswordError";
 import {toast} from "react-toastify";
 import {useState} from "react";
 import {FormLoader} from "../formLoader/formLoader";
+import {motion} from "framer-motion"
 
 type ResetFormType = {
     email: string
@@ -18,7 +19,7 @@ type Props = {
     isLoading: boolean
 }
 
-export const ResetForm = ({switchForm, resetPassword, isLoading}: Props) => {
+export const ResetPasswordForm = ({switchForm, resetPassword, isLoading}: Props) => {
     const [isVisible, setIsVisible] = useState(false)
     const [isDisableBtn, setIsDisableBtn] = useState(false)
     const [seconds, setSeconds] = useState(60)
@@ -45,9 +46,11 @@ export const ResetForm = ({switchForm, resetPassword, isLoading}: Props) => {
         }, 60000)
     }
     return (
-        <div className={styles.wrapper}>
+        <motion.div className={styles.wrapper}
+                    initial={{translateX: 300}}
+                    animate={{translateX: 0}}
+        >
             {isLoading ? <FormLoader/> :
-
                 <>
                     <button onClick={() => switchForm('login')}>
                         <AiOutlineLeft/> Наазад
@@ -72,6 +75,6 @@ export const ResetForm = ({switchForm, resetPassword, isLoading}: Props) => {
                     </form>
                 </>
             }
-        </div>
+        </motion.div>
     )
 }

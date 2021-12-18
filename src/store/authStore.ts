@@ -30,7 +30,7 @@ class AuthStore {
     }
 
     login(data: UserLoginDetails) {
-        login(data)
+        return login(data)
             .then(res => {
                     runInAction(() => {
                         localStorage.setItem(ACCESS_TOKEN, res.data.access)
@@ -39,7 +39,6 @@ class AuthStore {
                     })
                 }
             )
-            .catch(e => console.log(e.message))
     }
 
     loginAfterRegistration(tokens: AuthResponse) {

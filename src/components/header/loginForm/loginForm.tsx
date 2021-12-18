@@ -6,24 +6,29 @@ import {SetState} from "../../../types/utils/utils";
 import {SelectedForm} from "../../../types/Users/SelectedForm";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {UserLoginDetails} from "../../../types/Auth/AuthRequest";
+import {AxiosError} from "axios";
+import {toast} from "react-toastify";
 
 
 type Props = {
     switchForm: SetState<SelectedForm>
-    login: (data: UserLoginDetails) => void
+    login: (data: UserLoginDetails) => Promise<void>
+    setActiveModal: SetState<boolean>
 }
 
 type LoginFormType = {
     login: string,
     password: string
 }
-export const LoginForm = ({switchForm, login}: Props) => {
+export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
     const [isShow, setIsShow] = useState(false)
     const {register, formState: {errors}, handleSubmit} = useForm<LoginFormType>({
         mode: "onChange"
     });
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         login(data)
+            .then(() => setActiveModal(false))
+            .catch((errors: AxiosError) => toast.error(errors.response?.data.detail))
     }
     return (
         <motion.div
