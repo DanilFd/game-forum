@@ -1,7 +1,16 @@
+@import "./src/variables";
+
+.account {
+  margin: 20px 0;
+  cursor: pointer;
+  position: relative;
+}
+
 .container {
+  position: relative;
+  z-index: 4;
   display: flex;
   align-items: center;
-
 }
 
 .img {
@@ -11,8 +20,15 @@
 }
 
 .login {
-  font-family: Roboto, sans-serif;
   font-size: 14px;
   display: block;
   padding-left: 10px;
+}
+
+.login.active {
+  color: black;
+
+  &:hover {
+    color: $secondaryColor;
+  }
 }

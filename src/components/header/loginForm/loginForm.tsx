@@ -22,12 +22,15 @@ type LoginFormType = {
 }
 export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
     const [isShow, setIsShow] = useState(false)
-    const {register, formState: {errors}, handleSubmit} = useForm<LoginFormType>({
+    const {register, formState: {errors}, handleSubmit, reset} = useForm<LoginFormType>({
         mode: "onChange"
     });
     const onSubmit: SubmitHandler<LoginFormType> = data => {
         login(data)
-            .then(() => setActiveModal(false))
+            .then(() => {
+                setActiveModal(false)
+                reset()
+            })
             .catch((errors: AxiosError) => toast.error(errors.response?.data.detail))
     }
     return (
@@ -63,9 +66,9 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
                     </div>
                 </form>
                 <div className={styles.additional}>
-                    <span className={isShow ? `${styles.active}` :``} onClick={() => setIsShow(true)}>
+                    <span className={isShow ? `${styles.active}` : ``} onClick={() => setIsShow(true)}>
                         Другие способы войти</span>
-                    <div className={isShow ? `${styles.social}` :``}>
+                    <div className={isShow ? `${styles.social}` : ``}>
                         <button><FcGoogle/></button>
                     </div>
                 </div>

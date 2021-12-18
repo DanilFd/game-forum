@@ -1,0 +1,36 @@
+@import "./src/variables";
+
+.dropdown {
+  padding-top: 50px;
+  position: absolute;
+  background-color: white;
+  width: calc(100% + 25px);
+  z-index: 2;
+  right: -15px;
+  top: -8px;
+  border-radius: 8px;
+  box-shadow: 0 0 7px #999;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    li {
+      width: 100%;
+      text-align: center;
+      a, span {
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        color: #585858;
+        margin-bottom: 10px;
+        font-weight: 500;
+        display: block;
+        width:100%;
+        padding: 0!important;
+        &:hover {
+          color: $secondaryColor;
+        }
+      }
+    }
+  }
+}
