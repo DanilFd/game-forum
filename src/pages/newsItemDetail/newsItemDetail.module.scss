@@ -1,12 +1,13 @@
-.newsItemDetail{
+.newsItemDetail {
   display: flex;
-  flex-grow: 1;
+  min-height: 92.4vh;
 }
-.content{
+
+.wrapper{
   flex-grow: 1;
 }
 @media (max-width: 800px) {
-  .newsItemDetail{
+  .newsItemDetail {
     flex-direction: column;
   }
 }

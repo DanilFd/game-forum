@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from "./newsItemContent.module.scss"
-import {NewsItemContentType} from "../../../../types/News/NewsItemContentType";
+import {NewsItemDetailType} from "../../../types/News/NewsItemDetailType";
 import {AiOutlineEye, BsBookmark, FaRegComment} from "react-icons/all";
 
 type Props = {
-    newsItemDetail: NewsItemContentType
+    newsItemDetail: NewsItemDetailType
 }
 
 const NewsItemContent = ({newsItemDetail}: Props) => {
