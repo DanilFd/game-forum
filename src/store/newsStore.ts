@@ -1,21 +1,22 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {NewsItemType} from "../types/News/NewsItemType";
 import {CategoryType} from "../types/News/CategoryType";
-import {NewsItemContentType} from "../types/News/NewsItemContentType";
+import {NewsItemDetailType} from "../types/News/NewsItemDetailType";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
-import {getCategories, getNews, getNewsItemDetail} from "../api/NewsService";
+import {getCategories, getCategoriesAndNewsItemDetail, getNews} from "../api/NewsService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 
 class NewsStore {
     news = [] as NewsItemType[]
     categories = [] as CategoryType[]
     isLoading = false
+    isLoadingCategoriesAndNewsItemDetail = true
     error = ''
-    newsItemContent = {} as NewsItemContentType
+    newsItemDetail = {} as NewsItemDetailType
     totalPages = null as number | null
 
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this, {}, {autoBind: true})
     }
 
     fetchNews(slug: string, page: number) {
@@ -40,15 +41,17 @@ class NewsStore {
             .finally(() => runInAction(() => this.isLoading = false))
     }
 
-    fetchNewsItemDetail(newsId: string) {
-        this.isLoading = true
-        getNewsItemDetail(newsId)
-            .then(res => {
-                convertToTodayYesterday(res.data)
-                runInAction(() => this.newsItemContent = res.data)
+    fetchCategoriesAndNewsItemDetail(newsId: string) {
+        getCategoriesAndNewsItemDetail(newsId)
+            .then(([categories, newsItemDetail]) => {
+                convertToTodayYesterday(newsItemDetail.data)
+                runInAction(() => {
+                    this.newsItemDetail = newsItemDetail.data
+                    this.categories = categories.data
+                })
             })
             .catch(e => runInAction(() => this.error = e.message))
-            .finally(() => runInAction(() => this.isLoading = false))
+            .finally(() => runInAction(() => this.isLoadingCategoriesAndNewsItemDetail = false))
     }
 }
 

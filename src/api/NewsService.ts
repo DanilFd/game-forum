@@ -1,17 +1,20 @@
 import {api} from "../http";
 import {CategoryType} from "../types/News/CategoryType";
-import {NewsItemContentType} from "../types/News/NewsItemContentType";
+import {NewsItemDetailType} from "../types/News/NewsItemDetailType";
 import {PaginatedNewsItems} from "../types/News/PaginatedNewsItems";
 
 export const getNews = (slug: string, page = 1) => {
     return api.get<PaginatedNewsItems>('news/list/news/',
-        {params: {category: slug, page:page}})
+        {params: {category: slug, page: page}})
 }
 
 export const getCategories = () => {
     return api.get<CategoryType[]>('news/list/categories/')
 }
 
-export const getNewsItemDetail = (newsId: string) => {
-    return api.get<NewsItemContentType>(`news/detail/news-item/${newsId}`)
+export const getCategoriesAndNewsItemDetail = (newsId: string) => {
+    return Promise.all([
+        api.get<CategoryType[]>('news/list/categories/'),
+        api.get<NewsItemDetailType>(`news/detail/news-item/${newsId}`)
+    ])
 }
