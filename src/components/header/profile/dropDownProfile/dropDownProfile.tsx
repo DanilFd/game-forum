@@ -1,5 +1,6 @@
 import {NavLink} from "react-router-dom"
 import styles from "./dropDownProfile.module.scss"
+import authStore from "../../../../store/authStore";
 
 export const DropDownProfile = () => {
     return (
@@ -15,7 +16,7 @@ export const DropDownProfile = () => {
                     <NavLink to="#">Лента</NavLink>
                 </li>
                 <li>
-                    <span >Выйти</span>
+                    <span onClick={() => authStore.logout()}>Выйти</span>
                 </li>
             </ul>
         </div>
