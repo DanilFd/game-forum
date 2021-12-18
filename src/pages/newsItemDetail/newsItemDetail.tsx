@@ -27,7 +27,7 @@ export const NewsItemDetail = observer(() => {
                                 </div>
                                 <section className={styles.gameForNews}>
                                     <h2>Игра из новости:</h2>
-                                    <Game game={newsStore.newsItemDetail.game}/>
+                                    <Game className={styles.gameCard} game={newsStore.newsItemDetail.game}/>
                                 </section>
                             </div>
                         </>

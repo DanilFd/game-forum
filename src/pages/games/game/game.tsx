@@ -9,8 +9,9 @@ import {Platforms} from './platforms/platforms';
 
 type Props = {
     game: GameType
+    className?: string
 }
-export const Game = ({game}: Props) => {
+export const Game = ({game, className}: Props) => {
     console.log('из гейма:', game)
     const subNotify = () => toast.info("Вы добавили игру в избранное")
     const unsubNotify = () => toast.info("Вы удалили игру из избранного")
@@ -21,7 +22,7 @@ export const Game = ({game}: Props) => {
             game.score > 0 ? "red" : "#ddd"
     }, [game.score])
     return (
-        <div className={styles.item}>
+        <div className={`${styles.item} ${className}`}>
             <NavLink to="#" className={styles.img}>
                 <img src={game.img} alt=""/>
             </NavLink>
