@@ -98,6 +98,7 @@
   align-items: center;
   flex-direction: column;
   min-height: 70px;
+
   span {
     color: #9d9d9d;
     cursor: pointer;
@@ -106,38 +107,64 @@
       color: $secondaryColor;
     }
   }
-  span.active{
+
+  span.active {
     color: black;
     cursor: auto;
-    &:hover{
+
+    &:hover {
       color: black;
     }
   }
-  button{
+
+  button {
     display: none;
     font-size: 17px;
-    padding:10px 20px;
+    padding: 10px 20px;
     border-radius: 5px;
     transition: border-color 500ms;
     border: 1px solid #c2c2c2;
     transform: skew(-11deg);
-    svg{
+
+    svg {
       transform: skew(11deg);
     }
-    &:hover{
+
+    &:hover {
       transition: border-color 500ms;
-      border-color:black ;
+      border-color: black;
     }
   }
 }
-.social{
+
+.social {
   padding-top: 10px;
-  button{
+
+  button {
     display: block;
   }
 }
-.subtitle{
+
+.subtitle {
   text-align: center;
   color: #d0d0d0;
   font-size: 12px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  align-self: self-start;
+  margin-bottom: 10px;
+}
+
+
+@media (max-width: 400px) {
+  .row {
+    flex-direction: column;
+
+    button {
+      margin-bottom: 15px;
+    }
+  }
 }

@@ -51,21 +51,21 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
                         }
                     })} placeholder="Логин"
                            type="text"/>
-                    {errors.login && <span style={{color: "red"}}>{errors.login.message}</span>}
+                    {errors.login && <span className={styles.error}>{errors.login.message}</span>}
                     <input style={{borderColor: errors.password && "red"}} {...register('password', {
                         required: 'Заполните это поле.',
                     })} placeholder="Пароль" name="password" autoComplete="on"
                            type="password"/>
-                    {errors.password && <span style={{color: "red"}}>{errors.password.message}</span>}
+                    {errors.password && <span className={styles.error}>{errors.password.message}</span>}
                     <div className={styles.row}>
                         <button type="submit"><span>войти</span></button>
                         <span onClick={() => switchForm('reset')}>Я не помню логин/пароль</span>
                     </div>
                 </form>
                 <div className={styles.additional}>
-                    <span className={isShow ? `${styles.active}` : ``} onClick={() => setIsShow(true)}>
+                    <span className={isShow ? `${styles.active}` :``} onClick={() => setIsShow(true)}>
                         Другие способы войти</span>
-                    <div className={isShow ? `${styles.social}` : ``}>
+                    <div className={isShow ? `${styles.social}` :``}>
                         <button><FcGoogle/></button>
                     </div>
                 </div>
