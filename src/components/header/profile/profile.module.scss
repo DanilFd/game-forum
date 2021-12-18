@@ -32,3 +32,10 @@
     color: $secondaryColor;
   }
 }
+
+@media (max-width: 590px) {
+  .login {
+    display: none;
+  }
+
+}
