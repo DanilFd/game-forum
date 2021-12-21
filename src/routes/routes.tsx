@@ -6,6 +6,7 @@ import {NewsItemDetail} from "../pages/newsItemDetail/newsItemDetail";
 import {Games} from "../pages/games/games";
 import {ResetPassword} from "../pages/resetPassword/resetPassword";
 import {ActivationEmail} from "../pages/successfulActivationEmail/activationEmail";
+import {DetailProfile} from "../pages/detailProfile/detailProfile";
 
 export const Routes = () => {
     return (
@@ -17,8 +18,8 @@ export const Routes = () => {
                 <Route exact path="/games" component={Games}/>
                 <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                 <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
+                <Route exact path="/user/:login" component={DetailProfile}/>
             </Switch>
         </div>
     );
 };
-

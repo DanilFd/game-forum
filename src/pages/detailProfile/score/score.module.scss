@@ -1,0 +1,12 @@
+.score {
+  transform: skew(-20deg);
+  padding: 2px 10px;
+  border-radius: 5px;
+
+  span {
+    font-size: 14px;
+    display: block;
+    transform: skew(20deg);
+    color: white;
+  }
+}
