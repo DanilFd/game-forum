@@ -1,0 +1,97 @@
+@import "./src/variables";
+
+.page {
+  position: relative;
+  height: 50vh;
+}
+
+.content {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+
+  span {
+    color: white;
+  }
+}
+
+.logo {
+  max-width: 170px;
+
+  img {
+    max-width: 170px;
+    height: 90px;
+  }
+}
+
+.errorCode {
+  font-size: 180px;
+  font-weight: 300;
+
+}
+
+.errorMessage {
+  font-size: 30px;
+  padding-bottom: 50px;
+}
+
+.redirect {
+  text-decoration: none;
+  border: 1px solid $secondaryColor;
+  padding: 10px 0;
+  transform: skew(-11deg);
+  border-radius: 8px;
+
+  span {
+    display: block;
+    text-transform: uppercase;
+    transform: skew(11deg);
+    text-align: center;
+    color: $secondaryColor;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+.backgroundLogo {
+
+  overflow: hidden;
+
+  img {
+    opacity: .1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 800px;
+    height: 800px;
+  }
+}
+
+@media (max-width: 590px) {
+  .content {
+    left: 25%;
+    top: 50%;
+  }
+  .errorCode {
+    font-size: 140px;
+  }
+  .errorMessage {
+    font-size: 25px;
+  }
+  .backgroundLogo {
+    img {
+      right: -25%;
+      width: 450px;
+      height: 450px;
+    }
+  }
+}
