@@ -1,7 +1,7 @@
 import styles from './acceptingForm.module.scss'
 import {AiOutlineLeft, AiOutlineMail} from "react-icons/all";
 import {SetState} from "../../../types/utils/utils";
-import {SelectedForm} from "../../../types/Users/SelectedForm";
+import {SelectedForm} from "../../../types/Auth/SelectedForm";
 
 
 type Props = {

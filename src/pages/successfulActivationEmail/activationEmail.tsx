@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useParams} from "react-router-dom";
-import {AccountActivationData} from "../../types/Users/AccountActivationData";
+import {AccountActivationData} from "../../types/Auth/AccountActivationData";
 import authStore from "../../store/authStore";
 
 

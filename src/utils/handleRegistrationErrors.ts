@@ -1,4 +1,4 @@
-import {RegisterUserError} from "../types/Users/RegisterUserError";
+import {RegisterUserError} from "../types/Auth/RegisterUserError";
 import {toast} from "react-toastify";
 import {AxiosError} from "axios";
 

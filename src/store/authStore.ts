@@ -5,9 +5,9 @@ import {accountActivation, registerUser, resetPassword, resetPasswordConfirm} fr
 import {AuthenticatedUser} from "../types/Auth/AuthenticatedUser";
 import jwtDecode from "jwt-decode";
 import {DecodedToken} from "../types/Auth/DecodedToken";
-import {UserRegisterCredential} from "../types/Users/UserRegisterCredential";
-import {AccountActivationData} from "../types/Users/AccountActivationData";
-import {PasswordResetData} from "../types/Users/PasswordResetData";
+import {UserRegisterCredential} from "../types/Auth/UserRegisterCredential";
+import {AccountActivationData} from "../types/Auth/AccountActivationData";
+import {PasswordResetData} from "../types/Auth/PasswordResetData";
 import {AuthResponse} from "../types/Auth/AuthResponse";
 
 export const ACCESS_TOKEN = 'access_token'

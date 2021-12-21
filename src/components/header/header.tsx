@@ -9,7 +9,7 @@ import {AiOutlineClose, GiHamburgerMenu, IoMdLogIn} from "react-icons/all";
 import {Modal} from "../modal/modal";
 import {LoginForm} from "./loginForm/loginForm";
 import {observer} from "mobx-react-lite";
-import {SelectedForm} from "../../types/Users/SelectedForm";
+import {SelectedForm} from "../../types/Auth/SelectedForm";
 import {RegistrationForm} from "./registrationForm/registrationForm";
 import {AcceptingForm} from "./acceptingForm/acceptingForm";
 import {ResetPasswordForm} from "./resetPasswordForm/resetPasswordForm";

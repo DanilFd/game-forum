@@ -2,9 +2,9 @@ import styles from "./resetPasswordForm.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {AiOutlineLeft} from "react-icons/all";
 import {SetState} from "../../../types/utils/utils";
-import {SelectedForm} from "../../../types/Users/SelectedForm";
+import {SelectedForm} from "../../../types/Auth/SelectedForm";
 import {AxiosError, AxiosResponse} from "axios";
-import {ResetPasswordError} from "../../../types/Users/ResetPasswordError";
+import {ResetPasswordError} from "../../../types/Auth/ResetPasswordError";
 import {toast} from "react-toastify";
 import {useState} from "react";
 import {FormLoader} from "../formLoader/formLoader";

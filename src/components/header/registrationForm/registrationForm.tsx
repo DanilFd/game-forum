@@ -2,11 +2,11 @@ import styles from "./registrationForm.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {SetState} from "../../../types/utils/utils";
 import {motion} from "framer-motion";
-import {UserRegisterCredential} from "../../../types/Users/UserRegisterCredential";
+import {UserRegisterCredential} from "../../../types/Auth/UserRegisterCredential";
 import {AxiosResponse} from "axios";
-import {RegisterUserError} from "../../../types/Users/RegisterUserError";
+import {RegisterUserError} from "../../../types/Auth/RegisterUserError";
 import {handleRegistrationErrors} from "../../../utils/handleRegistrationErrors";
-import {SelectedForm} from "../../../types/Users/SelectedForm";
+import {SelectedForm} from "../../../types/Auth/SelectedForm";
 import {FormLoader} from "../formLoader/formLoader";
 
 

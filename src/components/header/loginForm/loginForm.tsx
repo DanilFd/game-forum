@@ -3,7 +3,7 @@ import {useState} from "react";
 import {FcGoogle} from "react-icons/all";
 import {motion} from "framer-motion";
 import {SetState} from "../../../types/utils/utils";
-import {SelectedForm} from "../../../types/Users/SelectedForm";
+import {SelectedForm} from "../../../types/Auth/SelectedForm";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {UserLoginDetails} from "../../../types/Auth/AuthRequest";
 import {AxiosError} from "axios";

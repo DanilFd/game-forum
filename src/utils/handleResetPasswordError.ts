@@ -1,5 +1,5 @@
 import {AxiosError} from "axios";
-import {ResetPasswordConfirmError} from "../types/Users/ResetPasswordError";
+import {ResetPasswordConfirmError} from "../types/Auth/ResetPasswordError";
 import {toast} from "react-toastify";
 
 

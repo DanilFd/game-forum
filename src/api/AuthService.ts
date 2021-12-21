@@ -1,10 +1,10 @@
 import {api} from "../http";
 import {AuthResponse} from "../types/Auth/AuthResponse";
-import {UserRegisterCredential} from "../types/Users/UserRegisterCredential";
-import {RegisterUserError} from "../types/Users/RegisterUserError";
-import {AccountActivationData} from "../types/Users/AccountActivationData";
-import {ResetPasswordConfirmError, ResetPasswordError} from "../types/Users/ResetPasswordError";
-import {PasswordResetData} from "../types/Users/PasswordResetData";
+import {UserRegisterCredential} from "../types/Auth/UserRegisterCredential";
+import {RegisterUserError} from "../types/Auth/RegisterUserError";
+import {AccountActivationData} from "../types/Auth/AccountActivationData";
+import {ResetPasswordConfirmError, ResetPasswordError} from "../types/Auth/ResetPasswordError";
+import {PasswordResetData} from "../types/Auth/PasswordResetData";
 import {UserLoginDetails} from "../types/Auth/AuthRequest";
 import {RefreshTokenResponse} from "../types/Auth/RefreshTokenResponse";
 

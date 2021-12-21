@@ -1,7 +1,7 @@
 import styles from "./resetPassword.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useHistory, useParams} from "react-router-dom";
-import {PasswordResetData} from "../../types/Users/PasswordResetData";
+import {PasswordResetData} from "../../types/Auth/PasswordResetData";
 import {observer} from "mobx-react-lite";
 import {toast} from "react-toastify";
 import {HandleResetPasswordError} from "../../utils/handleResetPasswordError";

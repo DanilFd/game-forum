@@ -12,7 +12,7 @@ export const DropDownProfile = ({login}: Props) => {
         <div className={styles.dropdown}>
             <ul>
                 <li>
-                    <NavLink to={`user/${login}`}>Профиль</NavLink>
+                    <NavLink to={`/user/${login}`}>Профиль</NavLink>
                 </li>
                 <li>
                     <NavLink to="#">Сообщения</NavLink>
