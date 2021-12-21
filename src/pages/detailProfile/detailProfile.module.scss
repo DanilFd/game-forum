@@ -1,0 +1,93 @@
+@import "./src/variables";
+
+.page {
+}
+
+.profile {
+  margin-top: 200px;
+  max-width: 800px;
+  background-color: white;
+  border: 1px solid #c4c4c4;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding: 0 30px 40px;
+  display: flex;
+
+  a {
+    text-decoration: none;
+    color: $secondaryColor;
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+
+    &:hover {
+      border-bottom: $secondaryColor 1px solid;
+    }
+  }
+}
+
+.avatarRating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 124px;
+    height: 124px;
+    border: 2px solid #fff;
+    border-radius: 62px;
+    object-fit: cover;
+    margin: -30px 0 15px 0;
+  }
+}
+
+.edit {
+  padding-top: 15px;
+}
+
+.info {
+  padding: 30px 0 0 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: 700;
+  font-size: 26px;
+  padding-bottom: 20px;
+}
+
+.lastVisit {
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+}
+
+.writeMessage {
+  padding-top: 30px;
+}
+
+.showAddInfo {
+  min-height: 48px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  svg {
+    transition: 300ms;
+    font-size: 35px;
+    color: $secondaryColor;
+  }
+}
+
+.showAddInfo.active {
+  svg {
+    transition: 300ms;
+    transform: rotate(180deg);
+  }
+}
