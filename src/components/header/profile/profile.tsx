@@ -17,7 +17,7 @@ export const Profile = ({user}: Props) => {
                 <img className={styles.img} src={user.profile_img} alt=''/>
                 <span className={`${styles.login} ${isActive ? styles.active : ''}`}>{user.login}</span>
             </div>
-            {isActive && <DropDownProfile/>}
+            {isActive && <DropDownProfile login={user.login}/>}
         </div>
     )
 }

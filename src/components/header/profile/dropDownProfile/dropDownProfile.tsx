@@ -2,12 +2,17 @@ import {NavLink} from "react-router-dom"
 import styles from "./dropDownProfile.module.scss"
 import authStore from "../../../../store/authStore";
 
-export const DropDownProfile = () => {
+
+type Props = {
+    login: string
+}
+
+export const DropDownProfile = ({login}: Props) => {
     return (
         <div className={styles.dropdown}>
             <ul>
                 <li>
-                    <NavLink to="#">Профиль</NavLink>
+                    <NavLink to={`user/${login}`}>Профиль</NavLink>
                 </li>
                 <li>
                     <NavLink to="#">Сообщения</NavLink>

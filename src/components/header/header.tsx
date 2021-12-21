@@ -36,12 +36,10 @@ export const Header = observer(() => {
                     <img className={styles.logoIcon} src={logoIcon} alt=""/>
                 </NavLink>
                 <NavLinks/>
-
                 {
                     !authStore.isLoading &&
                     authStore.isAuth ?
                         <Profile user={authStore.user!}/> :
-
                         <div className={styles.login}>
                             <span onClick={() => setActiveModal(true)}>
                             <IoMdLogIn/>
