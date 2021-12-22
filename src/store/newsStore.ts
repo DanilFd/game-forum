@@ -23,7 +23,7 @@ class NewsStore {
         this.isLoading = true
         getNews(slug, page)
             .then(res => {
-                res.data.results.forEach(item => convertToTodayYesterday(item))
+                res.data.results.forEach(item => item.creation_date = convertToTodayYesterday(item.creation_date))
                 runInAction(() => {
                     this.news = res.data.results
                     this.totalPages = calcNumberPages(res.data.count)
@@ -44,7 +44,7 @@ class NewsStore {
     fetchCategoriesAndNewsItemDetail(newsId: string) {
         getCategoriesAndNewsItemDetail(newsId)
             .then(([categories, newsItemDetail]) => {
-                convertToTodayYesterday(newsItemDetail.data)
+                newsItemDetail.data.creation_date = convertToTodayYesterday(newsItemDetail.data.creation_date)
                 runInAction(() => {
                     this.newsItemDetail = newsItemDetail.data
                     this.categories = categories.data
