@@ -38,7 +38,14 @@ export const DetailProfile = observer(() => {
                         </div>
                         <div className={styles.info}>
                             <span className={styles.username}>{usersStore.userProfile.login}</span>
-                            <span className={styles.lastVisit}>Последнее посещение: <b>Вчера</b></span>
+                            {usersStore.userProfile.age && <span
+                                className={styles.age}>Возраст:
+                                 <b>{usersStore.userProfile.age}</b>
+                            </span>}
+                            <span
+                                className={styles.lastVisit}>Последнее посещение:
+                                 <b>{usersStore.userProfile.last_visit}</b>
+                            </span>
                             <div className={styles.writeMessage}>
                                 <NavLink to="#">написать сообщение</NavLink>
                             </div>
@@ -47,7 +54,12 @@ export const DetailProfile = observer(() => {
                     <div className={styles.profileInfo}>
                         <AnimatePresence>
                             {
-                                isActive && <AdditionalInfo/>
+                                isActive && <AdditionalInfo
+                                    date_joined={usersStore.userProfile.date_joined}
+                                    birthday_date={usersStore.userProfile.birthday_date}
+                                    discord={usersStore.userProfile.discord}
+                                    gender={usersStore.userProfile.gender}
+                                />
                             }
                         </AnimatePresence>
                         <div onClick={() => setIsActive(prev => !prev)}

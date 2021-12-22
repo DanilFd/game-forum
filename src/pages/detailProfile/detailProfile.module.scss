@@ -1,6 +1,12 @@
 @import "./src/variables";
 
 .page {
+  b {
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    padding-left: 5px;
+  }
 }
 
 .profile {
@@ -60,8 +66,10 @@
   font-size: 26px;
   padding-bottom: 20px;
 }
-
-.lastVisit {
+.age{
+  padding-bottom: 15px;
+}
+.lastVisit,.age {
   font-family: Roboto, sans-serif;
   font-size: 13px;
 }

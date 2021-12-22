@@ -1,7 +1,15 @@
 import {motion} from "framer-motion"
 import styles from "./additionalInfo.module.scss";
 
-export const AdditionalInfo = () => {
+
+type Props = {
+    date_joined: string
+    birthday_date: null | string
+    gender: string
+    discord: null | string
+}
+
+export const AdditionalInfo = ({date_joined, birthday_date, gender, discord}: Props) => {
     return (
         <motion.div className={styles.additionalInfo}
                     initial={{height: 0}}
@@ -10,10 +18,10 @@ export const AdditionalInfo = () => {
                     transition={{duration: 0.3}}
         >
             <h3 className={styles.heading}>Персональные данные</h3>
-            <span>Дата регистрации: <b>30.11.2021</b></span>
-            <span>Дата рождения: <b>15.03.2002</b></span>
-            <span>Пол: <b>мужской</b></span>
-            <span>Discord: <b>zzzz#9999</b></span>
+            <span>Дата регистрации:<b>{date_joined}</b></span>
+            {birthday_date && <span>Дата рождения:<b>{birthday_date}</b></span>}
+            {gender !== 'Не указан' && <span>Пол:<b>{gender}</b></span>}
+            {discord && <span>Discord:<b>{discord}</b></span>}
         </motion.div>
     )
 }

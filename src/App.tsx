@@ -11,7 +11,6 @@ import {PageNotFound} from "./components/pageNotFound/pageNotFound";
 function App() {
     useEffect(() => authStore.checkAuth(), [])
     const {pathname} = useLocation()
-    console.log(pathname)
     return (
         <>
             {
