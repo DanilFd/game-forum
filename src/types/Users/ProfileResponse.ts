@@ -6,5 +6,6 @@ export type ProfileResponse = {
     birthday_date: null | string
     discord: null | string
     gender: string
+    about_custom_user: null | string
     age: null | string
 }

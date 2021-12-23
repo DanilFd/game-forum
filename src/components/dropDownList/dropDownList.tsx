@@ -9,7 +9,7 @@ type Props = {
             slug?:string
             value?:string
         }[]
-    selectProps: object
+    selectProps?: object
 }
 export const DropDownList = ({defaultItemText, items, selectProps}: Props) => {
     return (

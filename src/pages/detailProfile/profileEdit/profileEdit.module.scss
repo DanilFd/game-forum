@@ -1,0 +1,114 @@
+@import "./src/variables";
+
+.profileEdit {
+  border-top: 2px solid #c4c4c4;
+  margin: 20px 30px 0;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.formGroupLeft {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  margin-right: 40px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.formGroupLeftTitle {
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+.formGroupLeftNote {
+  color: #c4c4c4;
+  font-size: 12px;
+  text-align: left;
+}
+
+.formGroupRight {
+  flex-grow: 1;
+
+  span {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #c4c4c4;
+    font-size: 14px;
+    padding: 10px 15px;
+    min-height: 90px;
+  }
+
+  input {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #c4c4c4;
+    width: 94%;
+    font-size: 14px;
+  }
+
+  select {
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 15px;
+  }
+}
+
+.actionBtn {
+  box-shadow: 1px 1px 3px #0003;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  padding: 10px 15px;
+  border: 2px solid $secondaryColor;
+
+  span {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: $secondaryColor;
+    transform: skew(11deg);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+.formAction {
+  > button {
+    padding: 15px 25px;
+  }
+
+  display: flex;
+  padding: 25px 0;
+}
+
+.resetBtn {
+  text-transform: uppercase;
+  padding: 15px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 20px;
+
+  &:hover {
+    color: $secondaryColor;
+  }
+}

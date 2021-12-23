@@ -7,9 +7,10 @@ type Props = {
     birthday_date: null | string
     gender: string
     discord: null | string
+    about_user: null | string
 }
 
-export const AdditionalInfo = ({date_joined, birthday_date, gender, discord}: Props) => {
+export const AdditionalInfo = ({date_joined, birthday_date, gender, discord, about_user}: Props) => {
     return (
         <motion.div className={styles.additionalInfo}
                     initial={{height: 0}}
@@ -22,6 +23,7 @@ export const AdditionalInfo = ({date_joined, birthday_date, gender, discord}: Pr
             {birthday_date && <span>Дата рождения:<b>{birthday_date}</b></span>}
             {gender !== 'Не указан' && <span>Пол:<b>{gender}</b></span>}
             {discord && <span>Discord:<b>{discord}</b></span>}
+            {about_user && <span>Коротко о себе:<b>{about_user}</b></span>}
         </motion.div>
     )
 }

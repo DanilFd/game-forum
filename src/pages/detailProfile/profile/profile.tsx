@@ -6,23 +6,27 @@ import {AdditionalInfo} from "./additionalInfo/additionalInfo";
 import {IoIosArrowDown} from "react-icons/all";
 import {useState} from "react";
 import {ProfileResponse} from "../../../types/Users/ProfileResponse";
+import {AuthenticatedUser} from "../../../types/Auth/AuthenticatedUser";
+import {ProfileEdit} from "../profileEdit/profileEdit";
 
 type Props = {
     userProfile: ProfileResponse
+    authenticatedUser: AuthenticatedUser
 }
 
 
-export const Profile = ({userProfile}: Props) => {
+export const Profile = ({userProfile, authenticatedUser}: Props) => {
     const [isActive, setIsActive] = useState(false)
+    const [isEditProfile, setIsEditProfile] = useState(true)
     const score = 80
-
     return (
         <div className={styles.profile}>
             <div className={styles.section}>
                 <div className={styles.avatarRating}>
                     <img src={userProfile.profile_img} alt=""/>
                     <Score score={score}/>
-                    <NavLink className={styles.edit} to="#">редактировать</NavLink>
+                    {authenticatedUser.login === userProfile.login &&
+                    <NavLink className={styles.edit} to="#">редактировать</NavLink>}
                 </div>
                 <div className={styles.info}>
                     <span className={styles.username}>{userProfile.login}</span>
@@ -39,22 +43,27 @@ export const Profile = ({userProfile}: Props) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.profileInfo}>
-                <AnimatePresence>
-                    {
-                        isActive && <AdditionalInfo
-                            date_joined={userProfile.date_joined}
-                            birthday_date={userProfile.birthday_date}
-                            discord={userProfile.discord}
-                            gender={userProfile.gender}
-                        />
-                    }
-                </AnimatePresence>
-                <div onClick={() => setIsActive(prev => !prev)}
-                     className={`${styles.showAddInfo} ${isActive ? styles.active : ''}`}>
-                    <IoIosArrowDown/>
-                </div>
-            </div>
+            {
+                isEditProfile ?
+                    <ProfileEdit/> :
+                    <div className={styles.profileInfo}>
+                        <AnimatePresence>
+                            {
+                                isActive && <AdditionalInfo
+                                    date_joined={userProfile.date_joined}
+                                    birthday_date={userProfile.birthday_date}
+                                    discord={userProfile.discord}
+                                    gender={userProfile.gender}
+                                    about_user={userProfile.about_custom_user}
+                                />
+                            }
+                        </AnimatePresence>
+                        <div onClick={() => setIsActive(prev => !prev)}
+                             className={`${styles.showAddInfo} ${isActive ? styles.active : ''}`}>
+                            <IoIosArrowDown/>
+                        </div>
+                    </div>
+            }
         </div>
     )
 }
