@@ -1,8 +1,9 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getUserProfile, putProfileEdit} from "../api/UsersService";
+import {getUserProfile, postSetUserPassword, putProfileEdit} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {ProfileEditData} from "../types/Users/ProfileEditData";
+import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 
 class UsersStore {
     constructor() {
@@ -11,6 +12,7 @@ class UsersStore {
 
     isLoadingProfile = true
     isLoadingEdit = false
+    isLoadingSetPassword = false
     userProfile = {} as ProfileResponse
     error = ''
 
@@ -28,6 +30,11 @@ class UsersStore {
         this.isLoadingEdit = true
         return putProfileEdit(data)
             .finally(() => runInAction(() => this.isLoadingEdit = false))
+    }
+    setUserPassword = (data: DataForSetUserPassword) => {
+        this.isLoadingSetPassword = true
+        return postSetUserPassword(data)
+            .finally(() => runInAction(() => this.isLoadingSetPassword = false))
     }
 }
 

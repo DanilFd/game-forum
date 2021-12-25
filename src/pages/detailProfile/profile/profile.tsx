@@ -25,7 +25,7 @@ export const Profile = ({userProfile, authenticatedUser}: Props) => {
                 <div className={styles.avatarRating}>
                     <img src={userProfile.profile_img} alt=""/>
                     <Score score={score}/>
-                    {authenticatedUser.login === userProfile.login &&
+                    {authenticatedUser?.login === userProfile.login &&
                     <span onClick={() => setIsEditProfile(prev => !prev)}
                           className={styles.edit}>{isEditProfile ? "назад" : "редактировать"}</span>}
                 </div>

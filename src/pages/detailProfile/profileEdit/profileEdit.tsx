@@ -5,6 +5,9 @@ import {observer} from "mobx-react-lite";
 import {motion} from "framer-motion"
 import {toast} from "react-toastify";
 import {FormLoader} from "../../../components/header/formLoader/formLoader";
+import {useState} from "react";
+import {Modal} from "../../../components/modal/modal";
+import {ResetPasswordForm} from "./resetPasswordForm/resetPasswordFormType";
 
 type editProfileForm = {
     birthday_date: string | null
@@ -14,6 +17,7 @@ type editProfileForm = {
 }
 
 export const ProfileEdit = observer(() => {
+    const [isPasswordEdit, setIsPasswordEdit] = useState(false)
     const {register, handleSubmit, setValue} = useForm<editProfileForm>({
         defaultValues: {
             birthday_date: usersStore.userProfile.birthday_date ?
@@ -77,9 +81,13 @@ export const ProfileEdit = observer(() => {
                                 <span className={styles.formGroupLeftTitle}>Пароль</span>
                             </div>
                             <div className={styles.formGroupRight}>
-                                <button className={styles.actionBtn}><span>сменить пароль</span></button>
+                                <button onClick={() => setIsPasswordEdit(prev => !prev)} className={styles.actionBtn}>
+                                    <span>сменить пароль</span></button>
                             </div>
                         </div>
+                        <Modal active={isPasswordEdit} setActive={setIsPasswordEdit}>
+                            <ResetPasswordForm setIsPasswordEdit={setIsPasswordEdit}/>
+                        </Modal>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className={styles.formGroup}>
                                 <div className={styles.formGroupLeft}>
