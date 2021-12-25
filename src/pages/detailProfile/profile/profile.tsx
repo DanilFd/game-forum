@@ -17,7 +17,7 @@ type Props = {
 
 export const Profile = ({userProfile, authenticatedUser}: Props) => {
     const [isActive, setIsActive] = useState(false)
-    const [isEditProfile, setIsEditProfile] = useState(true)
+    const [isEditProfile, setIsEditProfile] = useState(false)
     const score = 80
     return (
         <div className={styles.profile}>
@@ -26,14 +26,17 @@ export const Profile = ({userProfile, authenticatedUser}: Props) => {
                     <img src={userProfile.profile_img} alt=""/>
                     <Score score={score}/>
                     {authenticatedUser.login === userProfile.login &&
-                    <NavLink className={styles.edit} to="#">редактировать</NavLink>}
+                    <span onClick={() => setIsEditProfile(prev => !prev)}
+                          className={styles.edit}>{isEditProfile ? "назад" : "редактировать"}</span>}
                 </div>
                 <div className={styles.info}>
                     <span className={styles.username}>{userProfile.login}</span>
-                    {userProfile.age && <span
-                        className={styles.age}>Возраст:
+                    {
+                        +userProfile.age! > 0 &&
+                        <span className={styles.age}>Возраст:
                                  <b>{userProfile.age}</b>
-                            </span>}
+                         </span>
+                    }
                     <span
                         className={styles.lastVisit}>Последнее посещение:
                                  <b>{userProfile.last_visit}</b>
@@ -45,7 +48,11 @@ export const Profile = ({userProfile, authenticatedUser}: Props) => {
             </div>
             {
                 isEditProfile ?
-                    <ProfileEdit/> :
+                    <div>
+                        <AnimatePresence>
+                            <ProfileEdit/>
+                        </AnimatePresence>
+                    </div> :
                     <div className={styles.profileInfo}>
                         <AnimatePresence>
                             {

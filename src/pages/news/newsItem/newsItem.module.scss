@@ -16,6 +16,7 @@
     padding: 9% 15%;
     position: relative;
     overflow: hidden;
+
     img {
       position: absolute;
       top: 0;
@@ -65,9 +66,11 @@
     }
   }
 }
-.categories{
+
+.categories {
   padding-top: 10px;
-  a{
+
+  a {
     font-family: Roboto, sans-serif;
     font-size: 12px;
     text-decoration: none;
@@ -75,33 +78,41 @@
     color: #666;
     border-bottom: 1px #666 dotted;
     margin-right: 5px;
-    &:hover{
+
+    &:hover {
       color: $secondaryColor;
       border-bottom: 1px $secondaryColor dotted;
     }
   }
-  span{
+
+  span {
     font-family: Roboto, sans-serif;
     font-size: 12px;
     font-style: italic;
   }
 }
+
 @media (max-width: 690px) {
-  .newsItem{
-    .articleImg{
-      padding: 15% 20%;
+  .newsItem {
+    .articleImg {
+      padding: 13% 20%;
     }
   }
 }
+
 @media (max-width: 590px) {
   .newsItem {
     flex-direction: column;
     align-items: normal;
+
     .articleImg {
       border-radius: 7px;
       padding: 22% 15%;
+      margin: 0;
+
     }
-    .articleDescription{
+
+    .articleDescription {
       padding-top: 8px;
       width: 100%;
     }

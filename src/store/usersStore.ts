@@ -1,7 +1,8 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getUserProfile} from "../api/UsersService";
+import {getUserProfile, putProfileEdit} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
+import {ProfileEditData} from "../types/Users/ProfileEditData";
 
 class UsersStore {
     constructor() {
@@ -9,6 +10,7 @@ class UsersStore {
     }
 
     isLoadingProfile = true
+    isLoadingEdit = false
     userProfile = {} as ProfileResponse
     error = ''
 
@@ -21,6 +23,11 @@ class UsersStore {
                 })
             })
             .finally(() => runInAction(() => this.isLoadingProfile = false))
+    }
+    profileEdit = (data: ProfileEditData) => {
+        this.isLoadingEdit = true
+        return putProfileEdit(data)
+            .finally(() => runInAction(() => this.isLoadingEdit = false))
     }
 }
 

@@ -44,6 +44,17 @@
 
 .edit {
   padding-top: 15px;
+  text-decoration: none;
+  color: $secondaryColor;
+  text-transform: uppercase;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    border-bottom: $secondaryColor 1px solid;
+  }
 }
 
 .info {

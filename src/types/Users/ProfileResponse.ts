@@ -5,7 +5,8 @@ export type ProfileResponse = {
     last_visit: string
     birthday_date: null | string
     discord: null | string
-    gender: string
+    gender: 'Не указан' | 'Мужской' | 'Женский'
     about_custom_user: null | string
     age: null | string
+    email: string
 }

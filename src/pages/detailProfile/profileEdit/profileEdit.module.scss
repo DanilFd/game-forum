@@ -3,6 +3,7 @@
 .profileEdit {
   border-top: 2px solid #c4c4c4;
   margin: 20px 30px 0;
+  overflow: hidden;
 }
 
 .formGroup {
@@ -53,7 +54,8 @@
     border-radius: 8px;
     padding: 10px 15px;
     border: 1px solid #c4c4c4;
-    width: 94%;
+    width: 100%;
+    font-family: Rubik, sans-serif;
     font-size: 14px;
   }
 
@@ -98,7 +100,7 @@
   }
 
   display: flex;
-  padding: 25px 0;
+  padding: 25px 0 25px 10px;
 }
 
 .resetBtn {

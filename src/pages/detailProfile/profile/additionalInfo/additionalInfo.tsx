@@ -1,5 +1,6 @@
 import {motion} from "framer-motion"
 import styles from "./additionalInfo.module.scss";
+import {useMemo} from "react";
 
 
 type Props = {
@@ -11,6 +12,9 @@ type Props = {
 }
 
 export const AdditionalInfo = ({date_joined, birthday_date, gender, discord, about_user}: Props) => {
+    const formattedBirthdayDate = useMemo(() => {
+        return new Date(birthday_date!).toLocaleDateString()
+    }, [birthday_date])
     return (
         <motion.div className={styles.additionalInfo}
                     initial={{height: 0}}
@@ -20,7 +24,7 @@ export const AdditionalInfo = ({date_joined, birthday_date, gender, discord, abo
         >
             <h3 className={styles.heading}>Персональные данные</h3>
             <span>Дата регистрации:<b>{date_joined}</b></span>
-            {birthday_date && <span>Дата рождения:<b>{birthday_date}</b></span>}
+            {birthday_date && <span>Дата рождения:<b>{formattedBirthdayDate}</b></span>}
             {gender !== 'Не указан' && <span>Пол:<b>{gender}</b></span>}
             {discord && <span>Discord:<b>{discord}</b></span>}
             {about_user && <span>Коротко о себе:<b>{about_user}</b></span>}
