@@ -12,7 +12,6 @@ type Props = {
     className?: string
 }
 export const Game = ({game, className}: Props) => {
-    console.log('из гейма:', game)
     const subNotify = () => toast.info("Вы добавили игру в избранное")
     const unsubNotify = () => toast.info("Вы удалили игру из избранного")
     const backColorForScore = useMemo(() => {

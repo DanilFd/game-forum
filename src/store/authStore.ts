@@ -74,7 +74,7 @@ class AuthStore {
                     this.loginByToken(res.data.access)
                 })
             })
-            .catch(() => runInAction(() => this.isLoading = false))
+            .catch(this.logout)
     }
 
     checkAuth() {
