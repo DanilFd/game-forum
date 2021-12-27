@@ -18,7 +18,7 @@ type editProfileForm = {
 
 export const ProfileEdit = observer(() => {
     const [isPasswordEdit, setIsPasswordEdit] = useState(false)
-    const {register, handleSubmit, setValue} = useForm<editProfileForm>({
+    const {register, handleSubmit} = useForm<editProfileForm>({
         defaultValues: {
             birthday_date: usersStore.userProfile.birthday_date ?
                 usersStore.userProfile.birthday_date :
@@ -34,14 +34,17 @@ export const ProfileEdit = observer(() => {
                 'Не указан'
         },
     });
+
     const onSubmit: SubmitHandler<editProfileForm> = data => {
         usersStore.profileEdit(data)
             .then(res => {
                 toast.info('Данные успешно изменены.')
-                setValue('about_custom_user', res.data.about_custom_user)
-                setValue('birthday_date', res.data.birthday_date)
-                setValue('gender', res.data.gender)
-                setValue('discord', res.data.discord)
+                usersStore.setAdditionalInfoInProfile(
+                    res.data.gender,
+                    res.data.about_custom_user,
+                    res.data.birthday_date,
+                    res.data.discord
+                )
             })
             .catch(() => toast.error("При изменении данных произошла ошибка."))
     }

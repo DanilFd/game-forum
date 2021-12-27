@@ -36,6 +36,17 @@ class UsersStore {
         return postSetUserPassword(data)
             .finally(() => runInAction(() => this.isLoadingSetPassword = false))
     }
+    setAdditionalInfoInProfile = (
+        gender: 'Не указан' | 'Мужской' | 'Женский',
+        about_custom_user: null | string,
+        birthday_date: null | string,
+        discord: null | string
+    ) => {
+        this.userProfile.gender = gender
+        this.userProfile.about_custom_user = about_custom_user
+        this.userProfile.birthday_date = birthday_date
+        this.userProfile.discord = discord
+    }
 }
 
 export default new UsersStore()
