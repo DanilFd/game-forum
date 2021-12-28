@@ -13,7 +13,7 @@ import {AuthResponse} from "../types/Auth/AuthResponse";
 export const ACCESS_TOKEN = 'access_token'
 export const REFRESH_TOKEN = 'refresh_token'
 
-const isDeprecated = (exp: number) => exp * 1000 < Date.now()
+export const isDeprecated = (exp: number) => exp * 1000 < Date.now()
 
 class AuthStore {
 
@@ -69,7 +69,6 @@ class AuthStore {
         return refreshToken(localStorage.getItem(REFRESH_TOKEN) || '')
             .then(res => {
                 runInAction(() => {
-
                     localStorage.setItem(ACCESS_TOKEN, res.data.access)
                     this.loginByToken(res.data.access)
                 })
