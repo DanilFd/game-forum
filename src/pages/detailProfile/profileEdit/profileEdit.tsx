@@ -123,7 +123,7 @@ export const ProfileEdit = observer(() => {
                             <div className={styles.formGroup}>
                                 <div className={styles.formGroupLeft}>
                                     <span className={styles.formGroupLeftTitle}>Коротко о себе</span>
-                                    <span className={styles.formGroupLeftNote}>информация будет отображаться на странице
+                                    <span className={styles.formGroupLeftNote}>Информация будет отображаться на странице
                             твоего профиля.</span>
                                 </div>
                                 <div className={styles.formGroupRight}>
