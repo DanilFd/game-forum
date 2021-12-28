@@ -1,4 +1,5 @@
 import {GameType} from "../Games/GameType";
+import {AuthorOfNewsType} from "./AuthorOfNewsType";
 
 export type  NewsItemDetailType = {
     id: number,
@@ -7,4 +8,5 @@ export type  NewsItemDetailType = {
     views_count: number
     creation_date: string
     game: GameType
+    creator: AuthorOfNewsType
 }

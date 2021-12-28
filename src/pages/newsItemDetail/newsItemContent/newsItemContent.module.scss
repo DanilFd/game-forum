@@ -3,6 +3,7 @@
 
 .wrapper {
   padding: 50px 0;
+
   .header {
     h1 {
       margin-bottom: 16px;
@@ -16,6 +17,7 @@
       display: flex;
       align-items: center;
       margin-bottom: 15px;
+
       div {
         font-family: Roboto, sans-serif;
         font-size: 13px;
@@ -23,18 +25,6 @@
         color: $infoBarColor;
         display: flex;
         align-items: center;
-      }
-
-      .user {
-        span {
-          margin-left: 10px;
-        }
-
-        img {
-          border-radius: 5px;
-          height: 36px;
-          width: 36px;
-        }
       }
 
       .views {
@@ -62,10 +52,6 @@
           font-size: 18px;
         }
       }
-
-      > * {
-        padding-top: 10px;
-      }
     }
   }
 
@@ -92,9 +78,11 @@
       border-left: 2px solid $secondaryColor;
       margin: 10px 0 15px 0;
     }
-  u{
-    text-decoration: none;
-  }
+
+    u {
+      text-decoration: none;
+    }
+
     ul, ol {
       display: block;
 
@@ -139,6 +127,9 @@
       .info {
         flex-wrap: wrap;
         padding-bottom: 10px;
+        > * {
+          padding-top: 10px;
+        }
       }
     }
 

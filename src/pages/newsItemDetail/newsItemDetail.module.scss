@@ -6,14 +6,16 @@
 .wrapper {
   flex-grow: 1;
 }
-.gameForNews{
-  h2{
+
+.gameForNews {
+  h2 {
     font-size: 30px;
     font-weight: 300;
     border-bottom: 1px solid #c4c4c4;
     padding-bottom: 30px;
   }
 }
+
 div.gameCard {
   width: 100%;
   margin-left: 0 !important;
@@ -27,5 +29,20 @@ div.gameCard {
 @media (max-width: 800px) {
   .newsItemDetail {
     flex-direction: column;
+  }
+  div.gameCard {
+    > a {
+      padding: 10% 16%;
+
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  div.gameCard {
+    > a {
+      padding: 20% 10%;
+
+    }
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./newsItemContent.module.scss"
 import {NewsItemDetailType} from "../../../types/News/NewsItemDetailType";
 import {AiOutlineEye, BsBookmark, FaRegComment} from "react-icons/all";
+import {AuthorOfNews} from "./authorOfNews/authorOfNews";
 
 type Props = {
     newsItemDetail: NewsItemDetailType
@@ -13,12 +14,7 @@ const NewsItemContent = ({newsItemDetail}: Props) => {
             <section className={styles.header}>
                 <h1>{newsItemDetail.title}</h1>
                 <div className={styles.info}>
-                    <div className={styles.user}>
-                        <img
-                            src="https://yt3.ggpht.com/ytc/AKedOLSDfkyRyvD8wZlHqtlKyNqE5H5BqUI2CxqOKU7wAg=s900-c-k-c0x00ffffff-no-rj"
-                            alt=""/>
-                        <span>Жмищенко Олег</span>
-                    </div>
+                    <AuthorOfNews creator={newsItemDetail.creator}/>
                     <div><span>{newsItemDetail.creation_date}</span></div>
                     <div className={styles.comments}><span>0</span> <FaRegComment/></div>
                     <div className={styles.views}><span>{newsItemDetail.views_count}</span> <AiOutlineEye/></div>

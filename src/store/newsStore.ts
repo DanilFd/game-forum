@@ -42,6 +42,7 @@ class NewsStore {
     }
 
     fetchCategoriesAndNewsItemDetail(newsId: string) {
+        this.isLoadingCategoriesAndNewsItemDetail = true
         getCategoriesAndNewsItemDetail(newsId)
             .then(([categories, newsItemDetail]) => {
                 newsItemDetail.data.creation_date = convertToTodayYesterday(newsItemDetail.data.creation_date)
