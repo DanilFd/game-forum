@@ -2,7 +2,6 @@ import {makeAutoObservable, runInAction} from "mobx";
 import {getUserProfile, postSetUserPassword, putProfileEdit} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
-import {ProfileEditData} from "../types/Users/ProfileEditData";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 
 class UsersStore {
@@ -26,7 +25,7 @@ class UsersStore {
             })
             .finally(() => runInAction(() => this.isLoadingProfile = false))
     }
-    profileEdit = (data: ProfileEditData) => {
+    profileEdit = (data: FormData) => {
         this.isLoadingEdit = true
         return putProfileEdit(data)
             .finally(() => runInAction(() => this.isLoadingEdit = false))

@@ -11,7 +11,7 @@ export const ActivationEmail = () => {
             .then(res => {
                 authStore.loginAfterRegistration(res.data)
             })
-            .catch(() => console.log('неудача'))
+            .catch()
         // eslint-disable-next-line
     }, [])
     return (

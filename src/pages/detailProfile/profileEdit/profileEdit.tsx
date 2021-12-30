@@ -8,13 +8,10 @@ import {FormLoader} from "../../../components/header/formLoader/formLoader";
 import {useState} from "react";
 import {Modal} from "../../../components/modal/modal";
 import {ResetPasswordForm} from "./resetPasswordForm/resetPasswordFormType";
+import {ProfileEditData} from "../../../types/Users/ProfileEditData";
+import authStore from "../../../store/authStore";
 
-type editProfileForm = {
-    birthday_date: string | null
-    gender: 'Не указан' | 'Мужской' | 'Женский'
-    discord: string | null
-    about_custom_user: string | null
-}
+type editProfileForm = ProfileEditData
 
 export const ProfileEdit = observer(() => {
     const [isPasswordEdit, setIsPasswordEdit] = useState(false)
@@ -29,14 +26,19 @@ export const ProfileEdit = observer(() => {
             discord: usersStore.userProfile.discord ?
                 usersStore.userProfile.discord :
                 '',
-            gender: usersStore.userProfile.gender ?
-                usersStore.userProfile.gender :
-                'Не указан'
+            gender: usersStore.userProfile.gender
         },
     });
 
     const onSubmit: SubmitHandler<editProfileForm> = data => {
-        usersStore.profileEdit(data)
+        const formData = new FormData()
+        formData.append('profile_img', data.profile_img[0])
+        formData.append('birthday_date', data.birthday_date || '')
+        formData.append('gender', data.gender)
+        formData.append('discord', data.discord || '')
+        formData.append('about_custom_user', data.about_custom_user || '')
+
+        usersStore.profileEdit(formData)
             .then(res => {
                 toast.info('Данные успешно изменены.')
                 usersStore.setAdditionalInfoInProfile(
@@ -45,6 +47,8 @@ export const ProfileEdit = observer(() => {
                     res.data.birthday_date,
                     res.data.discord
                 )
+                authStore.refresh()
+                    .then()
             })
             .catch(() => toast.error("При изменении данных произошла ошибка."))
     }
@@ -92,6 +96,14 @@ export const ProfileEdit = observer(() => {
                             <ResetPasswordForm setIsPasswordEdit={setIsPasswordEdit}/>
                         </Modal>
                         <form onSubmit={handleSubmit(onSubmit)}>
+                            <div className={styles.formGroup}>
+                                <div className={styles.formGroupLeft}>
+                                    <span className={styles.formGroupLeftTitle}>Аватар</span>
+                                </div>
+                                <div className={styles.formGroupRight}>
+                                    <input {...register("profile_img")} type="file"/>
+                                </div>
+                            </div>
                             <div className={styles.formGroup}>
                                 <div className={styles.formGroupLeft}>
                                     <span className={styles.formGroupLeftTitle}>Дата рождения</span>

@@ -7,7 +7,7 @@ export const getUserProfile = (login: string) => {
     return api.get<ProfileResponse>(`users/profile/${login}/`)
 }
 
-export const putProfileEdit = (data: ProfileEditData) => {
+export const putProfileEdit = (data: FormData) => {
     return api.put<ProfileEditData>('users/profile/edit/', data)
 }
 
