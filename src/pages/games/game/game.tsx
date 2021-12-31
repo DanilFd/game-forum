@@ -6,20 +6,25 @@ import {Switch} from "../../../components/switch/switch";
 import {toast} from "react-toastify";
 import {Genres} from "./genres/genres";
 import {Platforms} from './platforms/platforms';
+import gamesStore from "../../../store/gamesStore";
+import {observer} from "mobx-react-lite";
+import {useError} from "../../../hooks/useError";
 
 type Props = {
     game: GameType
     className?: string
 }
-export const Game = ({game, className}: Props) => {
-    const subNotify = () => toast.info("Вы добавили игру в избранное")
-    const unsubNotify = () => toast.info("Вы удалили игру из избранного")
+export const subNotify = () => toast.info("Вы добавили игру в избранное")
+export const unsubNotify = () => toast.info("Вы удалили игру из избранного")
+export const Game = observer(({game, className}: Props) => {
     const backColorForScore = useMemo(() => {
         return game.score > 4.0 ?
             game.score > 7.5 ? "green" : "#fb9400"
             :
             game.score > 0 ? "red" : "#ddd"
     }, [game.score])
+    useError(gamesStore.error)
+    console.log(game.is_following)
     return (
         <div className={`${styles.item} ${className}`}>
             <NavLink to="#" className={styles.img}>
@@ -43,10 +48,12 @@ export const Game = ({game, className}: Props) => {
                 </div>
                 <div className={styles.subForGame}>
                     <span>Следить за игрой</span>
-                    <Switch onCheck={subNotify} onUnCheck={unsubNotify}/>
+                    <Switch isChecked={game.is_following}
+                            toggle={() => gamesStore.toggleFollowing(game)}
+                    />
                 </div>
             </div>
         </div>
     );
-};
+});
 

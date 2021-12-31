@@ -1,9 +1,10 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
-import {getGames, getGenresAndPlatforms} from "../api/GamesService";
+import {followUnfollowGame, getGames, getGenresAndPlatforms} from "../api/GamesService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 import {PlatformType} from "../types/Games/PlatformType";
 import {GenreType} from "../types/Games/GenreType";
+import {subNotify, unsubNotify} from "../pages/games/game/game";
 
 class GamesStore {
     games = [] as GameType[]
@@ -81,6 +82,19 @@ class GamesStore {
     setDate = (min: string | null, max: string | null) => {
         this.selectedYearFilter.min = min
         this.selectedYearFilter.max = max
+    }
+
+    toggleFollowing = (game: GameType) => {
+        game.is_following = !game.is_following
+        followUnfollowGame(game.id, game.is_following)
+            .then(res => {
+                runInAction(() => game.is_following = res.data.is_following)
+                game.is_following ? subNotify() : unsubNotify()
+            })
+            .catch(e => {
+                runInAction(() => this.error = e.message)
+                game.is_following = !game.is_following
+            })
     }
 }
 

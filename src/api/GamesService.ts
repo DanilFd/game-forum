@@ -29,3 +29,7 @@ export const getGenresAndPlatforms = () => {
             .then(res => res.data)
     ])
 }
+
+export const followUnfollowGame = (game_id: number, is_following: boolean) => {
+    return api.put(`/games/follow-and-unfollow/${game_id}/`, {is_following})
+}

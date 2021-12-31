@@ -9,4 +9,5 @@ export type GameType = {
     genres: GenreType[]
     release_date: string,
     score: number
+    is_following: boolean
 }
