@@ -10,31 +10,37 @@ import {Game} from "../games/game/game";
 
 
 export const NewsItemDetail = observer(() => {
-        const params = useParams<{ newsId: string }>()
-        useEffect(() => {
-            newsStore.fetchCategoriesAndNewsItemDetail(params.newsId)
-            // eslint-disable-next-line
-        }, [])
-        return (
-            <>
-                <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
-                    {newsStore.isLoadingCategoriesAndNewsItemDetail ? <Loader/> :
-                        <>
-                            <SideBar categories={newsStore.categories}/>
-                            <div className={styles.wrapper}>
-                                <div className={styles.content}>
-                                    <NewsItemContent newsItemDetail={newsStore.newsItemDetail}/>
-                                </div>
-                                <section className={styles.gameForNews}>
-                                    <h2>Игра из новости:</h2>
-                                    <Game className={styles.gameCard} game={newsStore.newsItemDetail.game}/>
-                                </section>
+    const params = useParams<{ newsId: string }>()
+    useEffect(() => {
+        newsStore.fetchCategoriesAndNewsItemDetail(params.newsId)
+        // eslint-disable-next-line
+    }, [])
+    return (
+        <>
+            <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
+                {newsStore.isLoadingCategoriesAndNewsItemDetail ? <Loader/> :
+                    <>
+                        <SideBar categories={newsStore.categories}/>
+                        <div className={styles.wrapper}>
+                            <div className={styles.content}>
+                                <NewsItemContent newsItemDetail={newsStore.newsItemDetail}/>
                             </div>
-                        </>
-                    }
-                </div>
-            </>
-        );
-    }
+                            {
+                                !!newsStore.newsItemDetail.games.length &&
+                                <section className={styles.gameForNews}>
+                                    <h2>{newsStore.newsItemDetail.games.length > 1 ?
+                                        "Игры из новости" : "Игра из новости"}
+                                    </h2>
+                                    {newsStore.newsItemDetail.games.map(game => <Game className={styles.gameCard}
+                                                                                      game={game}/>)}
+                                </section>
+                            }
+                        </div>
+                    </>
+                }
+            </div>
+        </>
+    );
+}
 );
 

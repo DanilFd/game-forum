@@ -7,6 +7,6 @@ export type  NewsItemDetailType = {
     content: string
     views_count: number
     creation_date: string
-    game: GameType
+    games: GameType[]
     creator: AuthorOfNewsType
 }
