@@ -1,15 +1,18 @@
 import React, {useMemo, useState} from 'react';
 import {NavLink} from "react-router-dom";
-import styles from "../../pages/news/sideBar/sideBar.module.scss"
+import styles from "./sideBar.module.scss"
+import {CategoryType} from "../../../types/News/CategoryType";
 import {TiArrowDownOutline} from "react-icons/all";
 import {AnimatePresence, motion} from 'framer-motion';
-import authStore from "../../store/authStore";
 
-
+type Props = {
+    categories: CategoryType[]
+    url: string,
+    showAllNewsLink: boolean
+}
 const windowWidth = window.innerWidth
 
-
-export const SideBar = () => {
+export const SideBar = (props: Props) => {
     const isMobile = useMemo(() => windowWidth > 800, [])
     const [active, setActive] = useState(isMobile);
     return (
@@ -27,11 +30,13 @@ export const SideBar = () => {
                         exit={{height: 0}}
                         transition={{duration: 0.4}}
                     >
-                        <li><NavLink activeClassName={styles.active} to={`/user/${authStore.user?.login}`}>Обо
-                            мне</NavLink></li>
-                        <li><NavLink activeClassName={styles.active} to="/pm">Сообщения</NavLink></li>
-                        <li><NavLink activeClassName={styles.active} to="/feed">Лента</NavLink></li>
-                        <li><NavLink activeClassName={styles.active} to="/answers">Ответы</NavLink></li>
+                        {
+                            props.showAllNewsLink &&
+                            <li><NavLink activeClassName={styles.active} to='/news/all?page=1'>Все</NavLink></li>
+                        }
+                        {props.categories.map(category => <li key={category.id}><NavLink activeClassName={styles.active}
+                                                                                         to={`/${props.url}/${category.slug}?page=1`}>{category.title}</NavLink>
+                        </li>)}
                     </motion.ul>
                     }
                 </AnimatePresence>

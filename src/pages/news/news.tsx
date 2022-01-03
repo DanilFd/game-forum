@@ -3,7 +3,7 @@ import styles from "./news.module.scss"
 import {NewsItem} from "./newsItem/newsItem";
 import {observer} from "mobx-react-lite";
 import newsStore from "../../store/newsStore";
-import {SideBar} from "../../components/sideBar/sideBar";
+import {SideBar} from "./sideBar/sideBar";
 import {useParams} from 'react-router-dom';
 import {Pagination} from "../../components/pagination/pagination";
 import Loader from "../../components/loader/loader";
@@ -22,7 +22,7 @@ export const News = observer(() => {
             <div style={{backgroundColor: "white"}} className={styles.news}>
                 {newsStore.isLoading ? <Loader/> :
                     <>
-                        <SideBar categories={newsStore.categories}/>
+                        <SideBar categories={newsStore.categories} url="news" showAllNewsLink={true}/>
                         <main className={styles.content}>
                             <section className={styles.header}>
                                 <h1>{params.categorySlug ? "новости " + newsStore.categories.find(category =>

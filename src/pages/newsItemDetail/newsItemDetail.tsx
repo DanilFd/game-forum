@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {SideBar} from "../../components/sideBar/sideBar";
+import {SideBar} from "../news/sideBar/sideBar";
 import {observer} from "mobx-react-lite";
 import newsStore from "../../store/newsStore";
 import styles from "./newsItemDetail.module.scss"
@@ -20,7 +20,7 @@ export const NewsItemDetail = observer(() => {
             <div style={{backgroundColor: "white"}} className={styles.newsItemDetail}>
                 {newsStore.isLoadingCategoriesAndNewsItemDetail ? <Loader/> :
                     <>
-                        <SideBar categories={newsStore.categories}/>
+                        <SideBar categories={newsStore.categories} showAllNewsLink={true} url="news"/>
                         <div className={styles.wrapper}>
                             <div className={styles.content}>
                                 <NewsItemContent newsItemDetail={newsStore.newsItemDetail}/>
