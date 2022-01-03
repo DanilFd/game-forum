@@ -16,7 +16,7 @@ export const SideBar = () => {
         <aside className={styles.aside}>
             <nav className={styles.navigation}>
                 <div onClick={() => !isMobile && setActive(!active)} className={styles.heading}>
-                    <h3>Новости</h3>
+                    <h3>Профиль</h3>
                     <TiArrowDownOutline className={active ? `${styles.isActive}` : ''}/>
                 </div>
                 <AnimatePresence>

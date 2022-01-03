@@ -7,7 +7,7 @@ import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 type Props = {
     item: NewsItemType
-    categorySlug: string
+    categorySlug?: string
 }
 
 export const NewsItem = ({item, categorySlug}: Props) => {

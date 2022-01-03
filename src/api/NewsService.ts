@@ -18,3 +18,7 @@ export const getCategoriesAndNewsItemDetail = (newsId: string) => {
         api.get<NewsItemDetailType>(`news/detail/news-item/${newsId}`)
     ])
 }
+
+export const getFavoritesNews = () => {
+    return api.get<PaginatedNewsItems>('news/list/favorites-news/')
+}

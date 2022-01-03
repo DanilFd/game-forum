@@ -9,6 +9,7 @@ import {ActivationEmail} from "../pages/successfulActivationEmail/activationEmai
 import {DetailProfile} from "../pages/detailProfile/detailProfile";
 import {PageNotFound} from "../components/pageNotFound/pageNotFound";
 import {Main} from "../pages/main/main";
+import {Feed} from "../pages/feed/feed";
 
 export const Routes = () => {
     return (
@@ -22,6 +23,7 @@ export const Routes = () => {
                 <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                 <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
                 <Route exact path="/user/:login" component={DetailProfile}/>
+                <Route exact path="/feed" component={Feed}/>
                 <Route path='/not_found' component={PageNotFound}/>
                 <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>
             </Switch>

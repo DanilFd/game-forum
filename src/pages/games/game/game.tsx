@@ -24,7 +24,6 @@ export const Game = observer(({game, className}: Props) => {
             game.score > 0 ? "red" : "#ddd"
     }, [game.score])
     useError(gamesStore.error)
-    console.log(game.is_following)
     return (
         <div className={`${styles.item} ${className}`}>
             <NavLink to="#" className={styles.img}>

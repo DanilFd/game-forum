@@ -18,7 +18,7 @@ export const DropDownProfile = ({login}: Props) => {
                     <NavLink to="#">Сообщения</NavLink>
                 </li>
                 <li>
-                    <NavLink to="#">Лента</NavLink>
+                    <NavLink to="/feed">Лента</NavLink>
                 </li>
                 <li>
                     <span onClick={() => authStore.logout()}>Выйти</span>

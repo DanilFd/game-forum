@@ -3,7 +3,7 @@ import {NewsItemType} from "../types/News/NewsItemType";
 import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemDetailType} from "../types/News/NewsItemDetailType";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
-import {getCategories, getCategoriesAndNewsItemDetail, getNews} from "../api/NewsService";
+import {getCategories, getCategoriesAndNewsItemDetail, getFavoritesNews, getNews} from "../api/NewsService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 
 class NewsStore {
@@ -53,6 +53,20 @@ class NewsStore {
             })
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoadingCategoriesAndNewsItemDetail = false))
+    }
+
+    fetchFavoritesNews = () => {
+        this.isLoading = true
+        getFavoritesNews()
+            .then(res => {
+                res.data.results.forEach(item => item.creation_date = convertToTodayYesterday(item.creation_date))
+                runInAction(() => {
+                    this.news = res.data.results
+                    this.totalPages = calcNumberPages(res.data.count)
+                })
+            })
+            .catch(e => runInAction(() => this.error = e.message))
+            .finally(() => runInAction(() => this.isLoading = false))
     }
 }
 
