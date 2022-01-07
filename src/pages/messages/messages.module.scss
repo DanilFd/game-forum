@@ -1,0 +1,70 @@
+@import "./src/variables";
+
+.sidebarLayout {
+  display: flex;
+  background-color: white;
+  min-height: 92vh;
+}
+
+.content {
+  padding: 35px 0;
+  flex: 1 1 auto;
+}
+
+.header {
+  padding: 20px 30px 50px;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    color: #161b1d;
+    font-family: Rubik, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    align-self: center;
+  }
+}
+
+.createMessage {
+  box-shadow: 1px 1px 3px #0003;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  padding: 10px 15px;
+  border: 2px solid $secondaryColor;
+  text-decoration: none;
+
+  span {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: $secondaryColor;
+    transform: skew(11deg);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebarLayout {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    flex-direction: column;
+
+    h1 {
+      padding-bottom: 10px;
+    }
+  }
+}
