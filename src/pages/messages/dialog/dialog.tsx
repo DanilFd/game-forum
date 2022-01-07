@@ -17,7 +17,7 @@ export const Dialog = ({dialog}: Props) => {
             </NavLink>
             <div className={styles.info}>
                 <div>
-                    <CompactProfile user={dialog.responder}/>
+                    <CompactProfile user={dialog.interlocutor}/>
 
                 </div>
                 <div className={styles.creationDate}>

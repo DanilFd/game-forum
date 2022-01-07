@@ -3,7 +3,7 @@ import {AuthorOfNewsType} from "../News/AuthorOfNewsType";
 export type Dialog = {
     id: number
     title: string
-    responder: AuthorOfNewsType
+    interlocutor: AuthorOfNewsType
     creation_date: string
     last_message: {
         content: string
