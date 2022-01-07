@@ -1,23 +1,23 @@
-import styles from "./authorOfNews.module.scss";
+import styles from "./compactProfile.module.scss";
 import React, {useState} from "react";
-import {AuthorOfNewsType} from "../../../../types/News/AuthorOfNewsType";
+import {AuthorOfNewsType} from "../../types/News/AuthorOfNewsType";
 import {NavLink} from "react-router-dom";
-import {Score} from "../../../detailProfile/profile/score/score";
+import {Score} from "../../pages/detailProfile/profile/score/score";
 
 type Props = {
-    creator: AuthorOfNewsType
+    user: AuthorOfNewsType
 }
 
-export const AuthorOfNews = ({creator}: Props) => {
+export const CompactProfile = ({user}: Props) => {
     const [isActive, setIsActive] = useState(false)
     const score = 60
     return (
         <div className={styles.user} onMouseEnter={() => setIsActive(true)}
              onMouseLeave={() => setIsActive(false)}>
             <img className={styles.userImg}
-                 src={creator.profile_img}
+                 src={user.profile_img}
                  alt=""/>
-            <NavLink className={styles.userLogin} to={`/user/${creator.login}`}>{creator.login}</NavLink>
+            <NavLink className={styles.userLogin} to={`/user/${user.login}`}>{user.login}</NavLink>
             {
                 isActive &&
                 <div className={styles.dropdown}>
@@ -26,13 +26,13 @@ export const AuthorOfNews = ({creator}: Props) => {
                     </div>
                     <ul>
                         <li>
-                            <span>Пол: {creator.gender}</span>
+                            <span>Пол: {user.gender}</span>
                         </li>
                         <li>
-                            <span>Возраст: {creator.age ? creator.age : 0}</span>
+                            <span>Возраст: {user.age ? user.age : 0}</span>
                         </li>
                         <li>
-                            <span>На сайте с: {creator.date_joined}</span>
+                            <span>На сайте с: {user.date_joined}</span>
                         </li>
                         <li>
                             <span>Комментариев: {0}</span>

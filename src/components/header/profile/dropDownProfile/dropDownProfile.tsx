@@ -15,7 +15,7 @@ export const DropDownProfile = ({login}: Props) => {
                     <NavLink to={`/user/${login}`}>Профиль</NavLink>
                 </li>
                 <li>
-                    <NavLink to="#">Сообщения</NavLink>
+                    <NavLink to="/pm">Сообщения</NavLink>
                 </li>
                 <li>
                     <NavLink to="/feed">Лента</NavLink>

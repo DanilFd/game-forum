@@ -1,8 +1,10 @@
-@import "./src/variables";
+@import "../../variables";
 
 .user {
   padding: 5px 0 5px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .userImg {
@@ -15,6 +17,9 @@
 }
 
 .userLogin {
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  font-style: italic;
   padding-bottom: 2px;
   margin-left: 10px;
   text-decoration: none;
@@ -33,12 +38,13 @@
   padding-top: 60px;
   position: absolute;
   background-color: white;
-  width: calc(100% + 90px);
+  width: calc(100% + 70px);
   z-index: 2;
-  right: -85px;
+  right: -65px;
   top: -5px;
   border-radius: 8px;
   box-shadow: 0 0 7px #999;
+  display: flex;
 
   ul {
     display: flex;
@@ -65,5 +71,5 @@
 
 .rate {
   align-self: flex-start;
-  margin: 0 5px 0 6px!important;
+  margin: 0 5px 0 6px !important;
 }
