@@ -5,37 +5,49 @@ import {FaRegComment} from "react-icons/all";
 import {NewsItemType} from "../../../types/News/NewsItemType";
 import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
+type Game = {
+    id: number,
+    title: string
+}
+
 type Props = {
     item: NewsItemType
     categorySlug?: string
+    games?: Game[]
 }
 
-export const NewsItem = ({item, categorySlug}: Props) => {
+export const NewsItem = ({item, categorySlug, games}: Props) => {
         return (
-                <div className={styles.newsItem}>
-                    <NavLink className={styles.articleImg}
-                             to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>
-                        <img src={item.image} alt=""/>
-                    </NavLink>
-                    <div className={styles.articleDescription}>
-                        <div className={styles.description}>
-                            <NavLink
-                                to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>{item.title}</NavLink>
-                        </div>
-                        <div className={styles.articleInfo}>
-                            <span >{item.creation_date}</span>
-                            <span className={styles.commentsInfo}> <FaRegComment/></span>
-                        </div>
-                        <div className={styles.categories}>
-                            {item.categories.map((category, index) =>
-                                <React.Fragment key={generateUniqueID()}>
-                                    <NavLink
-                                        to={`/news/${category.slug}`}>{category.title}</NavLink>
-                                    {index !== item.categories.length - 1 && <span>, </span>}
-                                </React.Fragment>)}
-                        </div>
+            <div className={styles.newsItem}>
+                <NavLink className={styles.articleImg}
+                         to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>
+                    <img src={item.image} alt=""/>
+                </NavLink>
+                <div className={styles.articleDescription}>
+                    <div className={styles.description}>
+                        <NavLink
+                            to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>{item.title}</NavLink>
+                    </div>
+                    <div className={styles.articleInfo}>
+                        <span>{item.creation_date}</span>
+                        <span className={styles.commentsInfo}> <FaRegComment/></span>
+                    </div>
+                    <div className={styles.categories}>
+                        {item.categories.map((category, index) =>
+                            <React.Fragment key={generateUniqueID()}>
+                                <NavLink
+                                    to={`/news/${category.slug}`}>{category.title}</NavLink>
+                                {index !== item.categories.length - 1 && <span>, </span>}
+                            </React.Fragment>)}
+                        {games?.map((game, index) =>
+                            <React.Fragment key={generateUniqueID()}>
+                                <NavLink
+                                    to={`#`}>{game.title}</NavLink>
+                                {index !== games.length - 1 && <span>, </span>}
+                            </React.Fragment>)}
                     </div>
                 </div>
+            </div>
         );
     }
 ;

@@ -20,7 +20,7 @@ export const Feed = observer(() => {
                 newsStore.isLoading ? <Loader/> : <main className={styles.content}>
                     <h1 className={styles.header}>Твоя лента обновлений</h1>
                     <section>
-                        {newsStore.news.map(item => <NewsItem key={item.id} item={item}/>)}
+                        {newsStore.news.map(item => <NewsItem key={item.id} item={item} games={item.games}/>)}
                     </section>
                     <div>
                         {
