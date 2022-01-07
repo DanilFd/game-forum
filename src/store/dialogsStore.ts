@@ -1,6 +1,7 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getDialogs} from "../api/DialogsService";
+import {createDialog, getDialogs} from "../api/DialogsService";
 import {Dialog} from "../types/Dialogs/Dialog";
+import {CreateDialogData} from "../types/Dialogs/CreateDialogData";
 
 class DialogsStore {
 
@@ -23,6 +24,11 @@ class DialogsStore {
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
 
+    }
+    createDialog = (data: CreateDialogData) => {
+        this.isLoading = true
+        return createDialog(data)
+            .finally(() => runInAction(() => this.isLoading = false))
     }
 }
 

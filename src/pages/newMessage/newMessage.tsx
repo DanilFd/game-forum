@@ -1,17 +1,23 @@
 import {SideBar} from "../../components/sideBar/sideBar";
 import styles from "./newMessage.module.scss"
-import {useForm} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
+import dialogsStore from "../../store/dialogsStore";
+import {AxiosError} from "axios";
+import {toast} from "react-toastify";
 
 type NewMessageForm = {
-    addressee: string
+    responder: string
     title: string
     content: string
 }
 
 export const NewMessage = () => {
-    const {register, handleSubmit} = useForm<NewMessageForm>();
-    const onSubmit = () => {
-
+    const {register, handleSubmit, formState: {errors}} = useForm<NewMessageForm>({
+        mode: "onChange"
+    });
+    const onSubmit: SubmitHandler<NewMessageForm> = data => {
+        dialogsStore.createDialog(data)
+            .catch((errors: AxiosError<{ detail: string }>) => toast.error(errors.response?.data.detail))
     }
     return (
         <div className={styles.sidebarLayout}>
@@ -22,19 +28,31 @@ export const NewMessage = () => {
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.formGroup}>
-                        <input className={styles.half} {...register('addressee')} placeholder="Кому" type="text"/>
-                        <span className={styles.formNote}>укажите имя пользователя, работает автоподстановка</span>
+                        <input className={styles.half} {...register('responder', {
+                            required: 'Это обязательное поле'
+                        })} placeholder="Кому" type="text"/>
+                        {errors.responder ?
+                            <span className={styles.formError}>{errors.responder.message}</span> :
+                            <span className={styles.formNote}>укажите имя пользователя, работает автоподстановка</span>}
                     </div>
                     <div className={styles.formGroup}>
-                        <input {...register('title')} placeholder="Заголовок" type="text"/>
-                        <span className={styles.formNote}>заголовок диалога</span>
+                        <input {...register('title', {
+                            required: 'Это обязательное поле',
+                            maxLength: {value: 50, message: 'Максимальная длинна заголовка 50 символов'}
+                        })} placeholder="Заголовок" type="text"/>
+                        {errors.title ?
+                            <span className={styles.formError}>{errors.title.message}</span> :
+                            <span className={styles.formNote}>заголовок диалога</span>}
                     </div>
 
                     <div className={styles.formGroup}>
-                        <textarea {...register('content')} />
-                        <span className={styles.formNote}>сообщение</span>
+                        <textarea {...register('content', {
+                            required: 'Это обязательное поле'
+                        })} />
+                        {errors.content ?
+                            <span className={styles.formError}>{errors.content.message}</span> :
+                            <span className={styles.formNote}>сообщение</span>}
                     </div>
-
                     <button className={styles.actionBtn} type="submit"><span>отправить</span></button>
                 </form>
             </main>
