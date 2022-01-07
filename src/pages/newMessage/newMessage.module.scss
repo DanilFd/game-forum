@@ -1,0 +1,99 @@
+@import "./src/variables";
+
+.sidebarLayout {
+  display: flex;
+  background-color: white;
+}
+
+.content {
+  padding: 35px 0;
+  flex: 1 1 auto;
+}
+
+.header {
+  padding: 20px 30px 50px;
+  justify-content: space-between;
+
+  h1 {
+    color: #161b1d;
+    font-family: Rubik, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    align-self: center;
+  }
+}
+
+
+.form {
+  padding: 0 30px;
+}
+
+.formGroup {
+  padding-bottom: 30px;
+
+  input, textarea {
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    font-family: Rubik, sans-serif;
+    font-size: 14px;
+    outline: none;
+    padding: 15px 16px 14px;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid #000;
+    }
+  }
+}
+
+input.half {
+  width: 50%;
+}
+
+.formNote {
+  font-family: Roboto, sans-serif;
+  display: block;
+  color: #c4c4c4;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.actionBtn {
+  box-shadow: 1px 1px 3px #0003;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  padding: 15px 50px;
+  border: 2px solid $secondaryColor;
+  text-decoration: none;
+
+  span {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: $secondaryColor;
+    transform: skew(11deg);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .sidebarLayout {
+    flex-direction: column;
+  }
+}
+@media (max-width: 500px) {
+    input.half{
+      width: 100%;
+    }
+}

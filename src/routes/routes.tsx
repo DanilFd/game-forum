@@ -11,6 +11,7 @@ import {PageNotFound} from "../components/pageNotFound/pageNotFound";
 import {Main} from "../pages/main/main";
 import {Feed} from "../pages/feed/feed";
 import {Messages} from "../pages/messages/messages";
+import {NewMessage} from "../pages/newMessage/newMessage";
 
 export const Routes = () => {
     return (
@@ -26,6 +27,7 @@ export const Routes = () => {
                 <Route exact path="/user/:login" component={DetailProfile}/>
                 <Route exact path="/feed" component={Feed}/>
                 <Route exact path="/pm" component={Messages}/>
+                <Route exact path="/pm/new" component={NewMessage}/>
                 <Route path='/not_found' component={PageNotFound}/>
                 <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>
             </Switch>
