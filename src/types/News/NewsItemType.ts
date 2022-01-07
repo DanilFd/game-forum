@@ -1,3 +1,8 @@
+type Game = {
+    id: number,
+    title: string
+}
+
 export type NewsItemType = {
     id: number
     title: string,
@@ -9,4 +14,5 @@ export type NewsItemType = {
             slug: string
         }
     ]
+    games: Game[]
 }
