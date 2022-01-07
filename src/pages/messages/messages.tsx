@@ -6,11 +6,13 @@ import Loader from "../../components/loader/loader";
 import {useEffect} from "react";
 import {Dialog} from "./dialog/dialog";
 import {NavLink} from "react-router-dom";
+import {useError} from "../../hooks/useError";
 
 export const Messages = observer(() => {
         useEffect(() => {
             dialogsStore.fetchDialogs()
         }, [])
+        useError(dialogsStore.error)
         return (
             <div className={styles.sidebarLayout}>
                 <SideBar/>
