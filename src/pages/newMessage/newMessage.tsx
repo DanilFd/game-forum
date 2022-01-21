@@ -4,6 +4,10 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import dialogsStore from "../../store/dialogsStore";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
+import {ChangeEvent, useCallback} from "react";
+import usersStore from "../../store/usersStore";
+import {throttle} from "../../utils/throttle";
+
 
 type NewMessageForm = {
     responder: string
@@ -19,6 +23,8 @@ export const NewMessage = () => {
         dialogsStore.createDialog(data)
             .catch((errors: AxiosError<{ detail: string }>) => toast.error(errors.response?.data.detail))
     }
+    // eslint-disable-next-line
+    const throttled = useCallback(throttle(newValue => usersStore.usersSearch(newValue), 2000), []);
     return (
         <div className={styles.sidebarLayout}>
             <SideBar/>
@@ -29,6 +35,9 @@ export const NewMessage = () => {
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.formGroup}>
                         <input className={styles.half} {...register('responder', {
+                            onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                                e.target.value.length > 2 && throttled(e.target.value)
+                            },
                             required: 'Это обязательное поле'
                         })} placeholder="Кому" type="text"/>
                         {errors.responder ?

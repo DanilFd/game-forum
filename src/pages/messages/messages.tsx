@@ -25,7 +25,7 @@ export const Messages = observer(() => {
                                 <NavLink to="/pm/new"
                                          className={styles.createMessage}><span>создать сообщение</span></NavLink>
                             </div>
-                            {dialogsStore.dialogs.map(dialog => <Dialog dialog={dialog}/>)}
+                            {dialogsStore.dialogs.map(dialog => <Dialog key={dialog.id} dialog={dialog}/>)}
                         </main>
                 }
             </div>

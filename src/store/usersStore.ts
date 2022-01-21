@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getUserProfile, postSetUserPassword, putProfileEdit} from "../api/UsersService";
+import {getUserProfile, postSetUserPassword, putProfileEdit, usersSearch} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
@@ -45,6 +45,9 @@ class UsersStore {
         this.userProfile.about_custom_user = about_custom_user
         this.userProfile.birthday_date = birthday_date
         this.userProfile.discord = discord
+    }
+    usersSearch = (login: string) => {
+        return usersSearch(login)
     }
 }
 
