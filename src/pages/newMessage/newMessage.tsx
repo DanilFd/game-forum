@@ -4,9 +4,12 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import dialogsStore from "../../store/dialogsStore";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
-import {ChangeEvent, useCallback} from "react";
+import {ChangeEvent, useCallback, useEffect, useState} from "react";
 import usersStore from "../../store/usersStore";
 import {throttle} from "../../utils/throttle";
+import {ListOfFoundUsers} from "./listOfFoundUsers/listOfFoundUsers";
+import {observer} from "mobx-react-lite";
+import {useHistory} from "react-router-dom";
 
 
 type NewMessageForm = {
@@ -15,16 +18,24 @@ type NewMessageForm = {
     content: string
 }
 
-export const NewMessage = () => {
-    const {register, handleSubmit, formState: {errors}} = useForm<NewMessageForm>({
+export const NewMessage = observer(() => {
+    const history = useHistory()
+    const [active, setActive] = useState(false)
+    const {register, handleSubmit, formState: {errors}, setValue} = useForm<NewMessageForm>({
         mode: "onChange"
     });
+    useEffect(() => {
+        const removeUserList = () => setActive(false)
+        document.addEventListener('click', removeUserList)
+        return () => document.removeEventListener('click', removeUserList)
+    }, [])
     const onSubmit: SubmitHandler<NewMessageForm> = data => {
         dialogsStore.createDialog(data)
+            .then(() => history.push('/pm'))
             .catch((errors: AxiosError<{ detail: string }>) => toast.error(errors.response?.data.detail))
     }
     // eslint-disable-next-line
-    const throttled = useCallback(throttle(newValue => usersStore.usersSearch(newValue), 2000), []);
+    const throttled = useCallback(throttle(newValue => usersStore.usersSearch(newValue), 1000), []);
     return (
         <div className={styles.sidebarLayout}>
             <SideBar/>
@@ -33,16 +44,21 @@ export const NewMessage = () => {
                     <h1>сообщения</h1>
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <div className={styles.formGroup}>
-                        <input className={styles.half} {...register('responder', {
+                    <div className={`${styles.formGroup} ${styles.withModal}`}>
+                        <input autoComplete="off" onFocus={() => setActive(true)} onClick={e => e.stopPropagation()}
+                               className={styles.half} {...register('responder', {
                             onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                                e.target.value.length > 2 && throttled(e.target.value)
+                                e.target.value.length > 0 &&
+                                throttled(e.target.value)
+                                setActive(true)
                             },
                             required: 'Это обязательное поле'
                         })} placeholder="Кому" type="text"/>
                         {errors.responder ?
                             <span className={styles.formError}>{errors.responder.message}</span> :
                             <span className={styles.formNote}>укажите имя пользователя, работает автоподстановка</span>}
+                        <ListOfFoundUsers foundUsers={usersStore.foundUsers}
+                                          setUser={(login) => setValue('responder', login)} active={active}/>
                     </div>
                     <div className={styles.formGroup}>
                         <input {...register('title', {
@@ -68,4 +84,4 @@ export const NewMessage = () => {
 
         </div>
     )
-}
+})

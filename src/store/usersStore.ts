@@ -3,6 +3,7 @@ import {getUserProfile, postSetUserPassword, putProfileEdit, usersSearch} from "
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
+import {FoundUser} from "../types/Users/FoundUser";
 
 class UsersStore {
     constructor() {
@@ -14,6 +15,7 @@ class UsersStore {
     isLoadingSetPassword = false
     userProfile = {} as ProfileResponse
     error = ''
+    foundUsers = [] as FoundUser[]
 
     getProfile = (login: string) => {
         return getUserProfile(login)
@@ -48,6 +50,12 @@ class UsersStore {
     }
     usersSearch = (login: string) => {
         return usersSearch(login)
+            .then(res => runInAction(() => {
+                this.foundUsers = res.data
+            }))
+    }
+    clearUserList = () => {
+        this.foundUsers.length = 0
     }
 }
 

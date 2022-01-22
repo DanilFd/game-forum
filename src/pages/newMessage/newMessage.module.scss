@@ -94,7 +94,9 @@ input.half {
     }
   }
 }
-
+.withModal{
+  position: relative;
+}
 @media (max-width: 800px) {
   .sidebarLayout {
     flex-direction: column;
