@@ -1,4 +1,4 @@
-import {NavLink} from "react-router-dom"
+import {NavLink, useHistory} from "react-router-dom"
 import styles from "./dropDownProfile.module.scss"
 import authStore from "../../../../store/authStore";
 
@@ -8,6 +8,7 @@ type Props = {
 }
 
 export const DropDownProfile = ({login}: Props) => {
+    const history = useHistory()
     return (
         <div className={styles.dropdown}>
             <ul>
@@ -21,7 +22,10 @@ export const DropDownProfile = ({login}: Props) => {
                     <NavLink to="/feed">Лента</NavLink>
                 </li>
                 <li>
-                    <span onClick={() => authStore.logout()}>Выйти</span>
+                    <span onClick={() => {
+                        authStore.logout()
+                        history.replace('/')
+                    }}>Выйти</span>
                 </li>
             </ul>
         </div>
