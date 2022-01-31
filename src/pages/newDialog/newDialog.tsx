@@ -1,15 +1,16 @@
 import {SideBar} from "../../components/sideBar/sideBar";
-import styles from "./newMessage.module.scss"
+import styles from "./newDialog.module.scss"
 import {SubmitHandler, useForm} from "react-hook-form";
 import dialogsStore from "../../store/dialogsStore";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
-import {ChangeEvent, useCallback, useEffect, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useRef, useState} from "react";
 import usersStore from "../../store/usersStore";
 import {throttle} from "../../utils/throttle";
 import {ListOfFoundUsers} from "./listOfFoundUsers/listOfFoundUsers";
 import {observer} from "mobx-react-lite";
 import {useHistory} from "react-router-dom";
+import {useSubmitByEnterClick} from "../../hooks/useSubmitByEnterClick";
 
 
 type NewMessageForm = {
@@ -18,8 +19,9 @@ type NewMessageForm = {
     content: string
 }
 
-export const NewMessage = observer(() => {
+export const NewDialog = observer(() => {
     const history = useHistory()
+    const buttonRef = useRef(null)
     const [active, setActive] = useState(false)
     const {register, handleSubmit, formState: {errors}, setValue} = useForm<NewMessageForm>({
         mode: "onChange"
@@ -36,6 +38,7 @@ export const NewMessage = observer(() => {
     }
     // eslint-disable-next-line
     const throttled = useCallback(throttle(newValue => usersStore.usersSearch(newValue), 1000), []);
+    useSubmitByEnterClick(buttonRef)
     return (
         <div className={styles.sidebarLayout}>
             <SideBar/>
@@ -52,7 +55,8 @@ export const NewMessage = observer(() => {
                                 throttled(e.target.value)
                                 setActive(true)
                             },
-                            required: 'Это обязательное поле'
+                            required: 'Это обязательное поле',
+                            minLength: {value: 6, message:'Минимальная длина имени пользователя равна 6 символам.'}
                         })} placeholder="Кому" type="text"/>
                         {errors.responder ?
                             <span className={styles.formError}>{errors.responder.message}</span> :
@@ -71,14 +75,13 @@ export const NewMessage = observer(() => {
                     </div>
 
                     <div className={styles.formGroup}>
-                        <textarea {...register('content', {
-                            required: 'Это обязательное поле'
-                        })} />
+                        <textarea {...register('content', {required: 'Это обязательное поле'})}/>
                         {errors.content ?
                             <span className={styles.formError}>{errors.content.message}</span> :
                             <span className={styles.formNote}>сообщение</span>}
                     </div>
-                    <button className={styles.actionBtn} type="submit"><span>отправить</span></button>
+                    <button ref={buttonRef} className={styles.actionBtn} type="submit"><span>отправить</span>
+                    </button>
                 </form>
             </main>
 

@@ -1,0 +1,52 @@
+@import "./src/variables";
+
+.icon {
+  font-size: 23px;
+  color: #585858;
+  cursor: pointer;
+
+}
+
+.wrapper {
+  position: relative;
+
+}
+
+.dropdown {
+  display: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: white;
+  border: 1px solid #f6f6f6;
+  border-radius: 8px;
+  box-shadow: 0 0 7px #999;
+  z-index: 100;
+  min-width: 161px;
+
+  span {
+    font-family: Roboto, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-bottom: dotted 1px #585858;
+    color: #585858;
+    font-style: normal;
+    line-height: 1.5;
+
+    &:hover {
+      color: $secondaryColor;
+    }
+  }
+}
+
+.dropdown.active {
+  top: 9px;
+  left: -50px;
+  position: absolute;
+  display: block;
+}
+
+@media (max-width: 420px) {
+  .dropdown.active{
+    left: -130px;
+  }
+}

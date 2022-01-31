@@ -1,0 +1,22 @@
+.info{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 100%;
+}
+.sendingDate{
+  font-family: Roboto, sans-serif;
+  color: #585858;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 500;
+}
+.content{
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  padding: 15px 0;
+}
+.message{
+  padding: 15px 0 45px 0;
+  border-bottom: 1px solid #eee;
+}

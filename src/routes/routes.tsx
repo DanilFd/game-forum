@@ -11,9 +11,13 @@ import {PageNotFound} from "../components/pageNotFound/pageNotFound";
 import {Main} from "../pages/main/main";
 import {Feed} from "../pages/feed/feed";
 import {Messages} from "../pages/messages/messages";
-import {NewMessage} from "../pages/newMessage/newMessage";
+import {NewDialog} from "../pages/newDialog/newDialog";
+import {DialogDetail} from "../pages/dialogDetail/dialogDetail";
+import authStore from "../store/authStore";
+import {observer} from "mobx-react-lite";
 
-export const Routes = () => {
+export const Routes = observer(() => {
+    console.log(authStore.isAuth)
     return (
         <div className={styles.pageContent}>
             <Switch>
@@ -25,12 +29,13 @@ export const Routes = () => {
                 <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                 <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
                 <Route exact path="/user/:login" component={DetailProfile}/>
-                <Route exact path="/feed" component={Feed}/>
-                <Route exact path="/pm" component={Messages}/>
-                <Route exact path="/pm/new" component={NewMessage}/>
+                {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
+                {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
+                {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}
+                {authStore.isAuth && <Route exact path="/pm/read/:dialogId" component={DialogDetail}/>}
                 <Route path='/not_found' component={PageNotFound}/>
-                <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>
+                {!authStore.isLoading && <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>}
             </Switch>
         </div>
     );
-};
+});

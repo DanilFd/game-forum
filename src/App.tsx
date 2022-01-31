@@ -18,8 +18,7 @@ function App() {
                     <div className="container">
                         <Header/>
                         <Routes/>
-                    </div>
-                    :
+                    </div> :
                     <PageNotFound/>
             }
             <ToastContainer position="top-right"
