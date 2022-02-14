@@ -1,0 +1,71 @@
+@import "./src/variables";
+
+.form {
+  padding-top: 10px;
+}
+
+.cancelBtn {
+  text-transform: uppercase;
+  color: $secondaryColor;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+  padding: 15px;
+
+  &:hover {
+    span {
+      border-bottom: 1px solid $secondaryColor;
+    }
+  }
+}
+
+.formAction {
+  padding: 10px;
+}
+
+
+.errorMessage {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  color: red;
+}
+
+.textarea {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  width: 100%;
+  height: 85px;
+  outline: none;
+
+  &:focus {
+    border-color: #9098A9;
+  }
+}
+
+.actionBtn {
+  text-transform: uppercase;
+  padding: 15px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondaryColor;
+  border: 2px solid $secondaryColor;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  text-decoration: none;
+
+  span {
+    display: block;
+    transform: skew(11deg);
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+    color: white;
+  }
+}

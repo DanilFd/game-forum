@@ -15,7 +15,7 @@ export const getCategories = () => {
 export const getCategoriesAndNewsItemDetail = (newsId: string) => {
     return Promise.all([
         api.get<CategoryType[]>('news/list/categories/'),
-        api.get<NewsItemDetailType>(`news/detail/news-item/${newsId}`)
+        api.get<NewsItemDetailType>(`news/detail/news-item/${newsId}/`)
     ])
 }
 

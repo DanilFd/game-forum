@@ -1,0 +1,84 @@
+@import "./src/variables";
+
+.wrapper {
+  margin: 25px 30px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  margin: 0 30px;
+  border-top: 1px solid #C4C4C4;
+  border-bottom: 1px solid #C4C4C4;
+}
+
+.actionBtn {
+  text-transform: uppercase;
+  padding: 15px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondaryColor;
+  border: 2px solid $secondaryColor;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  text-decoration: none;
+
+  span {
+    display: block;
+    transform: skew(11deg);
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+    color: white;
+  }
+}
+
+.count {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px dotted #585858;
+  color: #585858;
+}
+
+.heading {
+  font-size: 32px;
+  font-weight: 300;
+  padding: 15px 30px;
+}
+
+.textarea {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+  width: 100%;
+  height: 85px;
+  outline: none;
+
+  &:focus {
+    border-color: #9098A9;
+  }
+}
+
+.form {
+  padding: 5px 30px 20px;
+
+}
+
+.formAction {
+  padding-top: 10px;
+}
+
+
+.errorMessage {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  color: red;
+}

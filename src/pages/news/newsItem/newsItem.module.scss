@@ -58,7 +58,8 @@
       .commentsInfo {
         display: flex;
         margin-left: 10px;
-
+        align-items: center;
+        gap: 2px;
         svg {
           margin-left: 3px;
         }

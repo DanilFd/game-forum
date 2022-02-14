@@ -15,4 +15,5 @@ export type NewsItemType = {
         }
     ]
     games: Game[]
+    comments_count: number
 }

@@ -30,7 +30,7 @@ export const NewsItem = ({item, categorySlug, games}: Props) => {
                     </div>
                     <div className={styles.articleInfo}>
                         <span>{item.creation_date}</span>
-                        <span className={styles.commentsInfo}> <FaRegComment/></span>
+                        <span className={styles.commentsInfo}>{item.comments_count}<FaRegComment/></span>
                     </div>
                     <div className={styles.categories}>
                         {item.categories.map((category, index) =>
