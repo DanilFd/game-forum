@@ -10,3 +10,7 @@ export const getNewsComments = (newsId: number) => {
 export const sendingComment = (data: SendingCommentRequest) => {
     return api.post<CommentType>('comments/create/', data)
 }
+
+export const deleteComment = (commentId: number) => {
+    return api.delete(`comments/delete/${commentId}/`)
+}

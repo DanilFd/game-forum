@@ -5,6 +5,8 @@ import {CgMailReply} from "react-icons/all";
 import {observer} from "mobx-react-lite";
 import {RespondCommentForm} from "./respondCommentForm/respondCommentForm";
 import {SetState} from "../../../types/utils/utils";
+import commentsStore from "../../../store/commentsStore";
+import {toast} from "react-toastify";
 
 type Props = {
     comment: CommentType
@@ -24,11 +26,18 @@ export const Comment = observer(({
                                      isSendingComment
                                  }: Props) => {
     const isShow = comment.id === selectedCommentId
+    const deleteComment = () => {
+        commentsStore.deleteComment(comment.id)
+            .then(() => toast.success('Ваш комментарий удален.'))
+            .catch(() => toast.error('При удалении произошла ошибка.'))
+    }
     return (
         <div className={`${styles.body} ${isChildren ? styles.children : ''}`}>
             <div className={styles.info}>
                 <CompactProfile user={comment.creator}/>
                 <span className={styles.creation_date}>{comment.creation_date}</span>
+                {!comment.is_owner && <span className={styles.complain}>Пожаловаться</span>}
+                {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
             </div>
             <div className={styles.content}>
                 <p>{comment.content}</p>

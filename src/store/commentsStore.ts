@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getNewsComments, sendingComment} from "../api/CommentsService";
+import {deleteComment, getNewsComments, sendingComment} from "../api/CommentsService";
 import {PaginatedComments} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {findParent} from "../utils/findParent";
@@ -35,6 +35,10 @@ class CommentsStore {
                 this.paginatedNewsComments.results.push(res.data)
             }))
             .finally(() => runInAction(() => this.isSendingComment = false))
+    }
+
+    deleteComment = (commentId: number) => {
+        return deleteComment(commentId)
     }
 
 }

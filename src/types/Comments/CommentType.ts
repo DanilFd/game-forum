@@ -7,4 +7,5 @@ export type CommentType = {
     content: string
     children: CommentType[]
     parent?: null | number
+    is_owner: boolean
 }
