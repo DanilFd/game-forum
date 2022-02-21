@@ -69,20 +69,23 @@
 }
 
 .body.children::before {
-  border: solid #eee;
+  //border: solid #eee;
+  border: solid black;
   border-width: 0 0 0 1px;
   content: " ";
-  height: 35px;
+  height: 55px;
   left: 5px;
   position: absolute;
   top: 0;
 }
 
+
 .body.children::after {
-  border: solid #eee;
+  //border: solid #eee;
+  border: solid black;
   border-width: 0 0 0 1px;
   content: " ";
-  height: 35px;
+  height: 55px;
   left: 5px;
   position: absolute;
   top: 20px;

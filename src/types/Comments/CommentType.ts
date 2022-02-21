@@ -8,5 +8,5 @@ export type CommentType = {
     children: CommentType[]
     parent?: null | number
     is_owner: boolean
-    is_deleted: boolean
+    is_deleted:boolean
 }
