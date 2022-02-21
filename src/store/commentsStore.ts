@@ -39,6 +39,7 @@ class CommentsStore {
 
     deleteComment = (commentId: number) => {
         return deleteComment(commentId)
+            .then(() => this.paginatedNewsComments.results = this.paginatedNewsComments.results.filter(comment => comment.id !== commentId))
     }
 
 }

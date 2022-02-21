@@ -33,21 +33,29 @@ export const Comment = observer(({
     }
     return (
         <div className={`${styles.body} ${isChildren ? styles.children : ''}`}>
-            <div className={styles.info}>
-                <CompactProfile user={comment.creator}/>
-                <span className={styles.creation_date}>{comment.creation_date}</span>
-                {!comment.is_owner && <span className={styles.complain}>Пожаловаться</span>}
-                {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
-            </div>
-            <div className={styles.content}>
-                <p>{comment.content}</p>
-                {
-                    !isShow && <div className={styles.answerButton}>
-                        <CgMailReply/>
-                        <button onClick={() => setSelectedCommentId(comment.id)}><span>Ответить</span></button>
+            {
+                comment.is_deleted ?
+                    <div className={styles.isCommentDeleted}>
+                        <span>Комментарий удален</span>
+                    </div> :
+                <>
+                    <div className={styles.info}>
+                        <CompactProfile user={comment.creator}/>
+                        <span className={styles.creation_date}>{comment.creation_date}</span>
+                        {!comment.is_owner && <span className={styles.complain}>Пожаловаться</span>}
+                        {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
                     </div>
-                }
-            </div>
+                    <div className={styles.content}>
+                        <p>{comment.content}</p>
+                        {
+                            !isShow && <div className={styles.answerButton}>
+                                <CgMailReply/>
+                                <button onClick={() => setSelectedCommentId(comment.id)}><span>Ответить</span></button>
+                            </div>
+                        }
+                    </div>
+                </>
+            }
             {isShow &&
             <RespondCommentForm setSelectedCommentId={setSelectedCommentId} selectedCommentId={selectedCommentId}
                                 isSendingComment={isSendingComment}

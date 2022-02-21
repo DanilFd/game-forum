@@ -100,3 +100,18 @@
     border-color: $secondaryColor;
   }
 }
+.isCommentDeleted{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #F9F9F9;
+  padding:25px 0;
+  margin: 10px 0;
+  span{
+    font-size: 15px;
+    font-family: Roboto, sans-serif;
+    color: #999999;
+
+  }
+}
