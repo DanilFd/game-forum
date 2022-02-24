@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {deleteComment, getNewsComments, sendingComment} from "../api/CommentsService";
+import {createCommentComplaint, deleteComment, getNewsComments, sendingComment} from "../api/CommentsService";
 import {PaginatedComments} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {findComment} from "../utils/findComment";
@@ -60,6 +60,9 @@ class CommentsStore {
             return commentBeingDeleted.is_deleted = true
         const foundIndex = parent.children.findIndex(comment => comment.id === commentBeingDeleted.id)
         parent.children.splice(foundIndex, 1)
+    }
+    createCommentComplaint = (data: { reason: string, comment: number }) => {
+        return createCommentComplaint(data)
     }
 }
 

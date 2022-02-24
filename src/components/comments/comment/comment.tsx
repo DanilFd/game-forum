@@ -31,6 +31,12 @@ export const Comment = observer(({
             .then(() => toast.success('Ваш комментарий удален.'))
             .catch(() => toast.error('При удалении произошла ошибка.'))
     }
+    const createComplaint = () => {
+        setSelectedCommentId(comment.id)
+        const payload = {reason: "Контент для взрослы", comment: selectedCommentId!}
+        commentsStore.createCommentComplaint(payload)
+
+    }
     return (
         <div className={`${styles.body} ${isChildren ? styles.children : ''}`}>
             {
@@ -38,23 +44,24 @@ export const Comment = observer(({
                     <div className={styles.isCommentDeleted}>
                         <span>Комментарий удален</span>
                     </div> :
-                <>
-                    <div className={styles.info}>
-                        <CompactProfile user={comment.creator}/>
-                        <span className={styles.creation_date}>{comment.creation_date}</span>
-                        {!comment.is_owner && <span className={styles.complain}>Пожаловаться</span>}
-                        {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
-                    </div>
-                    <div className={styles.content}>
-                        <p>{comment.content}</p>
-                        {
-                            !isShow && <div className={styles.answerButton}>
-                                <CgMailReply/>
-                                <button onClick={() => setSelectedCommentId(comment.id)}><span>Ответить</span></button>
-                            </div>
-                        }
-                    </div>
-                </>
+                    <>
+                        <div className={styles.info}>
+                            <CompactProfile user={comment.creator}/>
+                            <span className={styles.creation_date}>{comment.creation_date}</span>
+                            {!comment.is_owner && <span onClick={createComplaint} className={styles.complain}>Пожаловаться</span>}
+                            {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
+                        </div>
+                        <div className={styles.content}>
+                            <p>{comment.content}</p>
+                            {
+                                !isShow && <div className={styles.answerButton}>
+                                    <CgMailReply/>
+                                    <button onClick={() => setSelectedCommentId(comment.id)}><span>Ответить</span>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </>
             }
             {isShow &&
             <RespondCommentForm setSelectedCommentId={setSelectedCommentId} selectedCommentId={selectedCommentId}

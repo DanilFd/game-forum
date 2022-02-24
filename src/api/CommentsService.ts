@@ -14,3 +14,7 @@ export const sendingComment = (data: SendingCommentRequest) => {
 export const deleteComment = (commentId: number) => {
     return api.delete(`comments/delete/${commentId}/`)
 }
+
+export const createCommentComplaint = (data: { reason: string, comment: number }) => {
+    return api.post('comments/complaint/create/', data)
+}
