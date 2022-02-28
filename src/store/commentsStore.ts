@@ -4,6 +4,7 @@ import {PaginatedComments} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {findComment} from "../utils/findComment";
 import {CommentType} from "../types/Comments/CommentType";
+import {CreateComplaintComment} from "../types/Comments/CreateComplaintComment";
 
 class CommentsStore {
 
@@ -61,7 +62,7 @@ class CommentsStore {
         const foundIndex = parent.children.findIndex(comment => comment.id === commentBeingDeleted.id)
         parent.children.splice(foundIndex, 1)
     }
-    createCommentComplaint = (data: { reason: string, comment: number }) => {
+    createCommentComplaint = (data: CreateComplaintComment) => {
         return createCommentComplaint(data)
     }
 }

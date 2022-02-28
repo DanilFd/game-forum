@@ -1,0 +1,60 @@
+@import "./src/variables";
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.heading {
+  font-family: Rubik, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.info {
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+}
+
+.additionalInfo {
+
+  textarea {
+    margin-top: 5px;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    width: 100%;
+    height: 80px;
+    outline: none;
+
+    &:focus {
+      border-color: #9098A9;
+    }
+  }
+}
+
+.actionBtn {
+  text-transform: uppercase;
+  padding: 15px;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $secondaryColor;
+  border: 2px solid $secondaryColor;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  text-decoration: none;
+
+  span {
+    display: block;
+    transform: skew(11deg);
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+    color: white;
+  }
+}
