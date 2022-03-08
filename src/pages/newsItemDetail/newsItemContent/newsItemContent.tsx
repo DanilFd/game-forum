@@ -16,7 +16,7 @@ const NewsItemContent = ({newsItemDetail}: Props) => {
                 <div className={styles.info}>
                     <CompactProfile user={newsItemDetail.creator}/>
                     <div><span>{newsItemDetail.creation_date}</span></div>
-                    <div className={styles.comments}><span>0</span> <FaRegComment/></div>
+                    <div className={styles.comments}><span>{newsItemDetail.comments_count}</span> <FaRegComment/></div>
                     <div className={styles.views}><span>{newsItemDetail.views_count}</span> <AiOutlineEye/></div>
                     <div className={styles.favorite}><BsBookmark/><span>Избранное(0)</span></div>
                 </div>
