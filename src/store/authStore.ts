@@ -20,6 +20,7 @@ class AuthStore {
     user = null as null | AuthenticatedUser
     isLoading = true
     isLoadingBetweenForms = false
+    isActiveAuthForm = false
 
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true})
@@ -109,6 +110,10 @@ class AuthStore {
         this.isLoadingBetweenForms = true
         return resetPasswordConfirm(passwordResetData)
             .finally(() => this.isLoadingBetweenForms = false)
+    }
+
+    setIsActiveAuthForm = (flag: boolean) => {
+        this.isActiveAuthForm = flag
     }
 }
 

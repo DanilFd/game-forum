@@ -19,7 +19,6 @@ import {Profile} from "./profile/profile";
 
 export const Header = observer(() => {
     const [active, setActive] = useState(false)
-    const [activeModal, setActiveModal] = useState(false)
     const [selectedForm, setSelectedForm] = useState<SelectedForm>('login')
     return (
         <header className={styles.header}>
@@ -41,7 +40,7 @@ export const Header = observer(() => {
                     authStore.isAuth ?
                         <Profile user={authStore.user!}/> :
                         <div className={styles.login}>
-                            <span onClick={() => setActiveModal(true)}>
+                            <span onClick={() => authStore.setIsActiveAuthForm(true)}>
                             <IoMdLogIn/>
                             <span>Войти</span>
                             </span>
@@ -49,9 +48,9 @@ export const Header = observer(() => {
                 }
             </nav>
             <Menu active={active} setActive={setActive}/>
-            <Modal active={activeModal} setActive={setActiveModal}>
+            <Modal active={authStore.isActiveAuthForm} setActive={authStore.setIsActiveAuthForm}>
                 {selectedForm === 'login' &&
-                <LoginForm setActiveModal={setActiveModal} login={authStore.login} switchForm={setSelectedForm}/>}
+                <LoginForm setActiveModal={authStore.setIsActiveAuthForm} login={authStore.login} switchForm={setSelectedForm}/>}
                 {selectedForm === 'register' &&
                 <RegistrationForm isLoading={authStore.isLoadingBetweenForms} registerUser={authStore.registerUser}
                                   switchForm={setSelectedForm}/>}

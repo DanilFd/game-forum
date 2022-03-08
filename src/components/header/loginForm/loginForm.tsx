@@ -13,7 +13,7 @@ import {toast} from "react-toastify";
 type Props = {
     switchForm: SetState<SelectedForm>
     login: (data: UserLoginDetails) => Promise<void>
-    setActiveModal: SetState<boolean>
+    setActiveModal: (flag: boolean) => void
 }
 
 type LoginFormType = {

@@ -4,8 +4,10 @@ import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {CommentType} from "../types/Comments/CommentType";
 import {CreateComplaintComment} from "../types/Comments/CreateComplaintComment";
 
-export const getNewsComments = (newsId: number) => {
-    return api.get<PaginatedComments>(`comments/list/${newsId}/`)
+export const getNewsComments = (newsId: number, page: number) => {
+    return api.get<PaginatedComments>(`comments/list/${newsId}/`, {
+        params: {page: page}
+    })
 }
 
 export const sendingComment = (data: SendingCommentRequest) => {

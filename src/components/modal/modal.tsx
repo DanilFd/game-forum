@@ -1,11 +1,10 @@
 import styles from './modal.module.scss'
 import {FC} from "react";
 import {ImCancelCircle} from "react-icons/all";
-import {SetState} from "../../types/utils/utils";
 
 type Props = {
     active: boolean,
-    setActive: SetState<boolean>
+    setActive: (flag:boolean) => void
 }
 
 export const Modal: FC<Props> = ({active, setActive, children}) => {
