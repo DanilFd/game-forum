@@ -81,25 +81,55 @@
     border-color: $secondaryColor;
   }
 }
-.isCommentDeleted{
+
+.isCommentDeleted {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
   background-color: #F9F9F9;
-  padding:25px 0;
+  padding: 25px 0;
   margin: 10px 0;
-  span{
+
+  span {
     font-size: 15px;
     font-family: Roboto, sans-serif;
     color: #999999;
 
   }
 }
-.parentInfo{
+
+.parentInfo {
   color: #585858;
   font-size: 12px;
   font-style: italic;
   font-family: Roboto, sans-serif;
   padding-bottom: 10px;
+}
+.infoGroup{
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 500px) {
+  .children {
+    padding-left: 10px;
+  }
+  .info{
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .infoGroup{
+    flex-basis: 100%;
+  }
+  .content{
+    padding: 7px 15px;
+  }
+  .answerButton{
+    padding: 0;
+    svg{
+      top:11px
+    }
+  }
+
 }

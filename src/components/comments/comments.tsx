@@ -63,7 +63,7 @@ export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isS
                 </div>
                 <h2 className={styles.heading}>Комментарии ({paginatedNewsComments?.comments_count || 0})</h2>
                 {
-                    isShowTop &&
+                    isShowTop && !selectedCommentId &&
                     <>
                         {
                             isSendingComment ?

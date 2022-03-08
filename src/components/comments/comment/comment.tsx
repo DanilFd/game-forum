@@ -47,15 +47,18 @@ export const Comment = observer(({
                         <>
                             <div className={styles.info}>
                                 <CompactProfile user={comment.creator}/>
-                                <span className={styles.creation_date}>{comment.creation_date}</span>
-                                {!comment.is_owner &&
-                                <span
-                                    onClick={() => authStore.isAuth ? setIsShowModal(true) : authStore.setIsActiveAuthForm(true)}
-                                    className={styles.complain}>Пожаловаться</span>}
-                                <Modal active={isShowModal} setActive={setIsShowModal}>
-                                    <ReportForm commentId={comment.id} setIsShow={setIsShowModal}/>
-                                </Modal>
-                                {comment.is_owner && <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
+                                <div className={styles.infoGroup}>
+                                    <span className={styles.creation_date}>{comment.creation_date}</span>
+                                    {!comment.is_owner &&
+                                    <span
+                                        onClick={() => authStore.isAuth ? setIsShowModal(true) : authStore.setIsActiveAuthForm(true)}
+                                        className={styles.complain}>Пожаловаться</span>}
+                                    <Modal active={isShowModal} setActive={setIsShowModal}>
+                                        <ReportForm commentId={comment.id} setIsShow={setIsShowModal}/>
+                                    </Modal>
+                                    {comment.is_owner &&
+                                    <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
+                                </div>
                             </div>
                             <div className={styles.content}>
                                 <div className={styles.parentInfo}>

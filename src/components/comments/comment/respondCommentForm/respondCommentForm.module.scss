@@ -69,3 +69,9 @@
     color: white;
   }
 }
+
+@media (max-width: 500px) {
+  .cancelBtn{
+    margin: 0;
+  }
+}
