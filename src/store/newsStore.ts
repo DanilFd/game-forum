@@ -14,7 +14,6 @@ class NewsStore {
     error = ''
     newsItemDetail = {} as NewsItemDetailType
     totalPages = null as number | null
-
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true})
     }

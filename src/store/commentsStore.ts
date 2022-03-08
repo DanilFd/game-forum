@@ -3,8 +3,9 @@ import {createCommentComplaint, deleteComment, getNewsComments, sendingComment} 
 import {PaginatedComments} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {findComment} from "../utils/findComment";
-import {CommentType} from "../types/Comments/CommentType";
+import {CommentType, NewCommentType} from "../types/Comments/CommentType";
 import {CreateComplaintComment} from "../types/Comments/CreateComplaintComment";
+import {calcNumberPages} from "../utils/calcNumberPages";
 
 class CommentsStore {
 
@@ -12,15 +13,40 @@ class CommentsStore {
         makeAutoObservable(this, {}, {autoBind: true})
     }
 
-    paginatedNewsComments = {} as PaginatedComments
+    paginatedNewsComments = null as null | PaginatedCommentTree
     isLoading = true
     isSendingComment = false
     error = ''
-    getNewsComments = (newsId: number) => {
+    totalPages = null as null | number
+
+    mergeTreeWithComment = (newComment: NewCommentType) => {
+        if (!this.paginatedNewsComments) {
+            return
+        }
+
+        const comment = {...newComment, children: []}
+
+        if (newComment.parent === null) {
+            return this.paginatedNewsComments.results.push(comment)
+        }
+
+        const parent = findComment(this.paginatedNewsComments!.results, newComment.parent)!
+        parent.children.push(comment)
+    }
+
+    getNewsComments = (newsId: number, page: number) => {
         this.isLoading = true
-        getNewsComments(newsId)
+        getNewsComments(newsId, page)
             .then(res => runInAction(() => {
-                this.paginatedNewsComments = res.data
+                if (page === 1) {
+                    this.paginatedNewsComments = {
+                        comments_count: res.data.comments_count,
+                        results: []
+                    }
+                }
+                this.totalPages = calcNumberPages(res.data.comments_count)
+                res.data.results = res.data.results.map(comment => ({...comment, children: []}))
+                res.data.results.forEach(this.mergeTreeWithComment)
             }))
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
@@ -29,12 +55,8 @@ class CommentsStore {
         this.isSendingComment = true
         return sendingComment(data)
             .then(res => runInAction(() => {
-                if (res.data.parent) {
-                    const foundComment = findComment(this.paginatedNewsComments.results, res.data.parent)!
-                    foundComment.children.push(res.data)
-                    return
-                }
-                this.paginatedNewsComments.results.push(res.data)
+                this.mergeTreeWithComment(res.data)
+                this.paginatedNewsComments!.comments_count++
             }))
             .finally(() => runInAction(() => this.isSendingComment = false))
     }
@@ -42,13 +64,13 @@ class CommentsStore {
     deleteComment = (commentId: number) => {
         return deleteComment(commentId)
             .then(() => runInAction(() => {
-                const foundComment = findComment(this.paginatedNewsComments.results, commentId)!
+                const foundComment = findComment(this.paginatedNewsComments!.results, commentId)!
                 this.deleteChild(foundComment)
             }))
     }
 
     deleteChild = (commentBeingDeleted: CommentType) => {
-        const comments = this.paginatedNewsComments.results
+        const comments = this.paginatedNewsComments!.results
         const parent = !!commentBeingDeleted.parent && findComment(comments, commentBeingDeleted.parent)!
         if (!parent) {
             if (commentBeingDeleted.children.length)
@@ -60,11 +82,16 @@ class CommentsStore {
         if (commentBeingDeleted.children.length)
             return commentBeingDeleted.is_deleted = true
         const foundIndex = parent.children.findIndex(comment => comment.id === commentBeingDeleted.id)
+        this.paginatedNewsComments!.comments_count--
         parent.children.splice(foundIndex, 1)
     }
     createCommentComplaint = (data: CreateComplaintComment) => {
         return createCommentComplaint(data)
     }
+    clearComments = () => {
+        this.paginatedNewsComments = null
+    }
+
 }
 
 

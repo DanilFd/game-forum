@@ -40,8 +40,9 @@ export const NewsItemDetail = observer(() => {
                                 }
                                 <Comments isSendingComment={commentsStore.isSendingComment}
                                           isLoading={commentsStore.isLoading}
-                                          paginatedNewsComments={commentsStore.paginatedNewsComments}
-                                          newsId={+params.newsId}/>
+                                          paginatedNewsComments={commentsStore.paginatedNewsComments!}
+                                          itemId={+params.newsId}
+                                          totalPages={commentsStore.totalPages}/>
                             </div>
                         </>
                     }

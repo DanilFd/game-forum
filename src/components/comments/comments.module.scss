@@ -82,3 +82,13 @@
   font-family: Roboto, sans-serif;
   color: red;
 }
+
+.cancelBtn {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: $secondaryColor;
+  font-weight: 500;
+  padding: 10px;
+  margin-left: 10px;
+}
