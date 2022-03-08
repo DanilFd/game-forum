@@ -31,6 +31,7 @@ export const RespondCommentForm = ({
             const payload = {content: data.comment, news_item: itemId, parent: selectedCommentId}
             commentsStore.sendingComment(payload)
                 .then(() => {
+                    toast.success('Комментарий успешно добавлен.')
                     setValue('comment', '')
                     setSelectedCommentId(null)
                 })

@@ -11,6 +11,7 @@ import {findComment} from "../../../utils/findComment";
 import {useState} from "react";
 import {Modal} from "../../modal/modal";
 import {ReportForm} from "./reportForm/reportForm";
+import authStore from "../../../store/authStore";
 
 type Props = {
     comment: CommentType
@@ -48,7 +49,9 @@ export const Comment = observer(({
                                 <CompactProfile user={comment.creator}/>
                                 <span className={styles.creation_date}>{comment.creation_date}</span>
                                 {!comment.is_owner &&
-                                <span onClick={() => setIsShowModal(true)} className={styles.complain}>Пожаловаться</span>}
+                                <span
+                                    onClick={() => authStore.isAuth ? setIsShowModal(true) : authStore.setIsActiveAuthForm(true)}
+                                    className={styles.complain}>Пожаловаться</span>}
                                 <Modal active={isShowModal} setActive={setIsShowModal}>
                                     <ReportForm commentId={comment.id} setIsShow={setIsShowModal}/>
                                 </Modal>
@@ -57,7 +60,7 @@ export const Comment = observer(({
                             <div className={styles.content}>
                                 <div className={styles.parentInfo}>
                                     {comment.parent &&
-                                    <span>в ответ на комментарий {findComment(commentsStore.paginatedNewsComments.results, comment.parent)?.creator.login}</span>
+                                    <span>в ответ на комментарий {findComment(commentsStore.paginatedNewsComments!.results, comment.parent)?.creator.login}</span>
                                     }
                                 </div>
                                 <p>{comment.content}</p>
