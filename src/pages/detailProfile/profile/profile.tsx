@@ -1,5 +1,4 @@
 import styles from "./profile.module.scss"
-import {Score} from "./score/score";
 import {NavLink} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import {AdditionalInfo} from "./additionalInfo/additionalInfo";
@@ -8,6 +7,7 @@ import {useState} from "react";
 import {ProfileResponse} from "../../../types/Users/ProfileResponse";
 import {AuthenticatedUser} from "../../../types/Auth/AuthenticatedUser";
 import {ProfileEdit} from "../profileEdit/profileEdit";
+import {ProfileRating} from "../../../components/profileRating/profileRating";
 
 type Props = {
     userProfile: ProfileResponse
@@ -18,13 +18,12 @@ type Props = {
 export const Profile = ({userProfile, authenticatedUser}: Props) => {
     const [isActive, setIsActive] = useState(false)
     const [isEditProfile, setIsEditProfile] = useState(false)
-    const score = 80
     return (
         <div className={styles.profile}>
             <div className={styles.section}>
                 <div className={styles.avatarRating}>
                     <img src={userProfile.profile_img} alt=""/>
-                    <Score score={score}/>
+                    <ProfileRating score={userProfile.rating} initialRate={userProfile.rate}/>
                     {authenticatedUser?.login === userProfile.login &&
                     <span onClick={() => setIsEditProfile(prev => !prev)}
                           className={styles.edit}>{isEditProfile ? "назад" : "редактировать"}</span>}

@@ -1,9 +1,10 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getUserProfile, postSetUserPassword, putProfileEdit, usersSearch} from "../api/UsersService";
+import {getUserProfile, postSetUserPassword, putProfileEdit, rateUser, usersSearch} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 import {FoundUser} from "../types/Users/FoundUser";
+import {RateUserData} from "../types/Users/RateUserData";
 
 class UsersStore {
     constructor() {
@@ -56,6 +57,9 @@ class UsersStore {
     }
     clearUserList = () => {
         this.foundUsers.length = 0
+    }
+    rateUser = (data: RateUserData) => {
+        return rateUser(data)
     }
 }
 

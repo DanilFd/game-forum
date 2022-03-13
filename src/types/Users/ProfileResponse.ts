@@ -7,6 +7,8 @@ export type ProfileResponse = {
     discord: null | string
     gender: 'Не указан' | 'Мужской' | 'Женский'
     about_custom_user: null | string
+    rate: "Like" | "Dislike" | null
+    rating: number
     age: null | string
     email: string
 }

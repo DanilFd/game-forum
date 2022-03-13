@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inc, .dec {
+  font-size: 14px;
+  cursor: pointer;
+  color: #9098A9;
+}
+
+.inc {
+  &:hover {
+    color: green;
+  }
+}
+
+.dec {
+  &:hover {
+    color: red;
+  }
+}
+
