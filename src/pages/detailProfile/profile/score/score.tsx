@@ -8,10 +8,10 @@ type Props = {
 
 export const Score = observer(({score}: Props) => {
     const backColorForScore = useMemo(() => {
-        return score > 40 ?
-            score > 75 ? "green" : "#fb9400"
+        return score > 50 ?
+            score > 100 ? "green" : "#fb9400"
             :
-            score > -20 ? "red" : "#ddd"
+            score < 0 ? "red" : "#ddd"
     }, [score])
     return (
         <div className={styles.score} style={{backgroundColor: backColorForScore}}>
