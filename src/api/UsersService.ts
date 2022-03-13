@@ -4,6 +4,7 @@ import {ProfileEditData} from "../types/Users/ProfileEditData";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 import {FoundUser} from "../types/Users/FoundUser";
 import {RateUserData} from "../types/Users/RateUserData";
+import {AvailableUserActions} from "../types/Users/AvailableUserActions";
 
 export const getUserProfile = (login: string) => {
     return api.get<ProfileResponse>(`users/profile/${login}/`)
@@ -25,4 +26,8 @@ export const usersSearch = (login: string) => {
 
 export const rateUser = (data: RateUserData) => {
     return api.put<{ rating: number, rate: 'Like' | 'Dislike' | null }>(`users/rate/${data.login}/`, {rate: data.rate})
+}
+
+export const getUserActions = () => {
+    return api.get<AvailableUserActions>('users/actions/')
 }

@@ -11,7 +11,7 @@
 }
 
 .header {
-  padding: 20px 30px 50px;
+  padding: 20px 30px 30px;
   justify-content: space-between;
 
   h1 {
@@ -93,6 +93,17 @@ input.half {
       color: white;
     }
   }
+}
+
+.warningMessage {
+  color: #000;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 17px;
+  line-height: 1.6;
+  margin: 0 30px 30px;
 }
 
 .withModal {

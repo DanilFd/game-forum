@@ -1,10 +1,18 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {getUserProfile, postSetUserPassword, putProfileEdit, rateUser, usersSearch} from "../api/UsersService";
+import {
+    getUserActions,
+    getUserProfile,
+    postSetUserPassword,
+    putProfileEdit,
+    rateUser,
+    usersSearch
+} from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 import {FoundUser} from "../types/Users/FoundUser";
 import {RateUserData} from "../types/Users/RateUserData";
+import {AvailableUserActions} from "../types/Users/AvailableUserActions";
 
 class UsersStore {
     constructor() {
@@ -17,6 +25,7 @@ class UsersStore {
     userProfile = {} as ProfileResponse
     error = ''
     foundUsers = [] as FoundUser[]
+    userActions = null as null | AvailableUserActions
 
     getProfile = (login: string) => {
         return getUserProfile(login)
@@ -60,6 +69,13 @@ class UsersStore {
     }
     rateUser = (data: RateUserData) => {
         return rateUser(data)
+    }
+    getUserActions = () => {
+        getUserActions()
+            .then(res => runInAction(() => {
+                this.userActions = res.data
+            }))
+            .catch(e => runInAction(() => this.error = e.message))
     }
 }
 

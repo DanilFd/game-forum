@@ -27,6 +27,7 @@ export const NewDialog = observer(() => {
         mode: "onChange"
     });
     useEffect(() => {
+        usersStore.getUserActions()
         const removeUserList = () => setActive(false)
         document.addEventListener('click', removeUserList)
         return () => document.removeEventListener('click', removeUserList)
@@ -46,6 +47,10 @@ export const NewDialog = observer(() => {
                 <div className={styles.header}>
                     <h1>сообщения</h1>
                 </div>
+                <div className={styles.warningMessage}>
+                    Ваш рейтинг позволяет отправлять не более <b>{usersStore.userActions?.available_messages}</b> личных
+                    сообщений в день.
+                </div>
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={`${styles.formGroup} ${styles.withModal}`}>
                         <input autoComplete="off" onFocus={() => setActive(true)} onClick={e => e.stopPropagation()}
@@ -56,7 +61,7 @@ export const NewDialog = observer(() => {
                                 setActive(true)
                             },
                             required: 'Это обязательное поле',
-                            minLength: {value: 6, message:'Минимальная длина имени пользователя равна 6 символам.'}
+                            minLength: {value: 6, message: 'Минимальная длина имени пользователя равна 6 символам.'}
                         })} placeholder="Кому" type="text"/>
                         {errors.responder ?
                             <span className={styles.formError}>{errors.responder.message}</span> :
