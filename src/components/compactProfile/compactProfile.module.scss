@@ -35,11 +35,11 @@
 }
 
 .dropdown {
-  padding-top: 60px;
+  padding: 60px 3px 0;
   position: absolute;
   background-color: white;
   width: calc(100% + 70px);
-  z-index: 2;
+  z-index: 3;
   right: -65px;
   top: -5px;
   border-radius: 8px;

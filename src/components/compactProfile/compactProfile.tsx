@@ -10,7 +10,6 @@ type Props = {
 
 export const CompactProfile = ({user}: Props) => {
     const [isActive, setIsActive] = useState(false)
-    const score = 60
     return (
         <div className={styles.user} onMouseEnter={() => setIsActive(true)}
              onMouseLeave={() => setIsActive(false)}>
@@ -22,7 +21,7 @@ export const CompactProfile = ({user}: Props) => {
                 isActive &&
                 <div className={styles.dropdown}>
                     <div className={styles.rate}>
-                        <Score score={score}/>
+                        <Score score={user.rating}/>
                     </div>
                     <ul>
                         <li>
@@ -35,7 +34,7 @@ export const CompactProfile = ({user}: Props) => {
                             <span>На сайте с: {user.date_joined}</span>
                         </li>
                         <li>
-                            <span>Комментариев: {0}</span>
+                            <span>Комментариев: {user.comments_count}</span>
                         </li>
                     </ul>
                 </div>

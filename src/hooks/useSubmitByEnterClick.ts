@@ -1,6 +1,7 @@
 import {MutableRefObject, useEffect} from "react";
 
-export const useSubmitByEnterClick = (buttonRef: MutableRefObject<HTMLElement | null>) => {
+
+export const useSubmitByEnterClick = (buttonRef: MutableRefObject<HTMLElement | null>, needToDo: boolean = true) => {
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
             if (!e.shiftKey && e.key === 'Enter') {
@@ -8,7 +9,9 @@ export const useSubmitByEnterClick = (buttonRef: MutableRefObject<HTMLElement | 
                 buttonRef.current?.click()
             }
         }
-        document.addEventListener('keydown', onKeyDown)
+        if (needToDo) {
+            document.addEventListener('keydown', onKeyDown)
+        }
         return () => document.removeEventListener('keydown', onKeyDown)
         // eslint-disable-next-line
     }, [])

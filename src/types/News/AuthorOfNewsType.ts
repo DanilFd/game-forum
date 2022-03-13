@@ -4,4 +4,6 @@ export type AuthorOfNewsType = {
     date_joined: string
     gender: string
     age: string | null
+    rating: number
+    comments_count: number
 }
