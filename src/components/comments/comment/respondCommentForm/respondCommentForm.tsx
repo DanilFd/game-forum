@@ -6,6 +6,7 @@ import {useSubmitByEnterClick} from "../../../../hooks/useSubmitByEnterClick";
 import {SetState} from "../../../../types/utils/utils";
 import {toast} from "react-toastify";
 import {FormLoader} from "../../../header/formLoader/formLoader";
+import authStore from "../../../../store/authStore";
 
 type CommentsForm = {
     comment: string
@@ -37,8 +38,7 @@ export const RespondCommentForm = ({
                 })
                 .catch(() => toast.error('При отправке комментария произошла ошибка.'))
         }
-        useSubmitByEnterClick(buttonRef)
-
+        useSubmitByEnterClick(buttonRef, authStore.isAuth)
         return (
             <>
                 {

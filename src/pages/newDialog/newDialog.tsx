@@ -51,7 +51,7 @@ export const NewDialog = observer(() => {
                         <input autoComplete="off" onFocus={() => setActive(true)} onClick={e => e.stopPropagation()}
                                className={styles.half} {...register('responder', {
                             onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                                e.target.value.length > 0 &&
+                                e.target.value.length > 2 &&
                                 throttled(e.target.value)
                                 setActive(true)
                             },

@@ -50,7 +50,7 @@ export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isS
         useObserver(lastElement, page < totalPages!, isLoading, () => {
             setPage(page + 1)
         })
-        useSubmitByEnterClick(buttonRef)
+        useSubmitByEnterClick(buttonRef, authStore.isAuth)
         return (
             <>
                 <div className={styles.summary}>
