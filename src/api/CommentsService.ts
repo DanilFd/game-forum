@@ -3,6 +3,7 @@ import {PaginatedComments} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {CommentType} from "../types/Comments/CommentType";
 import {CreateComplaintComment} from "../types/Comments/CreateComplaintComment";
+import {RateCommentData} from "../types/Comments/RateCommentData";
 
 export const getNewsComments = (newsId: number, page: number) => {
     return api.get<PaginatedComments>(`comments/list/${newsId}/`, {
@@ -20,4 +21,8 @@ export const deleteComment = (commentId: number) => {
 
 export const createCommentComplaint = (data: CreateComplaintComment) => {
     return api.post('comments/complaint/create/', data)
+}
+
+export const rateComment = (data: RateCommentData) => {
+    return api.put(`comments/rate/${data.comment}/`, {rate: data.rate})
 }

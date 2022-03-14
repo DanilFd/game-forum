@@ -12,6 +12,7 @@ import {useState} from "react";
 import {Modal} from "../../modal/modal";
 import {ReportForm} from "./reportForm/reportForm";
 import authStore from "../../../store/authStore";
+import {CommentRating} from "./commentRating/commentRating";
 
 type Props = {
     comment: CommentType
@@ -77,6 +78,9 @@ export const Comment = observer(({
                             </div>
                         </>
                 }
+                <div className={styles.commentRating}>
+                    <CommentRating score={comment.rating} initialRate={comment.rate} commentId={comment.id}/>
+                </div>
                 {isShow &&
                 <RespondCommentForm setSelectedCommentId={setSelectedCommentId} selectedCommentId={selectedCommentId}
                                     isSendingComment={isSendingComment}

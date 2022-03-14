@@ -6,6 +6,7 @@ import {findComment} from "../utils/findComment";
 import {CommentType, NewCommentType} from "../types/Comments/CommentType";
 import {CreateComplaintComment} from "../types/Comments/CreateComplaintComment";
 import {calcNumberPages} from "../utils/calcNumberPages";
+import {RateCommentData} from "../types/Comments/RateCommentData";
 
 class CommentsStore {
 
@@ -90,6 +91,9 @@ class CommentsStore {
     }
     clearComments = () => {
         this.paginatedNewsComments = null
+    }
+    rateComment = (data: RateCommentData) => {
+        return rateComment(data)
     }
 
 }

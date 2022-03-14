@@ -3,6 +3,7 @@
 .body {
   border-top: 1px solid #eee;
   margin-top: 20px;
+  position: relative;
 }
 
 .info {
@@ -106,7 +107,8 @@
   font-family: Roboto, sans-serif;
   padding-bottom: 10px;
 }
-.infoGroup{
+
+.infoGroup {
   display: flex;
   gap: 20px;
 }
@@ -115,21 +117,27 @@
   .children {
     padding-left: 10px;
   }
-  .info{
+  .info {
     flex-wrap: wrap;
     gap: 0;
   }
-  .infoGroup{
+  .infoGroup {
     flex-basis: 100%;
   }
-  .content{
+  .content {
     padding: 7px 15px;
   }
-  .answerButton{
+  .answerButton {
     padding: 0;
-    svg{
-      top:11px
+
+    svg {
+      top: 11px
     }
   }
+}
 
+.commentRating {
+  position: absolute;
+  top: 15px;
+  right: 0;
 }
