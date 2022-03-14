@@ -2,7 +2,7 @@ import styles from "./compactProfile.module.scss";
 import React, {useState} from "react";
 import {AuthorOfNewsType} from "../../types/News/AuthorOfNewsType";
 import {NavLink} from "react-router-dom";
-import {Score} from "../../pages/detailProfile/profile/score/score";
+import {Score} from "../rating/score/score";
 
 type Props = {
     user: AuthorOfNewsType

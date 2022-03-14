@@ -7,7 +7,7 @@ import {useState} from "react";
 import {ProfileResponse} from "../../../types/Users/ProfileResponse";
 import {AuthenticatedUser} from "../../../types/Auth/AuthenticatedUser";
 import {ProfileEdit} from "../profileEdit/profileEdit";
-import {ProfileRating} from "../../../components/profileRating/profileRating";
+import {UserRating} from "./userRating/userRating";
 
 type Props = {
     userProfile: ProfileResponse
@@ -23,7 +23,7 @@ export const Profile = ({userProfile, authenticatedUser}: Props) => {
             <div className={styles.section}>
                 <div className={styles.avatarRating}>
                     <img src={userProfile.profile_img} alt=""/>
-                    <ProfileRating score={userProfile.rating} initialRate={userProfile.rate}/>
+                    <UserRating initialRate={userProfile.rate} score={userProfile.rating}/>
                     {authenticatedUser?.login === userProfile.login &&
                     <span onClick={() => setIsEditProfile(prev => !prev)}
                           className={styles.edit}>{isEditProfile ? "назад" : "редактировать"}</span>}
