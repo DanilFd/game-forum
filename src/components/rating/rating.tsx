@@ -1,7 +1,7 @@
 import styles from "./rating.module.scss"
-import {Score} from "./score/score";
 import {AiOutlineMinus, AiOutlinePlus} from "react-icons/all";
 import {observer} from "mobx-react-lite";
+import {useCallback} from "react";
 
 type Props = {
     rating: number
@@ -10,11 +10,24 @@ type Props = {
 }
 
 export const Rating = observer(({rating, rate, rateFunc}: Props) => {
+    const backColorForScore = useCallback(() => {
+        if (rating > 100)
+            return 'green'
+        if (rating > 50)
+            return "#FCBE64"
+        if (rating > 0)
+            return "#fb9400"
+        if (rating < 0)
+            return "red"
+        return 'gray'
+    }, [rating])
     return (
         <div className={styles.wrapper}>
             <AiOutlineMinus onClick={() => rateFunc('Dislike')} className={styles.dec}
                             style={{color: rate === 'Dislike' ? "red" : ''}}/>
-            <Score score={rating}/>
+            <div className={styles.score} style={{backgroundColor: backColorForScore()}}>
+                <span>{(+rating).toFixed(2)}</span>
+            </div>
             <AiOutlinePlus onClick={() => rateFunc('Like')} className={styles.inc}
                            style={{color: rate === 'Like' ? "green" : ''}}/>
         </div>

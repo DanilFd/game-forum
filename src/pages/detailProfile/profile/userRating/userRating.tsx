@@ -3,13 +3,14 @@ import {Rating} from "../../../../components/rating/rating";
 import usersStore from "../../../../store/usersStore";
 import {toast} from "react-toastify";
 import {useParams} from "react-router-dom";
+import {observer} from "mobx-react-lite";
 
 type Props = {
     score: number
     initialRate: 'Like' | 'Dislike' | null
 }
 
-export const UserRating = ({score, initialRate}: Props) => {
+export const UserRating = observer(({score, initialRate}: Props) => {
     const params = useParams<{ login: string }>()
     const [rate, setRate] = useState<"Like" | "Dislike" | null>(initialRate)
     const [rating, setRating] = useState<number>(score)
@@ -27,5 +28,5 @@ export const UserRating = ({score, initialRate}: Props) => {
             <Rating rating={rating} rate={rate} rateFunc={rateUser}/>
         </div>
     );
-};
+});
 

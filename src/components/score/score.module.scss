@@ -1,14 +1,9 @@
 .score {
-  transform: skew(-20deg);
-  padding: 2px 8px;
-  border-radius: 5px;
-
   span {
+    font-family: Rubik,sans-serif;
     font-size: 13px!important;
     display: block;
     font-weight: 500;
-    transform: skew(20deg);
-    color: white!important;
     font-style: normal!important;
   }
 }
