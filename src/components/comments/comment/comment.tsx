@@ -78,9 +78,12 @@ export const Comment = observer(({
                             </div>
                         </>
                 }
-                <div className={styles.commentRating}>
-                    <CommentRating score={comment.rating} initialRate={comment.rate} commentId={comment.id}/>
-                </div>
+                {
+                    !comment.is_deleted &&
+                    <div className={styles.commentRating}>
+                        <CommentRating score={comment.rating} initialRate={comment.rate} commentId={comment.id}/>
+                    </div>
+                }
                 {isShow &&
                 <RespondCommentForm setSelectedCommentId={setSelectedCommentId} selectedCommentId={selectedCommentId}
                                     isSendingComment={isSendingComment}

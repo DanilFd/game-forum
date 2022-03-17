@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Rating} from "../../../rating/rating";
 import {toast} from "react-toastify";
 import commentsStore from "../../../../store/commentsStore";
 import {observer} from "mobx-react-lite";
+import {ScoreForCommentRating} from "../scoreForCommentRating/scoreForCommentRating";
 
 type Props = {
     score: number
@@ -24,7 +24,7 @@ export const CommentRating = observer(({initialRate, score, commentId}: Props) =
     }
     return (
         <div>
-            <Rating rating={rating} rate={rate} rateFunc={rateComment}/>
+            <ScoreForCommentRating rating={rating} rate={rate} rateFunc={rateComment}/>
         </div>
     );
 });
