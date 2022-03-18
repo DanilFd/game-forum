@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
 import {Rating} from "../../../../components/rating/rating";
 import usersStore from "../../../../store/usersStore";
 import {toast} from "react-toastify";
 import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
+import {AxiosError} from "axios";
+import {useSetRating} from "../../../../hooks/useSetRating";
 
 type Props = {
     score: number
@@ -12,8 +13,7 @@ type Props = {
 
 export const UserRating = observer(({score, initialRate}: Props) => {
     const params = useParams<{ login: string }>()
-    const [rate, setRate] = useState<"Like" | "Dislike" | null>(initialRate)
-    const [rating, setRating] = useState<number>(score)
+    const {rate, rating, setRating, setRate} = useSetRating(score, initialRate)
     const rateUser = (rateType: 'Dislike' | 'Like') => {
         const newRate = rate === rateType ? null : rateType
         usersStore.rateUser({login: params.login, rate: newRate})
@@ -21,7 +21,8 @@ export const UserRating = observer(({score, initialRate}: Props) => {
                 setRating(res.data.rating)
                 setRate(res.data.rate)
             })
-            .catch(() => toast.error('Произошла непредвиденная ошибка.'))
+            .catch((e: AxiosError<{ detail?: string }>) => toast.error(e.response ? e.response.data.detail :
+                'Произошла непредвиденная ошибка.'))
     }
     return (
         <div>

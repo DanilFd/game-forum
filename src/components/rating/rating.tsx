@@ -19,7 +19,7 @@ export const Rating = observer(({rating, rate, rateFunc}: Props) => {
             return "#fb9400"
         if (rating < 0)
             return "red"
-        return 'gray'
+        return "#606060"
     }, [rating])
     return (
         <div className={styles.wrapper}>

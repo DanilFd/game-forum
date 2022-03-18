@@ -3,11 +3,12 @@ import {NavLink} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import {AdditionalInfo} from "./additionalInfo/additionalInfo";
 import {IoIosArrowDown} from "react-icons/all";
-import {useState} from "react";
+import { useState} from "react";
 import {ProfileResponse} from "../../../types/Users/ProfileResponse";
 import {AuthenticatedUser} from "../../../types/Auth/AuthenticatedUser";
 import {ProfileEdit} from "../profileEdit/profileEdit";
 import {UserRating} from "./userRating/userRating";
+import {observer} from "mobx-react-lite";
 
 type Props = {
     userProfile: ProfileResponse
@@ -15,7 +16,7 @@ type Props = {
 }
 
 
-export const Profile = ({userProfile, authenticatedUser}: Props) => {
+export const Profile = observer(({userProfile, authenticatedUser}: Props) => {
     const [isActive, setIsActive] = useState(false)
     const [isEditProfile, setIsEditProfile] = useState(false)
     return (
@@ -72,4 +73,4 @@ export const Profile = ({userProfile, authenticatedUser}: Props) => {
             }
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {toast} from "react-toastify";
 import commentsStore from "../../../../store/commentsStore";
 import {observer} from "mobx-react-lite";
@@ -13,6 +13,10 @@ type Props = {
 export const CommentRating = observer(({initialRate, score, commentId}: Props) => {
     const [rate, setRate] = useState<"Like" | "Dislike" | null>(initialRate)
     const [rating, setRating] = useState<number>(score)
+    useEffect(() => {
+        setRate(initialRate)
+        setRating(score)
+    }, [score, initialRate])
     const rateComment = (rateType: 'Dislike' | 'Like') => {
         const newRate = rate === rateType ? null : rateType
         commentsStore.rateComment({comment: commentId, rate: newRate})
