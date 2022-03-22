@@ -9,6 +9,7 @@ import {Platforms} from './platforms/platforms';
 import gamesStore from "../../../store/gamesStore";
 import {observer} from "mobx-react-lite";
 import {useError} from "../../../hooks/useError";
+import authStore from "../../../store/authStore";
 
 type Props = {
     game: GameType
@@ -48,7 +49,8 @@ export const Game = observer(({game, className}: Props) => {
                 <div className={styles.subForGame}>
                     <span>Следить за игрой</span>
                     <Switch isChecked={game.is_following}
-                            toggle={() => gamesStore.toggleFollowing(game)}
+                            toggle={() => authStore.isAuth ? gamesStore.toggleFollowing(game) :
+                                toast.info('Для этого необходимо авторизоваться.')}
                     />
                 </div>
             </div>
