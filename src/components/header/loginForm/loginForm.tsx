@@ -1,6 +1,5 @@
 import styles from "./loginForm.module.scss"
 import {useState} from "react";
-import {FcGoogle} from "react-icons/all";
 import {motion} from "framer-motion";
 import {SetState} from "../../../types/utils/utils";
 import {SelectedForm} from "../../../types/Auth/SelectedForm";
@@ -8,6 +7,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {UserLoginDetails} from "../../../types/Auth/AuthRequest";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
+import GoogleLogin from "react-google-login";
+import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 
 type Props = {
@@ -32,6 +33,20 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
                 reset()
             })
             .catch((errors: AxiosError) => toast.error(errors.response?.data.detail))
+    }
+    const responseGoogle = async (response: any) => {
+        const GoogleAuth = {
+            login: response.profileObj.givenName,
+            email: response.profileObj.email,
+            password:generateUniqueID()
+        }
+        console.log(GoogleAuth)
+        // if (await authStore.IsRegistration(GoogleAuth))
+        //     await authStore.registration(GoogleAuth)
+        // await authStore.login(GoogleAuth)
+    }
+    const errorGoogleAuth = () => {
+        toast.error('При авторизации произошла ошибка.')
     }
     return (
         <motion.div
@@ -68,11 +83,15 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
                 <div className={styles.additional}>
                     <span className={isShow ? `${styles.active}` : ``} onClick={() => setIsShow(true)}>
                         Другие способы войти</span>
-                    <div className={isShow ? `${styles.social}` : ``}>
-                        <button><FcGoogle/></button>
-                    </div>
+                    {isShow &&
+                    <GoogleLogin className={styles.googleForm}
+                        clientId="170538785276-hnpecsl17i8bfeo80vdv2kq5q201nfsq.apps.googleusercontent.com"
+                        onSuccess={responseGoogle}
+                        onFailure={errorGoogleAuth}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                    }
                 </div>
-                -
             </div>
             <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
                 соглашением.</p>

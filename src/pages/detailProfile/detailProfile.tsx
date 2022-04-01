@@ -27,6 +27,7 @@ export const DetailProfile = observer(() => {
             <div className={styles.page}>
                 {usersStore.isLoadingProfile ? <Loader/> :
                     <Profile userProfile={usersStore.userProfile} authenticatedUser={authStore.user!}/>
+
                 }
             </div>
         )

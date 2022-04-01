@@ -8,7 +8,7 @@ export type NewsItemType = {
     title: string,
     image: string,
     creation_date: string
-    categories: [
+    categories?: [
         {
             title: string
             slug: string

@@ -3,7 +3,6 @@ import {NavLink} from 'react-router-dom';
 import styles from "./newsItem.module.scss"
 import {FaRegComment} from "react-icons/all";
 import {NewsItemType} from "../../../types/News/NewsItemType";
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
 
 type Game = {
     id: number,
@@ -33,14 +32,14 @@ export const NewsItem = ({item, categorySlug, games}: Props) => {
                         <span className={styles.commentsInfo}>{item.comments_count}<FaRegComment/></span>
                     </div>
                     <div className={styles.categories}>
-                        {item.categories.map((category, index) =>
-                            <React.Fragment key={generateUniqueID()}>
+                        {item.categories?.map((category, index) =>
+                            <React.Fragment key={category.slug}>
                                 <NavLink
                                     to={`/news/${category.slug}`}>{category.title}</NavLink>
-                                {index !== item.categories.length - 1 && <span>, </span>}
+                                {index !== item.categories!.length - 1 && <span>, </span>}
                             </React.Fragment>)}
                         {games?.map((game, index) =>
-                            <React.Fragment key={generateUniqueID()}>
+                            <React.Fragment key={game.id}>
                                 <NavLink
                                     to={`#`}>{game.title}</NavLink>
                                 {index !== games.length - 1 && <span>, </span>}
