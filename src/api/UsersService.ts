@@ -31,3 +31,4 @@ export const rateUser = (data: RateUserData) => {
 export const getUserActions = () => {
     return api.get<AvailableUserActions>('users/actions/')
 }
+

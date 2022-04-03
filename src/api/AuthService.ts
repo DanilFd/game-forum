@@ -32,3 +32,11 @@ export const resetPasswordConfirm = (passwordResetData: PasswordResetData) => {
 export const refreshToken = (refreshToken: string) => {
     return api.post<RefreshTokenResponse>('users/refresh/', {refresh: refreshToken})
 }
+
+export const isRegistered = (login: string) => {
+    return api.get<boolean>(`users/is-registered/${login}/`)
+}
+
+export const registrationByGoogle = (data: UserRegisterCredential) => {
+    return api.post<AuthResponse>('users/registration-by-google/', data)
+}

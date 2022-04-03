@@ -8,20 +8,22 @@ import {UserLoginDetails} from "../../../types/Auth/AuthRequest";
 import {AxiosError} from "axios";
 import {toast} from "react-toastify";
 import GoogleLogin from "react-google-login";
-import {generateUniqueID} from "web-vitals/dist/modules/lib/generateUniqueID";
+import authStore from "../../../store/authStore";
+import {FormLoader} from "../formLoader/formLoader";
 
 
 type Props = {
     switchForm: SetState<SelectedForm>
     login: (data: UserLoginDetails) => Promise<void>
     setActiveModal: (flag: boolean) => void
+    isLoading: boolean
 }
 
 type LoginFormType = {
     login: string,
     password: string
 }
-export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
+export const LoginForm = ({switchForm, login, setActiveModal, isLoading}: Props) => {
     const [isShow, setIsShow] = useState(false)
     const {register, formState: {errors}, handleSubmit, reset} = useForm<LoginFormType>({
         mode: "onChange"
@@ -38,12 +40,17 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
         const GoogleAuth = {
             login: response.profileObj.givenName,
             email: response.profileObj.email,
-            password:generateUniqueID()
+            password: response.profileObj.googleId
         }
-        console.log(GoogleAuth)
-        // if (await authStore.IsRegistration(GoogleAuth))
-        //     await authStore.registration(GoogleAuth)
-        // await authStore.login(GoogleAuth)
+
+        if (await authStore.isRegistered(GoogleAuth.login)) {
+            return authStore.login({login: GoogleAuth.login, password: GoogleAuth.password})
+                .then(() => setActiveModal(false))
+        }
+        await authStore.registrationByGoogle(GoogleAuth)
+            .then(() => setActiveModal(false))
+
+
     }
     const errorGoogleAuth = () => {
         toast.error('При авторизации произошла ошибка.')
@@ -53,48 +60,53 @@ export const LoginForm = ({switchForm, login, setActiveModal}: Props) => {
             initial={{translateX: -300}}
             animate={{translateX: 0}}
         >
-            <div className={styles.wrapper}>
-                <div className={styles.header}>
-                    <h1>Войти</h1>
-                    <div>
-                        или <span onClick={() => switchForm('register')}>зарегистрироваться</span>
-                    </div>
-                </div>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <input style={{borderColor: errors.login && "red"}} {...register('login', {
-                        required: 'Заполните это поле.',
-                        pattern: {
-                            value: /^[a-zA-Z\d]+$/,
-                            message: 'Логин должен содержать только буквы латинского алфавита и цифры.'
-                        }
-                    })} placeholder="Логин"
-                           type="text"/>
-                    {errors.login && <span className={styles.error}>{errors.login.message}</span>}
-                    <input style={{borderColor: errors.password && "red"}} {...register('password', {
-                        required: 'Заполните это поле.',
-                    })} placeholder="Пароль" name="password" autoComplete="on"
-                           type="password"/>
-                    {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-                    <div className={styles.row}>
-                        <button type="submit"><span>войти</span></button>
-                        <span onClick={() => switchForm('reset')}>Я не помню логин/пароль</span>
-                    </div>
-                </form>
-                <div className={styles.additional}>
+            {isLoading ?
+                <FormLoader/> :
+                <>
+                    <div className={styles.wrapper}>
+                        <div className={styles.header}>
+                            <h1>Войти</h1>
+                            <div>
+                                или <span onClick={() => switchForm('register')}>зарегистрироваться</span>
+                            </div>
+                        </div>
+                        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                            <input style={{borderColor: errors.login && "red"}} {...register('login', {
+                                required: 'Заполните это поле.',
+                                pattern: {
+                                    value: /^[a-zA-Z\d]+$/,
+                                    message: 'Логин должен содержать только буквы латинского алфавита и цифры.'
+                                }
+                            })} placeholder="Логин"
+                                   type="text"/>
+                            {errors.login && <span className={styles.error}>{errors.login.message}</span>}
+                            <input style={{borderColor: errors.password && "red"}} {...register('password', {
+                                required: 'Заполните это поле.',
+                            })} placeholder="Пароль" name="password" autoComplete="on"
+                                   type="password"/>
+                            {errors.password && <span className={styles.error}>{errors.password.message}</span>}
+                            <div className={styles.row}>
+                                <button type="submit"><span>войти</span></button>
+                                <span onClick={() => switchForm('reset')}>Я не помню логин/пароль</span>
+                            </div>
+                        </form>
+                        <div className={styles.additional}>
                     <span className={isShow ? `${styles.active}` : ``} onClick={() => setIsShow(true)}>
                         Другие способы войти</span>
-                    {isShow &&
-                    <GoogleLogin className={styles.googleForm}
-                        clientId="170538785276-hnpecsl17i8bfeo80vdv2kq5q201nfsq.apps.googleusercontent.com"
-                        onSuccess={responseGoogle}
-                        onFailure={errorGoogleAuth}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                    }
-                </div>
-            </div>
-            <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
-                соглашением.</p>
+                            {isShow &&
+                            <GoogleLogin className={styles.googleForm}
+                                         clientId="170538785276-hnpecsl17i8bfeo80vdv2kq5q201nfsq.apps.googleusercontent.com"
+                                         onSuccess={responseGoogle}
+                                         onFailure={errorGoogleAuth}
+                                         cookiePolicy={'single_host_origin'}
+                            />
+                            }
+                        </div>
+                    </div>
+                    <p className={styles.subtitle}>Авторизуясь, ты соглашаешься с правилами сайта и пользовательским
+                        соглашением.</p>
+                </>
+            }
         </motion.div>
     )
 }

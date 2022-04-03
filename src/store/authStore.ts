@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {login, refreshToken} from "../api/AuthService";
+import {isRegistered, login, refreshToken, registrationByGoogle} from "../api/AuthService";
 import {UserLoginDetails} from "../types/Auth/AuthRequest";
 import {accountActivation, registerUser, resetPassword, resetPasswordConfirm} from "../api/AuthService";
 import {AuthenticatedUser} from "../types/Auth/AuthenticatedUser";
@@ -31,6 +31,7 @@ class AuthStore {
     }
 
     login(data: UserLoginDetails) {
+        this.isLoading = true
         return login(data)
             .then(res => {
                     runInAction(() => {
@@ -40,6 +41,8 @@ class AuthStore {
                     })
                 }
             )
+            .finally(() => runInAction(() => this.isLoading = false))
+
     }
 
     loginAfterRegistration(tokens: AuthResponse) {
@@ -114,6 +117,20 @@ class AuthStore {
 
     setIsActiveAuthForm = (flag: boolean) => {
         this.isActiveAuthForm = flag
+    }
+    isRegistered = (login: string) => {
+        this.isLoading = true
+        return isRegistered(login).then(res => res.data)
+            .finally(() => runInAction(() => this.isLoading = false))
+    }
+    registrationByGoogle = (data: UserRegisterCredential) => {
+        this.isLoading = true
+        return registrationByGoogle(data)
+            .then(res => {
+                    this.loginAfterRegistration(res.data)
+                }
+            )
+            .finally(() => runInAction(() => this.isLoading = false))
     }
 }
 
