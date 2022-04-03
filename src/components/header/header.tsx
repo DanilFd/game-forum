@@ -50,7 +50,8 @@ export const Header = observer(() => {
             <Menu active={active} setActive={setActive}/>
             <Modal active={authStore.isActiveAuthForm} setActive={authStore.setIsActiveAuthForm}>
                 {selectedForm === 'login' &&
-                <LoginForm setActiveModal={authStore.setIsActiveAuthForm} login={authStore.login} switchForm={setSelectedForm}/>}
+                <LoginForm isLoading={authStore.isLoading} setActiveModal={authStore.setIsActiveAuthForm}
+                           login={authStore.login} switchForm={setSelectedForm}/>}
                 {selectedForm === 'register' &&
                 <RegistrationForm isLoading={authStore.isLoadingBetweenForms} registerUser={authStore.registerUser}
                                   switchForm={setSelectedForm}/>}
