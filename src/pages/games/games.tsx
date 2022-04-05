@@ -23,29 +23,27 @@ export const Games = observer(() => {
         }, [])
         useError(gamesStore.error)
         return (
-            <div>
-                <main className={styles.layout}>
-                    {gamesStore.isLoadingGnsAndPls || gamesStore.isLoadingGames ? <Loader/> :
-                        <section className={styles.filters}>
-                            <h3>поиск игр по фильтру</h3>
-                            <Filters/>
-                        </section>
-                    }
-                    {gamesStore.isLoadingGames ? <Loader/> :
-                        <>
-                            <section className={styles.items}>
-                                {
+            <main className={styles.layout}>
+                {gamesStore.isLoadingGnsAndPls || gamesStore.isLoadingGames ? <Loader/> :
+                    <section className={styles.filters}>
+                        <h3>поиск игр по фильтру</h3>
+                        <Filters/>
+                    </section>
+                }
+                {gamesStore.isLoadingGames ? <Loader/> :
+                    <>
+                        <section className={styles.items}>
+                            {
 
-                                    gamesStore.games.map(game => <Game game={game} key={game.id}/>)
-                                }
-                            </section>
-                            <section>
-                                <Pagination pagesCount={gamesStore.totalPages}/>
-                            </section>
-                        </>
-                    }
-                </main>
-            </div>
+                                gamesStore.games.map(game => <Game game={game} key={game.id}/>)
+                            }
+                        </section>
+                        <section>
+                            <Pagination pagesCount={gamesStore.totalPages}/>
+                        </section>
+                    </>
+                }
+            </main>
         );
     }
 );

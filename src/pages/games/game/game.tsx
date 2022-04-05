@@ -27,12 +27,12 @@ export const Game = observer(({game, className}: Props) => {
     useError(gamesStore.error)
     return (
         <div className={`${styles.item} ${className}`}>
-            <NavLink to="#" className={styles.img}>
+            <NavLink to={`/game/${game.slug}`} className={styles.img}>
                 <img src={game.img} alt=""/>
             </NavLink>
             <div className={styles.info}>
                 <div>
-                    <NavLink to="">
+                    <NavLink to={`/game/${game.slug}`}>
                         {game.title}
                     </NavLink>
                 </div>
