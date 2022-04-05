@@ -1,6 +1,12 @@
 import {makeAutoObservable, runInAction} from "mobx";
-import {createCommentComplaint, deleteComment, getNewsComments, sendingComment} from "../api/CommentsService";
-import {PaginatedComments} from "../types/Comments/PaginatedComments";
+import {
+    createCommentComplaint,
+    deleteComment,
+    getNewsComments,
+    rateComment,
+    sendingComment
+} from "../api/CommentsService";
+import {PaginatedCommentTree} from "../types/Comments/PaginatedComments";
 import {SendingCommentRequest} from "../types/Comments/sendingCommentRequest";
 import {findComment} from "../utils/findComment";
 import {CommentType, NewCommentType} from "../types/Comments/CommentType";

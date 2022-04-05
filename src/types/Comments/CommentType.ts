@@ -1,12 +1,17 @@
 import {AuthorOfNewsType} from "../News/AuthorOfNewsType";
 
-export type CommentType = {
+type Comment = {
     id: number
     creator: AuthorOfNewsType
     creation_date: string
     content: string
-    children: CommentType[]
-    parent?: null | number
+    parent: null | number
     is_owner: boolean
-    is_deleted:boolean
+    is_deleted: boolean
+    rating: number
+    rate: 'Like' | 'Dislike' | null
 }
+
+export type CommentType = Comment & { children: CommentType[] }
+
+export type NewCommentType = Comment

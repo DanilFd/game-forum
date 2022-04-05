@@ -1,9 +1,11 @@
-import {CommentType} from "./CommentType";
+import {CommentType, NewCommentType} from "./CommentType";
 
 export type PaginatedComments = {
-    count: number
-    next: string | null
-    previous: string | null
+    results: NewCommentType[]
+    comments_count: number
+}
+
+export type PaginatedCommentTree = {
     results: CommentType[]
     comments_count: number
 }

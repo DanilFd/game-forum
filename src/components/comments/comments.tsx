@@ -2,8 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import commentsStore from "../../store/commentsStore";
 import {Comment} from "./comment/comment";
 import styles from "./comments.module.scss"
-import {NavLink} from "react-router-dom";
-import {PaginatedComments} from "../../types/Comments/PaginatedComments";
+import {PaginatedCommentTree} from "../../types/Comments/PaginatedComments";
 import {FormLoader} from "../header/formLoader/formLoader";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {useSubmitByEnterClick} from "../../hooks/useSubmitByEnterClick";
