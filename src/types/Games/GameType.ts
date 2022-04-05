@@ -10,4 +10,5 @@ export type GameType = {
     release_date: string,
     score: number
     is_following: boolean
+    slug: string
 }

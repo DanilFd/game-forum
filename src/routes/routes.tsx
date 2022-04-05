@@ -14,6 +14,7 @@ import {DialogDetail} from "../pages/dialogDetail/dialogDetail";
 import authStore from "../store/authStore";
 import {observer} from "mobx-react-lite";
 import {News} from "../pages/news/news";
+import {GameDetail} from "../pages/gameDetail/gameDetail";
 
 
 export const Routes = observer(() => {
@@ -25,6 +26,7 @@ export const Routes = observer(() => {
                     <Route exact path="/news/:categorySlug" component={News}/>
                     <Route exact path="/news/:categorySlug/:newsId" component={NewsItemDetail}/>
                     <Route exact path="/games" component={Games}/>
+                    <Route exact path="/game/:gameSlug" component={GameDetail} />
                     <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                     <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
                     <Route exact path="/user/:login" component={DetailProfile}/>
