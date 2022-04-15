@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
-import {followUnfollowGame, getGameDetail, getGames, getGenresAndPlatforms} from "../api/GamesService";
+import {followUnfollowGame, getGameDetail, getGames, getGenresAndPlatforms, rateGame} from "../api/GamesService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 import {PlatformType} from "../types/Games/PlatformType";
 import {GenreType} from "../types/Games/GenreType";
@@ -34,6 +34,7 @@ class GamesStore {
     }
     isLoadingGameDetail = true
     gameDetail = null as null | GameType
+    isLoadingRateGame = false
 
     constructor() {
         makeAutoObservable(this)
@@ -109,6 +110,18 @@ class GamesStore {
             }))
             .finally(() => runInAction(() => this.isLoadingGameDetail = false))
     }
+    setUserRating = (rating: number) => {
+        this.gameDetail!.user_rating = rating
+    }
+    rateGame = (game_id: number, rating: number) => {
+        this.isLoadingRateGame = true
+        return rateGame(game_id, rating)
+            .then(res => runInAction(() => {
+                this.gameDetail!.rating = res.data.game_rating
+            }))
+            .finally(() => runInAction(() => this.isLoadingRateGame = false))
+    }
+
 }
 
 

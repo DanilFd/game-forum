@@ -1,0 +1,38 @@
+.starWidget {
+  input {
+    display: none;
+  }
+
+  display: flex;
+  justify-content: center;
+  label {
+    padding: 0 2.5px;
+    position: relative;
+  }
+}
+.number{
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  cursor: pointer;
+  color: #fff;
+  font-size: 11px;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+  font-size: 28px;
+}
+
+@media (max-width: 400px) {
+  .starWidget{
+    label{
+      padding: 0 1.5px;
+    }
+  }
+  .star{
+    font-size: 23px;
+  }
+}

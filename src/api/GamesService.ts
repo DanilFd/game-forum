@@ -32,7 +32,10 @@ export const getGenresAndPlatforms = () => {
 }
 
 export const followUnfollowGame = (game_id: number, is_following: boolean) => {
-    return api.put(`/games/follow-and-unfollow/${game_id}/`, {is_following})
+    return api.patch(`/games/follow-and-unfollow/${game_id}/`, {is_following})
+}
+export const rateGame = (game_id: number, rate: number) => {
+    return api.patch<{ game_rating: number }>(`/games/follow-and-unfollow/${game_id}/`, {rate})
 }
 
 export const getGameDetail = (gameSlug: string) => {

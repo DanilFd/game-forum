@@ -4,28 +4,139 @@
   padding: 32px 0;
   position: relative;
 }
-.gameOverview{
-  padding: 32px 30px;
+
+.gameOverview {
+  padding: 40px 30px;
+  display: flex;
+  justify-content: space-between;
 
 }
-.gameTitle{
+
+.gameTitle {
   font-size: 25px;
 }
-.gameSpecs{
+
+.gameSpecs {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   padding-top: 15px;
+  font-size: 14px;
 }
-.switch{
+
+.switch {
   display: flex;
   position: absolute;
   align-items: center;
   top: 32px;
   right: 50px;
-  span{
+
+  span {
     padding-right: 10px;
     font-family: Roboto, sans-serif;
     font-size: 12px;
     color: #585858;
+  }
+}
+
+.gameImg {
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  flex-basis: 75%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.gameRating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-basis: 25%;
+  flex-shrink: 0;
+
+  span {
+    color: white;
+    text-align: center;
+  }
+}
+
+.rating {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 54px;
+}
+
+.rateGame {
+  font-family: Roboto, sans-serif;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 auto;
+
+  > span {
+    &:hover {
+      border-bottom: 1px solid #fff;
+    }
+  }
+}
+
+.other_users_rating {
+  text-align: center;
+  padding: 5px 0 15px;
+  font-family: Roboto, sans-serif;
+  font-size: 11px;
+
+  strong {
+    padding: 0 3px;
+  }
+}
+
+.modalHeading {
+  color: black !important;
+  text-transform: none;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  padding-bottom: 2px;
+}
+
+.gameInfo{
+  display: flex;
+}
+
+
+@media (max-width: 825px) {
+  .gameInfo{
+      flex-basis: 60%;
+  }
+}
+
+@media (max-width: 700px) {
+  .gameOverview{
+    flex-direction: column-reverse;
+  }
+  .gameInfo{
+    flex-direction: column;
+  }
+  .gameRating{
+    padding: 10px 0;
+  }
+  .gameDetails{
+    padding-top:15px;
+  }
+}
+@media (max-width: 500px) {
+  .gameOverview{
+    padding: 30px 5px ;
+  }
+  .other_users_rating{
+    padding: 2.5px 0 10px;
+  }
+  .modalHeading{
+    font-size: 15px;
   }
 }

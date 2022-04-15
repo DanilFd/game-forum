@@ -1,4 +1,3 @@
-import React, {useMemo} from 'react';
 import {NavLink} from 'react-router-dom';
 import styles from "./game.module.scss"
 import {GameType} from "../../../types/Games/GameType";
@@ -10,6 +9,7 @@ import gamesStore from "../../../store/gamesStore";
 import {observer} from "mobx-react-lite";
 import {useError} from "../../../hooks/useError";
 import authStore from "../../../store/authStore";
+import {useBackColorForScore} from "../../../hooks/useBackColorForScore";
 
 type Props = {
     game: GameType
@@ -18,12 +18,6 @@ type Props = {
 export const subNotify = () => toast.info("Вы добавили игру в избранное")
 export const unsubNotify = () => toast.info("Вы удалили игру из избранного")
 export const Game = observer(({game, className}: Props) => {
-    const backColorForScore = useMemo(() => {
-        return game.score > 4.0 ?
-            game.score > 7.5 ? "green" : "#fb9400"
-            :
-            game.score > 0 ? "red" : "#ddd"
-    }, [game.score])
     useError(gamesStore.error)
     return (
         <div className={`${styles.item} ${className}`}>
@@ -37,14 +31,14 @@ export const Game = observer(({game, className}: Props) => {
                     </NavLink>
                 </div>
                 <div className={styles.detail}>
-                    <Platforms game={game}/>
-                    <Genres game={game}/>
+                    <Platforms game={game} navigation={true}/>
+                    <Genres game={game} navigation={true}/>
                     <div>
                         Дата выхода: {game.release_date}
                     </div>
                 </div>
                 <div className={styles.score}>
-                    <span style={{backgroundColor: backColorForScore}}>{game.score}</span>
+                    <span style={{backgroundColor: useBackColorForScore(game.rating)}}>{game.rating}</span>
                 </div>
                 <div className={styles.subForGame}>
                     <span>Следить за игрой</span>
