@@ -14,7 +14,7 @@ export const StarRatingControl = ({userRating, changeRating}: Props) => {
             {[...Array(10)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
-                    <label onMouseEnter={() => setHover(ratingValue)}
+                    <label key={i} onMouseEnter={() => setHover(ratingValue)}
                            onMouseLeave={() => setHover(null)}>
                         <input type="radio" name="rating" value={ratingValue} onClick={() => {
                             changeRating(ratingValue)
