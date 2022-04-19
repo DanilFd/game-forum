@@ -2,7 +2,7 @@ import {api} from "../http";
 import {PaginatedGame} from "../types/Games/PaginatedGame";
 import {GenreType} from "../types/Games/GenreType";
 import {PlatformType} from "../types/Games/PlatformType";
-import {GameType} from "../types/Games/GameType";
+import {GameDetailType} from "../types/Games/GameDetailType";
 
 
 export const getGames = (page = 1,
@@ -39,5 +39,5 @@ export const rateGame = (game_id: number, rate: number) => {
 }
 
 export const getGameDetail = (gameSlug: string) => {
-    return api.get<GameType>(`games/detail/${gameSlug}/`)
+    return api.get<GameDetailType>(`games/detail/${gameSlug}/`)
 }

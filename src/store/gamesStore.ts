@@ -5,6 +5,7 @@ import {calcNumberPages} from "../utils/calcNumberPages";
 import {PlatformType} from "../types/Games/PlatformType";
 import {GenreType} from "../types/Games/GenreType";
 import {subNotify, unsubNotify} from "../pages/games/game/game";
+import {GameDetailType} from "../types/Games/GameDetailType";
 
 class GamesStore {
     games = [] as GameType[]
@@ -33,7 +34,7 @@ class GamesStore {
         max: '' as null | string
     }
     isLoadingGameDetail = true
-    gameDetail = null as null | GameType
+    gameDetail = null as null | GameDetailType
     isLoadingRateGame = false
 
     constructor() {

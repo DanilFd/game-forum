@@ -1,7 +1,8 @@
 import {GenreType} from "./GenreType";
 import {PlatformType} from "./PlatformType";
+import {NewsItemType} from "../News/NewsItemType";
 
-export type GameType = {
+export type GameDetailType = {
     id: number
     img: string
     title: string,
@@ -11,4 +12,12 @@ export type GameType = {
     rating: number
     is_following: boolean
     slug: string
+    developer: string
+    user_rating: number
+    rating_of_other_users: {
+        users_count: number,
+        users_rating: number
+    }
+    screenshots: string[]
+    news: NewsItemType[]
 }

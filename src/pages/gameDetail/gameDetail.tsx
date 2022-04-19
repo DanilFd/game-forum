@@ -14,6 +14,9 @@ import {useBackColorForScore} from "../../hooks/useBackColorForScore";
 import {Modal} from "../../components/modal/modal";
 import {StarRatingControl} from "./startRatingControl/starRatingControl";
 import {declOfNum} from "../../utils/declOfNum";
+import {GameGallery} from "./gameGallery/gameGallery";
+import {FormLoader} from "../../components/header/formLoader/formLoader";
+import {InfoBar} from "./infoBar/infoBar";
 
 export const GameDetail = observer(() => {
         const params = useParams<{ gameSlug: string }>()
@@ -56,30 +59,44 @@ export const GameDetail = observer(() => {
                                          style={{backgroundColor: color}}>
                                         <span className={styles.rating}>{gamesStore.gameDetail?.rating}</span>
                                         <div className={styles.rateGame}>
-                                            <span onClick={() => setIsActiveModal(true)}>оценить игру</span>
+                                        <span
+                                            onClick={() => authStore.isAuth ? setIsActiveModal(true) :
+                                                toast.info('Для этого необходимо авторизоваться.')}>оценить игру</span>
                                             <Modal active={isActiveModal} setActive={setIsActiveModal}>
-                                                <p className={styles.other_users_rating}>
-                                                    <strong>{ratingOfOtherUsers!.users_count}</strong>
-                                                    {declOfNum(ratingOfOtherUsers!.users_count, ['пользователь', 'пользователя', 'пользователей'])} уже {declOfNum(ratingOfOtherUsers!.users_count, ['оценил', 'оценили', 'оценили'])}
-                                                    <strong>{gamesStore.gameDetail?.title}</strong> на {gamesStore.gameDetail?.rating_of_other_users.users_rating} из
-                                                    10
-                                                </p>
-                                                <span className={styles.modalHeading}>Ваша оценка:</span>
-                                                <StarRatingControl changeRating={rateGame}
-                                                                   userRating={gamesStore.gameDetail!.user_rating}/>
+                                                {
+                                                    gamesStore.isLoadingRateGame ?
+                                                        <FormLoader/> :
+                                                        <>
+                                                            <p className={styles.other_users_rating}>
+                                                                <strong>{ratingOfOtherUsers!.users_count}</strong>
+                                                                {declOfNum(ratingOfOtherUsers!.users_count, ['пользователь', 'пользователя', 'пользователей'])} уже {declOfNum(ratingOfOtherUsers!.users_count, ['оценил', 'оценили', 'оценили'])}
+                                                                <strong>{gamesStore.gameDetail?.title}</strong> на {gamesStore.gameDetail?.rating_of_other_users.users_rating} из
+                                                                10
+                                                            </p>
+                                                            <span className={styles.modalHeading}>Ваша оценка:</span>
+                                                            <StarRatingControl changeRating={rateGame}
+                                                                               userRating={gamesStore.gameDetail!.user_rating}/>
+                                                        </>
+                                                }
                                             </Modal>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className={styles.switch}>
-                                    <span>Следить за игрой:</span>
-                                    <Switch
-                                        isChecked={gamesStore.gameDetail!.is_following}
-                                        toggle={() => authStore.isAuth ? gamesStore.toggleFollowing(gamesStore.gameDetail!) :
-                                            toast.info('Для этого необходимо авторизоваться.')}/>
-                                </div>
                             </section>
+                            <section>
+                                <InfoBar
+                                    screenshotsCount={gamesStore.gameDetail ? gamesStore.gameDetail.screenshots.length : 0}
+                                    newsCount={gamesStore.gameDetail ? gamesStore.gameDetail.news.length : 0}
+                                    blogsCount={0}/>
+                                <GameGallery gameScreenshots={gamesStore.gameDetail!.screenshots}/>
+                            </section>
+                            <div className={styles.switch}>
+                                <span>Следить за игрой:</span>
+                                <Switch
+                                    isChecked={gamesStore.gameDetail!.is_following}
+                                    toggle={() => authStore.isAuth ? gamesStore.toggleFollowing(gamesStore.gameDetail!) :
+                                        toast.info('Для этого необходимо авторизоваться.')}/>
+                            </div>
                         </>
                 }
             </main>
