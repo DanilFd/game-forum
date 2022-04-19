@@ -1,0 +1,40 @@
+@import "./src/variables";
+
+.items {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(246, 246, 246);
+  border-radius: 8px;
+}
+
+.item {
+  padding: 10px;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    .title {
+      color: $secondaryColor;
+      border-color: $secondaryColor;
+    }
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  color: rgb(98, 98, 98);
+  border-bottom: 1px dotted rgb(98, 98, 98);
+}
+
+.count {
+  color: rgb(236, 34, 39);
+  line-height: 1;
+  position: absolute;
+  font-size: 13px;
+  top: 0;
+  right: 0;
+}
