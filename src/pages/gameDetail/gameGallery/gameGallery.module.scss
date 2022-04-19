@@ -1,0 +1,80 @@
+@import "./src/variables";
+
+.heading {
+  font-size: 30px;
+  font-weight: 300;
+  padding: 20px 0;
+}
+
+.items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.imgWrapper {
+  width: 32.1%;
+  height: 200px;
+  justify-content: flex-end;
+  cursor: zoom-in;
+
+  img {
+    border-radius: 7px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.imgWrapper:nth-child(1), .imgWrapper:nth-child(2) {
+  width: 49.1%;
+  height: 300px;
+}
+
+.showAllBtn {
+  margin-top: 20px;
+  box-shadow: 1px 1px 3px #0003;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  padding: 15px 30px;
+  border: 2px solid $secondaryColor;
+
+  span {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: $secondaryColor;
+    transform: skew(11deg);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+
+@media (max-width: 1170px) {
+  .items {
+    gap: 15px;
+    .imgWrapper {
+      max-width: 32%;
+      height: 200px;
+    }
+  }
+}
+
+@media (max-width: 810px) {
+  .items {
+    .imgWrapper {
+      width: 370px;
+      max-width: 48%;
+      height: 170px;
+    }
+  }
+}
