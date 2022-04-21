@@ -78,3 +78,15 @@
     }
   }
 }
+@media (max-width: 550px) {
+  .items{
+    flex-wrap: nowrap;
+    flex-direction: column;
+    .imgWrapper {
+      height: 40%;
+      max-height: 40%;
+      width: 100%;
+      max-width: 100%
+    }
+  }
+}

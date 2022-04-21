@@ -62,3 +62,33 @@
 .rightArrow {
   right: 15px;
 }
+@media (max-width: 1170px) {
+  .slide{
+    height: 500px;
+  }
+  .leftArrow,.rightArrow{
+    width: 70px;
+  }
+  .rightArrow{
+    right: 0;
+  }
+}
+@media (max-width: 810px) {
+  .slide{
+    height: 300px;
+  }
+  .rightArrow,.leftArrow{
+    width: 60px;
+  }
+}
+@media (max-width: 550px) {
+  .slide{
+    height: 250px;
+    max-height: 25%;
+    max-width: 70%;
+  }
+  .rightArrow,.leftArrow{
+    width: 50px;
+    font-size: 40px;
+  }
+}
