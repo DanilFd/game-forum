@@ -17,10 +17,12 @@ import {declOfNum} from "../../utils/declOfNum";
 import {GameGallery} from "./gameGallery/gameGallery";
 import {FormLoader} from "../../components/header/formLoader/formLoader";
 import {InfoBar} from "./infoBar/infoBar";
+import {NewsForGameDetail} from "./newsForGameDetail/newsForGameDetail";
 
 export const GameDetail = observer(() => {
         const params = useParams<{ gameSlug: string }>()
         const [isActiveModal, setIsActiveModal] = useState(false)
+        const [isActive, setIsActive] = useState<'news' | 'gallery' | 'blogs'>('gallery')
         useEffect(() => {
             gamesStore.getGameDetail(params.gameSlug)
         }, [params.gameSlug])
@@ -86,9 +88,13 @@ export const GameDetail = observer(() => {
                             <section>
                                 <InfoBar
                                     screenshotsCount={gamesStore.gameDetail ? gamesStore.gameDetail.screenshots.length : 0}
-                                    newsCount={gamesStore.gameDetail ? gamesStore.gameDetail.news.length : 0}
-                                    blogsCount={0}/>
-                                <GameGallery gameScreenshots={gamesStore.gameDetail!.screenshots}/>
+                                    newsCount={gamesStore.gameDetail!.news_count}
+                                    blogsCount={0}
+                                    setIsActive={setIsActive}/>
+                                {isActive === 'gallery' &&
+                                <GameGallery gameScreenshots={gamesStore.gameDetail!.screenshots}/>}
+                                {isActive === 'news' && <NewsForGameDetail news_id={gamesStore.gameDetail!.id}/>}
+
                             </section>
                             <div className={styles.switch}>
                                 <span>Следить за игрой:</span>
