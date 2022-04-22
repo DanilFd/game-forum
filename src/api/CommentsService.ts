@@ -24,5 +24,5 @@ export const createCommentComplaint = (data: CreateComplaintComment) => {
 }
 
 export const rateComment = (data: RateCommentData) => {
-    return api.put(`comments/rate/${data.comment}/`, {rate: data.rate})
+    return api.put<{ rating: number, rate: 'Like' | 'Dislike' | null, available_rate_count: number }>(`comments/rate/${data.comment}/`, {rate: data.rate})
 }

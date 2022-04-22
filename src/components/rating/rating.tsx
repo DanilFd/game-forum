@@ -11,9 +11,9 @@ type Props = {
 
 export const Rating = observer(({rating, rate, rateFunc}: Props) => {
     const backColorForScore = useCallback(() => {
-        if (rating > 100)
+        if (rating >= 100)
             return 'green'
-        if (rating > 50)
+        if (rating >= 50)
             return "#FCBE64"
         if (rating > 0)
             return "#fb9400"

@@ -25,7 +25,7 @@ export const usersSearch = (login: string) => {
 }
 
 export const rateUser = (data: RateUserData) => {
-    return api.put<{ rating: number, rate: 'Like' | 'Dislike' | null }>(`users/rate/${data.login}/`, {rate: data.rate})
+    return api.put<{ rating: number, rate: 'Like' | 'Dislike' | null, available_rate_count: number }>(`users/rate/${data.login}/`, {rate: data.rate})
 }
 
 export const getUserActions = () => {

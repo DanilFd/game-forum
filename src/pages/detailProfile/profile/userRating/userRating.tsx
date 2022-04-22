@@ -20,6 +20,8 @@ export const UserRating = observer(({score, initialRate}: Props) => {
             .then(res => {
                 setRating(res.data.rating)
                 setRate(res.data.rate)
+                toast.success(`Ваша оценка принята. Ваш лимит голосов в сутки - ${res.data.available_rate_count}`)
+
             })
             .catch((e: AxiosError<{ detail?: string }>) => toast.error(e.response ? e.response.data.detail :
                 'Произошла непредвиденная ошибка.'))

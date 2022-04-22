@@ -3,6 +3,7 @@ import {toast} from "react-toastify";
 import commentsStore from "../../../../store/commentsStore";
 import {observer} from "mobx-react-lite";
 import {ScoreForCommentRating} from "../scoreForCommentRating/scoreForCommentRating";
+import {AxiosError} from "axios";
 
 type Props = {
     score: number
@@ -23,8 +24,10 @@ export const CommentRating = observer(({initialRate, score, commentId}: Props) =
             .then(res => {
                 setRating(res.data.rating)
                 setRate(res.data.rate)
+                toast.success(`Ваша оценка принята. Ваш лимит голосов в сутки - ${res.data.available_rate_count}`)
             })
-            .catch(() => toast.error('Произошла непредвиденная ошибка.'))
+            .catch((e: AxiosError<{ detail?: string }>) => toast.error(e.response ? e.response.data.detail :
+                'Произошла непредвиденная ошибка.'))
     }
     return (
         <div>
