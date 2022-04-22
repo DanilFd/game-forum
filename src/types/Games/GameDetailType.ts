@@ -1,6 +1,5 @@
 import {GenreType} from "./GenreType";
 import {PlatformType} from "./PlatformType";
-import {NewsItemType} from "../News/NewsItemType";
 
 export type GameDetailType = {
     id: number
@@ -19,5 +18,5 @@ export type GameDetailType = {
         users_rating: number
     }
     screenshots: string[]
-    news: NewsItemType[]
+    news_count: number
 }

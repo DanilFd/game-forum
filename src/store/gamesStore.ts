@@ -1,11 +1,19 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {GameType} from "../types/Games/GameType";
-import {followUnfollowGame, getGameDetail, getGames, getGenresAndPlatforms, rateGame} from "../api/GamesService";
+import {
+    followUnfollowGame,
+    getGameDetail,
+    getGames,
+    getGenresAndPlatforms,
+    rateGame
+} from "../api/GamesService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 import {PlatformType} from "../types/Games/PlatformType";
 import {GenreType} from "../types/Games/GenreType";
 import {subNotify, unsubNotify} from "../pages/games/game/game";
 import {GameDetailType} from "../types/Games/GameDetailType";
+import {NewsItemType} from "../types/News/NewsItemType";
+import {getNewsForGameDetail} from "../api/NewsService";
 
 class GamesStore {
     games = [] as GameType[]
@@ -36,6 +44,8 @@ class GamesStore {
     isLoadingGameDetail = true
     gameDetail = null as null | GameDetailType
     isLoadingRateGame = false
+    isLoadingNewsForGame = false
+    newsForGameDetail = [] as NewsItemType[]
 
     constructor() {
         makeAutoObservable(this)
@@ -121,6 +131,13 @@ class GamesStore {
                 this.gameDetail!.rating = res.data.game_rating
             }))
             .finally(() => runInAction(() => this.isLoadingRateGame = false))
+    }
+    getNewsForGameDetail = (gameId: number) => {
+        this.isLoadingNewsForGame = true
+        getNewsForGameDetail(gameId)
+            .then(res => runInAction(() => this.newsForGameDetail = res.data))
+            .catch(e => runInAction(() => this.error = e.message))
+            .finally(() => runInAction(() => this.isLoadingNewsForGame = false))
     }
 
 }

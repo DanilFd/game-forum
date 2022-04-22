@@ -2,6 +2,7 @@ import {api} from "../http";
 import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemDetailType} from "../types/News/NewsItemDetailType";
 import {PaginatedNewsItems} from "../types/News/PaginatedNewsItems";
+import {NewsItemType} from "../types/News/NewsItemType";
 
 export const getNews = (slug: string, page = 1) => {
     return api.get<PaginatedNewsItems>('news/list/news/',
@@ -21,4 +22,7 @@ export const getCategoriesAndNewsItemDetail = (newsId: string) => {
 
 export const getFavoritesNews = () => {
     return api.get<PaginatedNewsItems>('news/list/favorites-news/')
+}
+export const getNewsForGameDetail = (gameId: number) => {
+    return api.get<NewsItemType[]>(`news/list/news-for-game/${gameId}/`)
 }
