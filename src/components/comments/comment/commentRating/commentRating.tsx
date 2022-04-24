@@ -4,6 +4,7 @@ import commentsStore from "../../../../store/commentsStore";
 import {observer} from "mobx-react-lite";
 import {ScoreForCommentRating} from "../scoreForCommentRating/scoreForCommentRating";
 import {AxiosError} from "axios";
+import authStore from "../../../../store/authStore";
 
 type Props = {
     score: number
@@ -19,6 +20,9 @@ export const CommentRating = observer(({initialRate, score, commentId}: Props) =
         setRating(score)
     }, [score, initialRate])
     const rateComment = (rateType: 'Dislike' | 'Like') => {
+        if (!authStore.isAuth) {
+            return toast.info('Для этого необходимо авторизоваться.')
+        }
         const newRate = rate === rateType ? null : rateType
         commentsStore.rateComment({comment: commentId, rate: newRate})
             .then(res => {

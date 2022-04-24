@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {AxiosError} from "axios";
 import {useSetRating} from "../../../../hooks/useSetRating";
+import authStore from "../../../../store/authStore";
 
 type Props = {
     score: number
@@ -15,6 +16,9 @@ export const UserRating = observer(({score, initialRate}: Props) => {
     const params = useParams<{ login: string }>()
     const {rate, rating, setRating, setRate} = useSetRating(score, initialRate)
     const rateUser = (rateType: 'Dislike' | 'Like') => {
+        if (!authStore.isAuth) {
+            return toast.info('Для этого необходимо авторизоваться.')
+        }
         const newRate = rate === rateType ? null : rateType
         usersStore.rateUser({login: params.login, rate: newRate})
             .then(res => {
