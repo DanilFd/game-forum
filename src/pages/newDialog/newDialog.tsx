@@ -61,7 +61,7 @@ export const NewDialog = observer(() => {
                                 setActive(true)
                             },
                             required: 'Это обязательное поле',
-                            minLength: {value: 6, message: 'Минимальная длина имени пользователя равна 6 символам.'}
+                            minLength: {value: 5, message: 'Минимальная длина имени пользователя равна 5 символам.'}
                         })} placeholder="Кому" type="text"/>
                         {errors.responder ?
                             <span className={styles.formError}>{errors.responder.message}</span> :

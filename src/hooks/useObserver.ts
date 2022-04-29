@@ -12,7 +12,9 @@ export const useObserver = (ref: MutableRefObject<null>, canLoad: boolean, isLoa
 
         }
         observer.current = new IntersectionObserver(cb)
-        observer.current.observe(ref.current!)
+        if (ref.current) {
+            observer.current.observe(ref.current!)
+        }
         // eslint-disable-next-line
     }, [isLoading])
 }

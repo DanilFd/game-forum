@@ -7,6 +7,7 @@ import {SetState} from "../../../../types/utils/utils";
 import {toast} from "react-toastify";
 import {FormLoader} from "../../../header/formLoader/formLoader";
 import authStore from "../../../../store/authStore";
+import {observer} from "mobx-react-lite";
 
 type CommentsForm = {
     comment: string
@@ -19,7 +20,7 @@ type Props = {
     setSelectedCommentId: SetState<null | number>
 }
 
-export const RespondCommentForm = ({
+export const RespondCommentForm = observer(({
                                        itemId,
                                        setIsShowForm,
                                        isSendingComment,
@@ -58,6 +59,6 @@ export const RespondCommentForm = ({
                 }
             </>
         );
-    }
+    })
 ;
 
