@@ -36,7 +36,6 @@ class CommentsStore {
         if (newComment.parent === null) {
             return this.paginatedNewsComments.results.push(comment)
         }
-
         const parent = findComment(this.paginatedNewsComments!.results, newComment.parent)!
         parent.children.push(comment)
     }

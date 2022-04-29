@@ -5,6 +5,7 @@ import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 import {FoundUser} from "../types/Users/FoundUser";
 import {RateUserData} from "../types/Users/RateUserData";
 import {AvailableUserActions} from "../types/Users/AvailableUserActions";
+import {PaginatedModestUsers} from "../types/Users/ModestUser";
 
 export const getUserProfile = (login: string) => {
     return api.get<ProfileResponse>(`users/profile/${login}/`)
@@ -30,5 +31,12 @@ export const rateUser = (data: RateUserData) => {
 
 export const getUserActions = () => {
     return api.get<AvailableUserActions>('users/actions/')
+}
+
+export const searchUsers = (login: string) => {
+    return api.get<PaginatedModestUsers>('users/search/',
+        {
+            params: {search: login}
+        })
 }
 

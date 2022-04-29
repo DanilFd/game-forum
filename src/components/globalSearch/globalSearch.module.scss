@@ -1,0 +1,138 @@
+.overlay {
+  position: fixed;
+  top: 74px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.panel {
+  padding: 24px;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.container {
+  background-color: #DEDFE1FF;
+  max-width: 865px;
+  margin: 0 auto;
+  height: 55px;
+  border-radius: 16px;
+  display: flex;
+  position: relative;
+}
+
+.input, .select {
+  margin: 5px;
+  font-family: Rubik, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 10px 10px 10px 50px;
+}
+
+.input {
+  flex-grow: 1;
+  border: transparent;
+  background: 0 0;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.select {
+  cursor: pointer;
+  border-radius: 8px;
+  color: white;
+  padding: 10px 12px;
+  text-transform: uppercase;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #24252A url("./arrow-bottom.svg") no-repeat 115px;
+
+  &:hover, &:active {
+    background-color: #161B1DCC;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20px;
+  color: #626262FF;
+  font-size: 22px;
+}
+
+.closeIcon {
+  align-self: center;
+  cursor: pointer;
+  padding: 7px;
+  color: black;
+  font-size: 45px;
+
+  &:hover {
+    color: #161B1DCC;;
+  }
+}
+
+.foundItemsContainer {
+  overflow: hidden;
+  max-height: calc(75vh - 50px);
+  max-width: 865px;
+  margin: 0 auto;
+  gap: 15px;
+  display: flex;
+  padding: 10px 8px;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+
+  &:hover {
+    overflow: auto;
+  }
+
+  &:focus {
+    overflow: auto;
+  }
+}
+
+.foundQuantityContainer {
+  min-height: 59px;
+}
+
+
+@media (max-width: 1300px) {
+  .foundItemsContainer {
+    overflow: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .panel {
+    padding: 10px;
+  }
+  .select {
+    display: none;
+  }
+  .foundItemsContainer {
+    max-height: calc(70vh - 10px);
+  }
+}
+
+@media (max-width: 500px) {
+  .panel {
+    padding: 10px 3px 3px;
+  }
+  .foundItemsContainer {
+    max-height: calc(70vh - 50px);
+  }
+  .foundItemsContainer {
+    gap: 5px;
+    padding: 0 0 5px 10px;
+  }
+
+}

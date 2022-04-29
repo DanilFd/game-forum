@@ -41,3 +41,9 @@ export const rateGame = (game_id: number, rate: number) => {
 export const getGameDetail = (gameSlug: string) => {
     return api.get<GameDetailType>(`games/detail/${gameSlug}/`)
 }
+
+export const searchGames = (title: string, page: number) => {
+    return api.get('games/search/', {
+        params: {search: title, page}
+    })
+}

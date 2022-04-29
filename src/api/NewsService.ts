@@ -3,6 +3,7 @@ import {CategoryType} from "../types/News/CategoryType";
 import {NewsItemDetailType} from "../types/News/NewsItemDetailType";
 import {PaginatedNewsItems} from "../types/News/PaginatedNewsItems";
 import {NewsItemType} from "../types/News/NewsItemType";
+import {PaginatedModestNews} from "../types/News/ModestNewsItem";
 
 export const getNews = (slug: string, page = 1) => {
     return api.get<PaginatedNewsItems>('news/list/news/',
@@ -25,4 +26,10 @@ export const getFavoritesNews = () => {
 }
 export const getNewsForGameDetail = (gameId: number) => {
     return api.get<NewsItemType[]>(`news/list/news-for-game/${gameId}/`)
+}
+
+export const searchNews = (title: string, page: number) => {
+    return api.get<PaginatedModestNews>('news/search/',
+        {params: {search: title, page}}
+    )
 }

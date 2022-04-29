@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: 25px;
+  padding: 15px 0 5px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+}
+
+.container::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.searchType {
+  font-size: 16px;
+  line-height: 24px;
+  color: #929292FF;
+  background-color: rgb(231, 231, 232);
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+
+.searchType.active {
+  background-color: rgb(20, 20, 20);
+  color: rgb(255, 255, 255);
+}
