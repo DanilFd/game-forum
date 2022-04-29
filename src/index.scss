@@ -35,8 +35,23 @@ button {
   background-color: transparent;
   cursor: pointer;
 }
+
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px white inset!important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+body::-webkit-scrollbar, div::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track, div::-webkit-scrollbar-track {
+  background-color: rgb(222, 223, 225);
+}
+
+body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+  background-color: rgb(22, 27, 29);
+  border-radius: 22px;
+  border: 3px solid rgb(222, 223, 225);
 }
 
 @media (max-width: 700px) {
