@@ -1,0 +1,84 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border-radius: 16px;
+  flex: 0 1 32%;
+  overflow: hidden;
+  box-shadow: 0 0 3px #999;
+
+  &:hover {
+    background-color: #F5F5F5FF;
+  }
+}
+
+.cardTop {
+  position: relative;
+  width: 100%;
+}
+
+.cardBottom {
+  padding: 10px 15px;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  height: 183px;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 8, 16, .1) 22%, rgba(4, 8, 13, .65) 40%, #090909);
+}
+
+.rating {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.title {
+  font-weight: 400;
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  bottom: 16px;
+  padding: 0 16px;
+  line-height: 24px;
+}
+
+.infoTitle {
+  color: #00000080;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.infoValue {
+  color: #141414FF;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (max-width: 850px) {
+  .card {
+    flex: 0 1 48%;
+  }
+  .cardTop{
+    height: 200px;
+  }
+}
+@media (max-width: 450px) {
+  .card{
+    flex: 1 1 100%;
+    margin: 10px 20px;
+  }
+}
+
