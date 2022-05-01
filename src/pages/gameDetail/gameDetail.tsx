@@ -89,7 +89,6 @@ export const GameDetail = observer(() => {
                                 <InfoBar
                                     screenshotsCount={gamesStore.gameDetail ? gamesStore.gameDetail.screenshots.length : 0}
                                     newsCount={gamesStore.gameDetail!.news_count}
-                                    blogsCount={0}
                                     setIsActive={setIsActive}/>
                                 {isActive === 'gallery' &&
                                 <GameGallery gameScreenshots={gamesStore.gameDetail!.screenshots}/>}

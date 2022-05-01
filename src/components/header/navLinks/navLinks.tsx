@@ -29,7 +29,7 @@ export const NavLinks = ({setIsSearchActive}: Props) => {
             >
                 <li><NavLink onClick={setIsSearchDisable} to="/news/all?page=1">Новости</NavLink></li>
                 <li><NavLink onClick={setIsSearchDisable} to="/games?page=1">Игры</NavLink></li>
-                <li><NavLink onClick={setIsSearchDisable} to="">Блоги</NavLink></li>
+                <li><NavLink onClick={setIsSearchDisable} to="/blogs/new">Блоги</NavLink></li>
                 <li><NavLink onClick={setIsSearchDisable} to="">Помощь</NavLink></li>
                 <li className={styles.search} onClick={() => setIsSearchActive(prev => !prev)}>
                     <div>
