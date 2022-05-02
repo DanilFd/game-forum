@@ -15,28 +15,31 @@ import authStore from "../store/authStore";
 import {observer} from "mobx-react-lite";
 import {News} from "../pages/news/news";
 import {GameDetail} from "../pages/gameDetail/gameDetail";
+import {Blogs} from "../pages/blogs/blogs";
 
 
 export const Routes = observer(() => {
     return (
         <div className={styles.pageContent}>
-                <Switch>
-                    <Route exact path="/" component={Main}/>
-                    <Route exact path="/news/all" component={News}/>
-                    <Route exact path="/news/:categorySlug" component={News}/>
-                    <Route exact path="/news/:categorySlug/:newsId" component={NewsItemDetail}/>
-                    <Route exact path="/games" component={Games}/>
-                    <Route exact path="/game/:gameSlug" component={GameDetail} />
-                    <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
-                    <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
-                    <Route exact path="/user/:login" component={DetailProfile}/>
-                    {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
-                    {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
-                    {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}
-                    {authStore.isAuth && <Route exact path="/pm/read/:dialogId" component={DialogDetail}/>}
-                    <Route path='/not_found' component={PageNotFound}/>
-                    {!authStore.isLoading && <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>}
-                </Switch>
+            <Switch>
+                <Route exact path="/" component={Main}/>
+                <Route exact path="/news/all" component={News}/>
+                <Route exact path="/news/:categorySlug" component={News}/>
+                <Route exact path="/news/:categorySlug/:newsId" component={NewsItemDetail}/>
+                <Route exact path="/games" component={Games}/>
+                <Route exact path="/game/:gameSlug" component={GameDetail}/>
+                <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
+                <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
+                <Route exact path="/user/:login" component={DetailProfile}/>
+                <Route exact path="/blogs/news" component={Blogs}/>
+                <Route exact path="/blogs/:categorySlug" component={Blogs}/>
+                {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
+                {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
+                {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}
+                {authStore.isAuth && <Route exact path="/pm/read/:dialogId" component={DialogDetail}/>}
+                <Route path='/not_found' component={PageNotFound}/>
+                {!authStore.isLoading && <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>}
+            </Switch>
         </div>
     );
 });

@@ -31,7 +31,6 @@ export const News = observer(() => {
                             <section>
                                 <div className={styles.wrapper}>
                                     <div className={styles.items}>
-
                                         {newsStore.news.map(item => <NewsItem categorySlug={params.categorySlug}
                                                                               key={item.id}
                                                                               item={item}/>)}
