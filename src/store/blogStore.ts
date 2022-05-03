@@ -3,6 +3,7 @@ import {PaginatedBlogs} from "../types/Blogs/BlogItem";
 import {getAllBlogs} from "../api/BlogsService";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {calcNumberPages} from "../utils/calcNumberPages";
+import {BlogsType} from "../pages/blogs/blogs";
 
 class BlogStore {
     constructor() {
@@ -13,9 +14,9 @@ class BlogStore {
     isLoading = true
     error = ''
     totalPages = null as null | number
-    getAllBlogs = (page: number) => {
+    getAllBlogs = (page: number, blogsType: BlogsType) => {
         this.isLoading = true
-        getAllBlogs(page)
+        getAllBlogs(page, blogsType)
             .then(res => {
                 res.data.results.forEach(item => item.creation_date = convertToTodayYesterday(item.creation_date))
                 runInAction(() => {

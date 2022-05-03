@@ -132,9 +132,9 @@ export const GlobalSearch = observer(({setIsSearchActive}: Props) => {
                                         )
                                     })
                                 }
+                                {isSearching && <FormLoader/>}
                             </div>
                         }
-                        {isSearching && <FormLoader/>}
                     </>
                 }
 

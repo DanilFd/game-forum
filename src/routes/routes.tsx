@@ -31,8 +31,7 @@ export const Routes = observer(() => {
                 <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                 <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
                 <Route exact path="/user/:login" component={DetailProfile}/>
-                <Route exact path="/blogs/news" component={Blogs}/>
-                <Route exact path="/blogs/:categorySlug" component={Blogs}/>
+                <Route exact path="/blogs/:slug" component={Blogs}/>
                 {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
                 {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
                 {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}
