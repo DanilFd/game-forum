@@ -27,10 +27,9 @@ export const NavLinks = ({setIsSearchActive}: Props) => {
             <motion.ul
                 {...anim}
             >
-                <li><NavLink onClick={setIsSearchDisable} to="/news/all?page=1">Новости</NavLink></li>
-                <li><NavLink onClick={setIsSearchDisable} to="/games?page=1">Игры</NavLink></li>
-                <li><NavLink onClick={setIsSearchDisable} to="/blogs/new">Блоги</NavLink></li>
-                <li><NavLink onClick={setIsSearchDisable} to="">Помощь</NavLink></li>
+                <li><NavLink activeClassName={styles.active} onClick={setIsSearchDisable} to="/news/all?page=1">Новости</NavLink></li>
+                <li><NavLink activeClassName={styles.active} onClick={setIsSearchDisable} to="/games?page=1">Игры</NavLink></li>
+                <li><NavLink activeClassName={styles.active} onClick={setIsSearchDisable} to="/blogs/new">Блоги</NavLink></li>
                 <li className={styles.search} onClick={() => setIsSearchActive(prev => !prev)}>
                     <div>
                         <AiOutlineSearch/>

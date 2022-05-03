@@ -1,3 +1,4 @@
+@import "./src/variables";
 .nav {
   font-family: 'Rubik', sans-serif;
   display: flex;
@@ -33,4 +34,7 @@ ul {
     width: 15px;
     height: 19px;
   }
+}
+.active{
+  color: $secondaryColor;
 }
