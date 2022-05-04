@@ -5,7 +5,7 @@ import authStore from "../store/authStore";
 import {when} from "mobx";
 
 export const getAllBlogs = async (page: number, blogsType: BlogsType) => {
-    const date = new Date
+    const date = new Date()
     if (blogsType === "my")
         await when(() => !!authStore.user?.login)
     const foundType = {

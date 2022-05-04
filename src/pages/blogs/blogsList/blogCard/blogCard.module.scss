@@ -11,10 +11,12 @@
 .img {
   position: relative;
   flex: 0 0 30%;
+  height: 164px;
 
   img {
     border-radius: 8px;
     object-fit: cover;
+    height: 100%;
     width: 100%;
   }
 }
@@ -41,7 +43,8 @@
   text-decoration: none;
   color: rgb(20, 20, 20);
   font-size: 18px;
-  &:hover{
+
+  &:hover {
     color: $secondaryColor;
     border-bottom: 1px solid $secondaryColor;
   }
@@ -94,12 +97,12 @@
 }
 
 @media (max-width: 590px) {
-  .card{
+  .card {
     flex-direction: column;
     align-items: normal;
     gap: 10px;
   }
-  .articleBeginning{
+  .articleBeginning {
     display: none;
   }
 }

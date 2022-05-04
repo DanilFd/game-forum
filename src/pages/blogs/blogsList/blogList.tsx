@@ -4,10 +4,10 @@ import {Pagination} from "../../../components/pagination/pagination";
 
 type Props = {
     blogs: BlogItem[]
-    totalPages:number
+    totalPages: number
 }
 
-export const BlogList = ({blogs,totalPages}: Props) => {
+export const BlogList = ({blogs, totalPages}: Props) => {
     return (
         <div>
             {blogs.map(blog => <BlogCard key={blog.id} blog={blog}/>)}
