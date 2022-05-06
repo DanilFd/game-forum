@@ -1,0 +1,129 @@
+@import "./src/variables";
+
+.createBlog {
+  background-color: white;
+  display: flex;
+  min-height: 92vh;
+}
+
+.content {
+  flex: 1 1 75%;
+  padding-top: 20px;
+}
+
+
+.blogTitle {
+  width: 100%;
+  resize: none;
+  border: none;
+  font-size: 30px;
+  font-weight: 700;
+  outline: none;
+}
+
+.editorWrapper {
+  padding: 20px 0;
+  border-top: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.uploadFileForm {
+  padding: 10px 10px 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(134, 134, 134);
+  font-size: 15px;
+  font-weight: 400;
+  font-family: Roboto, sans-serif;
+  cursor: pointer;
+
+  svg {
+    font-size: 24px;
+  }
+
+  &:hover {
+    color: black;
+
+    svg {
+      color: $secondaryColor;
+    }
+  }
+}
+
+.actionBtn {
+  box-shadow: 1px 1px 3px #0003;
+  border-radius: 8px;
+  transform: skew(-11deg);
+  padding: 15px 20px;
+  border: 2px solid $secondaryColor;
+
+  span {
+    display: block;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: $secondaryColor;
+    transform: skew(11deg);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: $secondaryColor;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+.draftBtn {
+  text-transform: uppercase;
+  padding: 15px;
+  color: $secondaryColor;
+  font-weight: 500;
+  font-size: 14px;
+
+  &:hover {
+    span {
+      border-bottom: 1px solid $secondaryColor;
+    }
+  }
+}
+
+.formAction {
+  border-top: 1px solid rgb(230, 230, 230);
+  padding: 20px 0;
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.formNote {
+  color: rgb(98, 98, 98);
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+}
+
+.errorsWrapper {
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  color: black;
+  margin: 15px 0;
+
+}
+.errorTitle{
+  display: block;
+  padding: 10px 5px 0;
+}
+.error {
+  padding: 10px 10px;
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .createBlog {
+    flex-direction: column;
+  }
+}

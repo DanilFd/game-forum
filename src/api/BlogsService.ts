@@ -24,3 +24,7 @@ export const getAllBlogs = async (page: number, blogsType: BlogsType) => {
         }
     })
 }
+
+export const createBlog = (data: any) => {
+    return api.post('blogs/create/', data)
+}

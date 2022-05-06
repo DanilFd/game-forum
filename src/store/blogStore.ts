@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {PaginatedBlogs} from "../types/Blogs/BlogItem";
-import {getAllBlogs} from "../api/BlogsService";
+import {createBlog, getAllBlogs} from "../api/BlogsService";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
 import {calcNumberPages} from "../utils/calcNumberPages";
 import {BlogsType} from "../pages/blogs/blogs";
@@ -26,6 +26,9 @@ class BlogStore {
             })
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
+    }
+    createBlog = (data: any) => {
+        return createBlog(data)
     }
 }
 

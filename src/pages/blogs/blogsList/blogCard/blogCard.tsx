@@ -41,7 +41,7 @@ export const BlogCard = ({blog}: Props) => {
                         <span>0</span>
                     </div>
                 </div>
-                <span className={styles.articleBeginning}>{blog.content}</span>
+                <span className={styles.articleBeginning}>{}</span>
             </div>
         </div>
     );
