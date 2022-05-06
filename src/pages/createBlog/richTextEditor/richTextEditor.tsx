@@ -29,6 +29,7 @@ const RichTextEditor = ({onChange, value, isClearEditor, setIsClearEditor}: Prop
             isInstance.current?.blocks.clear()
             setIsClearEditor(false)
         }
+        // eslint-disable-next-line
     }, [isClearEditor])
     const initEditor = () => {
         const editor = new EditorJS({
