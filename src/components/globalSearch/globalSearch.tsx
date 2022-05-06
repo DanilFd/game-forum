@@ -15,6 +15,7 @@ import {useError} from "../../hooks/useError";
 import {AdaptiveSearchType} from "./adaptiveSearchType/adaptiveSearchType";
 import React from "react";
 import {ModestUserItem} from "./cardsForFoundItems/modestUserItem/modestUserItem";
+import {ModestBlogItem} from "./cardsForFoundItems/modestBlogItem/modestBlogItem";
 
 type Props = {
     setIsSearchActive: SetState<boolean>
@@ -38,7 +39,8 @@ export const GlobalSearch = observer(({setIsSearchActive}: Props) => {
         clearSearchItems,
         searchNews,
         searchGame,
-        searchUsers
+        searchUsers,
+        searchBlogs
     } = searchStore
     const {register, handleSubmit, watch, getValues} = useForm<SearchForm>({
         mode: "onChange",
@@ -59,6 +61,8 @@ export const GlobalSearch = observer(({setIsSearchActive}: Props) => {
         type === 'games' && searchGame(data)
             .then(() => setIsTypeChanging(false))
         type === 'users' && searchUsers(data)
+            .then(() => setIsTypeChanging(false))
+        type === 'blogs' && searchBlogs(data)
             .then(() => setIsTypeChanging(false))
     }, 300), [])
     const onSubmit: SubmitHandler<SearchForm> = data => {
@@ -83,7 +87,8 @@ export const GlobalSearch = observer(({setIsSearchActive}: Props) => {
     const FoundItem: FoundItemType = {
         news: ModestNewsItem,
         games: ModestGameItem,
-        users: ModestUserItem
+        users: ModestUserItem,
+        blogs: ModestBlogItem
     }[watch('type')]
     return (
         <div className={styles.overlay}>

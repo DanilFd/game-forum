@@ -4,6 +4,7 @@ import {searchGames} from "../api/GamesService";
 import {calcNumberPages} from "../utils/calcNumberPages";
 import {AxiosResponse} from "axios";
 import {searchUsers} from "../api/UsersService";
+import {searchBlogs} from "../api/BlogsService";
 
 
 class SearchStore {
@@ -39,6 +40,9 @@ class SearchStore {
     }
     searchUsers = (login: string) => {
         return this.searchItems(searchUsers, login)
+    }
+    searchBlogs = (title: string) => {
+        return this.searchItems(searchBlogs, title)
     }
     clearSearchItems = () => {
         if (this.paginatedFoundItems)
