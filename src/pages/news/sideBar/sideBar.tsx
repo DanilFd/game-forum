@@ -43,7 +43,7 @@ export const SideBar = observer(({isNews = true, showAllNewsLink, categories, ur
                             (!isNews && authStore.isAuth) &&
                             <>
                                 <li>
-                                    <NavLink to="/blogs/create" activeClassName={styles.active}>Создать тему</NavLink>
+                                    <NavLink to="/create-blog" activeClassName={styles.active}>Создать тему</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/blogs/my" activeClassName={styles.active}>Мои темы</NavLink>

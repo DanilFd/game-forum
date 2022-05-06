@@ -8,12 +8,10 @@ import Loader from "../../components/loader/loader";
 import {BlogList} from "./blogsList/blogList";
 import {useQuery} from "../../hooks/useQuery";
 import {Redirect, useParams} from "react-router-dom";
+import {blogsCategories} from "../../utils/blogsCategories";
+import authStore from "../../store/authStore";
 
-const blogsCategories = [
-    {id: 1, title: "Новое", slug: "new"},
-    {id: 2, title: "Топ за неделю", slug: 'week'},
-    {id: 3, title: "Топ за все время", slug: 'top'},
-]
+
 export type BlogsType = 'new' | 'week' | 'top' | 'my'
 
 export const Blogs = observer(() => {
@@ -32,6 +30,8 @@ export const Blogs = observer(() => {
         // eslint-disable-next-line
     }, [page, slug])
     if (slug !== 'my' && slug !== 'new' && slug !== 'top' && slug !== 'week')
+        return <Redirect to={'/blogs/new'}/>
+    if (slug === 'my' && !authStore.isAuth)
         return <Redirect to={'/blogs/new'}/>
     return (
         <div className={styles.blogs}>

@@ -16,6 +16,7 @@ import {observer} from "mobx-react-lite";
 import {News} from "../pages/news/news";
 import {GameDetail} from "../pages/gameDetail/gameDetail";
 import {Blogs} from "../pages/blogs/blogs";
+import {CreateBlog} from "../pages/createBlog/createBlog";
 
 
 export const Routes = observer(() => {
@@ -31,6 +32,7 @@ export const Routes = observer(() => {
                 <Route exact path="/reset_password/:uid/:token" component={ResetPassword}/>
                 <Route exact path="/activation/:uid/:token" component={ActivationEmail}/>
                 <Route exact path="/user/:login" component={DetailProfile}/>
+                {authStore.isAuth && <Route exact path="/create-blog" component={CreateBlog}/>}
                 <Route exact path="/blogs/:slug" component={Blogs}/>
                 {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
                 {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
