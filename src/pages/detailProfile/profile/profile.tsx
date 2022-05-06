@@ -3,12 +3,14 @@ import {NavLink} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import {AdditionalInfo} from "./additionalInfo/additionalInfo";
 import {IoIosArrowDown} from "react-icons/all";
-import { useState} from "react";
+import {useState} from "react";
 import {ProfileResponse} from "../../../types/Users/ProfileResponse";
 import {AuthenticatedUser} from "../../../types/Auth/AuthenticatedUser";
 import {ProfileEdit} from "../profileEdit/profileEdit";
 import {UserRating} from "./userRating/userRating";
 import {observer} from "mobx-react-lite";
+import {toast} from "react-toastify";
+import usersStore from "../../../store/usersStore";
 
 type Props = {
     userProfile: ProfileResponse
@@ -42,7 +44,15 @@ export const Profile = observer(({userProfile, authenticatedUser}: Props) => {
                                  <b>{userProfile.last_visit}</b>
                             </span>
                     <div className={styles.writeMessage}>
-                        <NavLink to="#">написать сообщение</NavLink>
+                        <NavLink
+                            onClick={e => {
+                                if (!authenticatedUser) {
+                                    toast.info("Для этого необходимо авторизоваться.")
+                                    return e.preventDefault()
+                                }
+                                usersStore.setUserLoginFromProfile(userProfile.login)
+                            }}
+                            to="/pm/new">написать сообщение</NavLink>
                     </div>
                 </div>
             </div>

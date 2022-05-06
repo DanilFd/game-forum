@@ -26,6 +26,7 @@ class UsersStore {
     error = ''
     foundUsers = [] as FoundUser[]
     userActions = null as null | AvailableUserActions
+    userLoginFromProfile = null as null | string
 
     getProfile = (login: string) => {
         return getUserProfile(login)
@@ -76,6 +77,10 @@ class UsersStore {
                 this.userActions = res.data
             }))
             .catch(e => runInAction(() => this.error = e.message))
+    }
+
+    setUserLoginFromProfile = (login: string) => {
+        this.userLoginFromProfile = login
     }
 }
 

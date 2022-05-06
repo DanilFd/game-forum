@@ -27,7 +27,7 @@ export const DialogDetail = observer(() => {
             const response = {dialog: +params.dialogId, content: data.message}
             dialogsStore.sendMessage(response)
                 .then(() => setValue('message', ''))
-                .catch(() => toast.error('Упс, произошла непредвидденая ошибка.'))
+                .catch(() => toast.error('При отправке сообщении произошла ошибка.'))
         }
         useSubmitByEnterClick(buttonRef)
         useError(dialogsStore.error)

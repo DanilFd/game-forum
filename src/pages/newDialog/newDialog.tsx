@@ -24,13 +24,17 @@ export const NewDialog = observer(() => {
     const buttonRef = useRef(null)
     const [active, setActive] = useState(false)
     const {register, handleSubmit, formState: {errors}, setValue} = useForm<NewMessageForm>({
-        mode: "onChange"
+        mode: "onChange",
+        defaultValues: {responder: usersStore?.userLoginFromProfile || ''}
     });
     useEffect(() => {
         usersStore.getUserActions()
         const removeUserList = () => setActive(false)
         document.addEventListener('click', removeUserList)
         return () => document.removeEventListener('click', removeUserList)
+    }, [])
+    useEffect(() => {
+        return usersStore.setUserLoginFromProfile('')
     }, [])
     const onSubmit: SubmitHandler<NewMessageForm> = data => {
         dialogsStore.createDialog(data)
