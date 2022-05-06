@@ -2,13 +2,16 @@ import EditorJS from "@editorjs/editorjs";
 import {useEffect, useRef} from "react";
 import {toolsConfiguration} from "./editorConfigs/toolsConfiguration";
 import {internationalizationConfiguration} from "./editorConfigs/internationalizationConfiguration";
+import {SetState} from "../../../types/utils/utils";
 
 type Props = {
     onChange: any
     value: any
+    isClearEditor: boolean
+    setIsClearEditor: SetState<boolean>
 }
 const EDITOR_HOLDER_ID = 'editorjs';
-const RichTextEditor = ({onChange, value}: Props) => {
+const RichTextEditor = ({onChange, value, isClearEditor, setIsClearEditor}: Props) => {
     const isInstance = useRef<EditorJS | null>(null)
     useEffect(() => {
         if (!isInstance.current)
@@ -21,6 +24,12 @@ const RichTextEditor = ({onChange, value}: Props) => {
         }
         // eslint-disable-next-line
     }, [])
+    useEffect(() => {
+        if (isClearEditor) {
+            isInstance.current?.blocks.clear()
+            setIsClearEditor(false)
+        }
+    }, [isClearEditor])
     const initEditor = () => {
         const editor = new EditorJS({
             holder: EDITOR_HOLDER_ID,

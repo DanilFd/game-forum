@@ -9,6 +9,7 @@ import blogStore from "../../store/blogStore";
 import {toast} from "react-toastify";
 import {AiOutlineUpload} from "react-icons/all";
 import {AxiosError} from "axios";
+import {useState} from "react";
 
 
 type blogForm = {
@@ -21,6 +22,7 @@ export const CreateBlog = observer(() => {
     const {register, setError, formState: {errors}, handleSubmit, control, watch, reset} = useForm<blogForm>({
         mode: "onSubmit"
     });
+    const [isClearEditor, setIsClearEditor] = useState(false)
     const onSubmit: SubmitHandler<blogForm> = data => {
         if (!data.content.blocks.length)
             return setError('content', {
@@ -58,7 +60,8 @@ export const CreateBlog = observer(() => {
                             control={control}
                             name="content"
                             render={({field: {onChange, value}}) => (
-                                <RichTextEditor value={value} onChange={onChange}/>
+                                <RichTextEditor setIsClearEditor={setIsClearEditor} isClearEditor={isClearEditor}
+                                                value={value} onChange={onChange}/>
                             )}
                         />
                     </div>
@@ -86,9 +89,12 @@ export const CreateBlog = observer(() => {
                         </div>
                     }
                     <div className={styles.formAction}>
-                        <button className={styles.actionBtn} onClick={() => console.log('+')} type="submit">
+                        <button className={styles.actionBtn} type="submit">
                             <span>опубликовать</span></button>
-                        <button onClick={() => reset()} type="button" className={styles.draftBtn}><span>очистить</span>
+                        <button onClick={() => {
+                            setIsClearEditor(true)
+                            reset()
+                        }} type="button" className={styles.draftBtn}><span>очистить</span>
                         </button>
                     </div>
                 </form>
