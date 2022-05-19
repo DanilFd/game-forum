@@ -10,7 +10,8 @@ import {toast} from "react-toastify";
 import {AiOutlineUpload} from "react-icons/all";
 import {AxiosError} from "axios";
 import {useState} from "react";
-
+// @ts-ignore
+import edjsHTML from "editorjs-html"
 
 type blogForm = {
     header: string
@@ -29,11 +30,12 @@ export const CreateBlog = observer(() => {
                 type: "required",
                 message: "Контент не указан."
             })
+        const edjsParser = edjsHTML();
+        const html = edjsParser.parse(data.content).join('');
         const formData = new FormData()
         formData.append('img', data.blogCover[0])
         formData.append('title', data.header)
-        const stringContent = JSON.stringify(data.content.blocks)
-        formData.append('content', stringContent)
+        formData.append('content', html)
         blogStore.createBlog(formData)
             .then(() => toast.success('Ваш блог успешно создан.'))
             .catch((err: AxiosError<{ title?: string[] }>) => toast.error(err.response?.data.title?.[0].replace('Название', 'названием')

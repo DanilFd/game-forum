@@ -1,0 +1,15 @@
+.blogDetail {
+  background-color: white;
+  display: flex;
+  min-height: 92vh;
+}
+
+.content {
+  flex: 1 1 75%;
+}
+
+@media (max-width: 800px) {
+  .blogDetail {
+    flex-direction: column;
+  }
+}

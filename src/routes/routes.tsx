@@ -17,6 +17,7 @@ import {News} from "../pages/news/news";
 import {GameDetail} from "../pages/gameDetail/gameDetail";
 import {Blogs} from "../pages/blogs/blogs";
 import {CreateBlog} from "../pages/createBlog/createBlog";
+import {BlogDetail} from "../pages/blogDetail/blogDetail";
 
 
 export const Routes = observer(() => {
@@ -34,6 +35,7 @@ export const Routes = observer(() => {
                 <Route exact path="/user/:login" component={DetailProfile}/>
                 {authStore.isAuth && <Route exact path="/create-blog" component={CreateBlog}/>}
                 <Route exact path="/blogs/:slug" component={Blogs}/>
+                <Route exact path="/blogs/:slug/:blogId" component={BlogDetail}/>
                 {authStore.isAuth && <Route exact path="/feed" component={Feed}/>}
                 {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
                 {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}

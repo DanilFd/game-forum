@@ -31,7 +31,6 @@ export const SideBar = () => {
                             мне</NavLink></li>
                         <li><NavLink activeClassName={styles.active} to="/pm">Сообщения</NavLink></li>
                         <li><NavLink activeClassName={styles.active} to="/feed">Лента</NavLink></li>
-                        <li><NavLink activeClassName={styles.active} to="/answers">Ответы</NavLink></li>
                     </motion.ul>
                     }
                 </AnimatePresence>

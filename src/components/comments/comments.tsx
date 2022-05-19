@@ -68,8 +68,11 @@ export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isS
                             isSendingComment ?
                                 <FormLoader/> :
                                 <form id="sending_comment_form" onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                    <textarea {...register('comment', {required: "Комментарий не может быть пустым."})}
-                              className={styles.textarea}/>
+                    <textarea {...register('comment', {
+                        required: "Комментарий не может быть пустым.",
+                        maxLength: {value: 100, message: 'Максимальная длина комментария 100 символов.'}
+                    })}
+                              className={styles.textarea}/>,
                                     {errors.comment &&
                                     <span className={styles.errorMessage}>{errors.comment.message}</span>}
                                     <div className={styles.formAction}>

@@ -6,9 +6,10 @@ import {FaRegComment} from "react-icons/all";
 
 type Props = {
     blog: BlogItem
+    slug: string
 }
 
-export const BlogCard = ({blog}: Props) => {
+export const BlogCard = ({blog, slug}: Props) => {
     const backgroundColorForScore = useCallback(() => {
         if (blog.rating > 0)
             return "#008000"
@@ -18,14 +19,14 @@ export const BlogCard = ({blog}: Props) => {
     }, [blog.rating])
     return (
         <div className={styles.card}>
-            <NavLink to="#" className={styles.img}>
+            <NavLink to={`/blogs/${slug}/${blog.id}`} className={styles.img}>
                 <span style={{backgroundColor: backgroundColorForScore()}}
                       className={styles.rating}>{blog.rating > 0 && '+'}{blog.rating}</span>
                 <img src={blog.img} alt=""/>
             </NavLink>
             <div className={styles.description}>
                 <div>
-                    <NavLink to="#" className={styles.title}>
+                    <NavLink to={`/blogs/${slug}/${blog.id}`} className={styles.title}>
                         {blog.title}
                     </NavLink>
                 </div>

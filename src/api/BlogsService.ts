@@ -4,6 +4,8 @@ import {BlogsType} from "../pages/blogs/blogs";
 import authStore from "../store/authStore";
 import {when} from "mobx";
 import {PaginatedBlogsItem} from "../types/Blogs/PaginatedBlogsItem";
+import {BlogDetail} from "../types/Blogs/BlogDetail";
+import {RateBlogData} from "../types/Blogs/RateBlogData";
 
 export const getAllBlogs = async (page: number, blogsType: BlogsType) => {
     const date = new Date()
@@ -34,4 +36,12 @@ export const searchBlogs = (title: string, page: number) => {
     return api.get<PaginatedBlogsItem>('blogs/search/',
         {params: {search: title, page}}
     )
+}
+
+export const getBlogDetail = (blogId: string) => {
+    return api.get<BlogDetail>(`blogs/detail/${blogId}/`)
+}
+
+export const rateBlog = (data: RateBlogData) => {
+    return api.put<{ rating: number, rate: 'Like' | 'Dislike' | null, available_rate_count: number }>(`blogs/rate/${data.blog}/`, {rate: data.rate})
 }

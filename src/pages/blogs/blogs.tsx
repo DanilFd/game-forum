@@ -39,7 +39,7 @@ export const Blogs = observer(() => {
             <main className={styles.content}>
                 <section>
                     <h1 className={styles.header}>Игровые блоги</h1>
-                    {isLoading ? <Loader/> : <BlogList totalPages={totalPages!} blogs={allBlogs!.results}/>}
+                    {isLoading ? <Loader/> : <BlogList slug={slug} totalPages={totalPages!} blogs={allBlogs!.results}/>}
                 </section>
             </main>
         </div>
