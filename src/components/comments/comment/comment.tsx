@@ -21,6 +21,7 @@ type Props = {
     setSelectedCommentId: SetState<null | number>
     selectedCommentId: null | number
     isSendingComment: boolean
+    isNews: boolean
 }
 
 export const Comment = observer(({
@@ -29,12 +30,13 @@ export const Comment = observer(({
                                      newsId,
                                      selectedCommentId,
                                      setSelectedCommentId,
-                                     isSendingComment
+                                     isSendingComment,
+                                     isNews
                                  }: Props) => {
         const isShow = comment.id === selectedCommentId
         const [isShowModal, setIsShowModal] = useState(false)
         const deleteComment = () => {
-            commentsStore.deleteComment(comment.id)
+            commentsStore.deleteComment(comment.id, isNews)
                 .then(() => toast.success('Ваш комментарий удален.'))
                 .catch(() => toast.error('При удалении произошла ошибка.'))
         }
@@ -55,7 +57,7 @@ export const Comment = observer(({
                                         onClick={() => authStore.isAuth ? setIsShowModal(true) : authStore.setIsActiveAuthForm(true)}
                                         className={styles.complain}>Пожаловаться</span>}
                                     <Modal active={isShowModal} setActive={setIsShowModal}>
-                                        <ReportForm commentId={comment.id} setIsShow={setIsShowModal}/>
+                                        <ReportForm commentId={comment.id} setIsShow={setIsShowModal} isNews={isNews}/>
                                     </Modal>
                                     {comment.is_owner &&
                                     <span onClick={deleteComment} className={styles.delete}>Удалить</span>}
@@ -64,7 +66,7 @@ export const Comment = observer(({
                             <div className={styles.content}>
                                 <div className={styles.parentInfo}>
                                     {comment.parent &&
-                                    <span>в ответ на комментарий {findComment(commentsStore.paginatedNewsComments!.results, comment.parent)?.creator.login}</span>
+                                    <span>в ответ на комментарий {findComment(commentsStore.paginatedComments!.results, comment.parent)?.creator.login}</span>
                                     }
                                 </div>
                                 <p>{comment.content}</p>
@@ -81,20 +83,24 @@ export const Comment = observer(({
                 {
                     !comment.is_deleted &&
                     <div className={styles.commentRating}>
-                        <CommentRating score={comment.rating} initialRate={comment.rate} commentId={comment.id}/>
+                        <CommentRating score={comment.rating} initialRate={comment.rate} commentId={comment.id}
+                                       isNews={isNews}/>
                     </div>
                 }
                 {isShow &&
                 <RespondCommentForm setSelectedCommentId={setSelectedCommentId} selectedCommentId={selectedCommentId}
                                     isSendingComment={isSendingComment}
                                     itemId={newsId}
-                                    setIsShowForm={setSelectedCommentId}/>}
+                                    setIsShowForm={setSelectedCommentId}
+                                    isNews={isNews}/>}
                 {comment.children.map(c => <Comment
                     setSelectedCommentId={setSelectedCommentId}
                     selectedCommentId={selectedCommentId}
                     newsId={newsId} key={c.id}
                     isChildren={true} comment={c}
-                    isSendingComment={isSendingComment}/>)}
+                    isSendingComment={isSendingComment}
+                    isNews={isNews}
+                />)}
             </div>
         );
     }

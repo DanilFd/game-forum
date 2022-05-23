@@ -8,6 +8,8 @@ import {useParams} from "react-router-dom";
 import blogStore from "../../store/blogStore";
 import {useError} from "../../hooks/useError";
 import Loader from "../../components/loader/loader";
+import {Comments} from "../../components/comments/comments";
+import commentsStore from "../../store/commentsStore";
 
 export const BlogDetail = observer(() => {
     const params = useParams<{ blogId: string }>()
@@ -25,6 +27,10 @@ export const BlogDetail = observer(() => {
                         <SideBar isNews={false} categories={blogsCategories} url="blogs" showAllNewsLink={false}/>
                         <main className={styles.content}>
                             <BlogContent blogContent={blogDetail!}/>
+                            <Comments paginatedComments={commentsStore.paginatedComments!} itemId={+params.blogId}
+                                      isLoading={commentsStore.isLoading}
+                                      isSendingComment={commentsStore.isSendingComment}
+                                      totalPages={commentsStore.totalPages} isNews={false}/>
                         </main>
                     </>
             }

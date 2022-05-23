@@ -1,7 +1,7 @@
 import styles from "./blogCard.module.scss"
 import {BlogItem} from "../../../../types/Blogs/BlogItem";
 import {NavLink} from "react-router-dom";
-import {useCallback} from "react";
+import React, {useCallback} from "react";
 import {FaRegComment} from "react-icons/all";
 
 type Props = {
@@ -42,7 +42,9 @@ export const BlogCard = ({blog, slug}: Props) => {
                         <span>0</span>
                     </div>
                 </div>
-                <span className={styles.articleBeginning}>{}</span>
+                <span className={styles.articleBeginning}>
+                    <div
+                        dangerouslySetInnerHTML={{__html: blog.content.replaceAll(/<iframe.*>.*<\/iframe>|<ul.*>.*<\/ul>|<ol.*>.*<\/ol>|<img.*\/>|<blockquote.*>.*<\/blockquote>\s-\s[\w\s]*/g, '')}}/></span>
             </div>
         </div>
     );

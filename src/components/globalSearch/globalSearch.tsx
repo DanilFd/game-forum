@@ -66,6 +66,8 @@ export const GlobalSearch = observer(({setIsSearchActive}: Props) => {
             .then(() => setIsTypeChanging(false))
     }, 300), [])
     const onSubmit: SubmitHandler<SearchForm> = data => {
+        if (data.title === '')
+            return
         setIsTypeChanging(true)
         debounced(data.title)
     }

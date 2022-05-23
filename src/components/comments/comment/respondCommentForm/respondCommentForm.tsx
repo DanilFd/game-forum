@@ -18,37 +18,42 @@ type Props = {
     isSendingComment: boolean
     selectedCommentId: number
     setSelectedCommentId: SetState<null | number>
+    isNews: boolean
 }
 
 export const RespondCommentForm = observer(({
-                                       itemId,
-                                       setIsShowForm,
-                                       isSendingComment,
-                                       selectedCommentId,
-                                       setSelectedCommentId
-                                   }: Props) => {
-        const {register, handleSubmit, formState: {errors}, setValue} = useForm<CommentsForm>();
-        const buttonRef = useRef(null)
-        const onSubmit: SubmitHandler<CommentsForm> = data => {
-            const payload = {content: data.comment, news_item: itemId, parent: selectedCommentId}
-            commentsStore.sendingComment(payload)
-                .then(() => {
-                    toast.success('Комментарий успешно добавлен.')
-                    setValue('comment', '')
-                    setSelectedCommentId(null)
-                })
-                .catch(() => toast.error('При отправке комментария произошла ошибка.'))
-        }
-        useSubmitByEnterClick(buttonRef, authStore.isAuth)
-        return (
-            <>
-                {
-                    isSendingComment ?
-                        <FormLoader/> :
-                        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                                                itemId,
+                                                setIsShowForm,
+                                                isSendingComment,
+                                                selectedCommentId,
+                                                setSelectedCommentId,
+                                                isNews
+                                            }: Props) => {
+    const {register, handleSubmit, formState: {errors}, setValue} = useForm<CommentsForm>();
+    const buttonRef = useRef(null)
+    const onSubmit: SubmitHandler<CommentsForm> = data => {
+        const item = isNews ?
+            {news_item: itemId} :
+            {blog_item: itemId}
+        const payload = {content: data.comment, ...item, parent: selectedCommentId}
+        commentsStore.sendComment(payload, isNews)
+            .then(() => {
+                toast.success('Комментарий успешно добавлен.')
+                setValue('comment', '')
+                setSelectedCommentId(null)
+            })
+            .catch(() => toast.error('При отправке комментария произошла ошибка.'))
+    }
+    useSubmitByEnterClick(buttonRef, authStore.isAuth)
+    return (
+        <>
+            {
+                isSendingComment ?
+                    <FormLoader/> :
+                    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                           <textarea {...register('comment', {required: "Комментарий не может быть пустым."})}
                                     className={styles.textarea}/>
-                            {errors.comment && <span className={styles.errorMessage}>{errors.comment.message}</span>}
+                        {errors.comment && <span className={styles.errorMessage}>{errors.comment.message}</span>}
                             <div className={styles.formAction}>
                                 <button ref={buttonRef} type="submit" className={styles.actionBtn}><span>опубликовать</span>
                                 </button>

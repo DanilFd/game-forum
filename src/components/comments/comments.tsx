@@ -12,38 +12,49 @@ import {useObserver} from "../../hooks/useObserver";
 import authStore from "../../store/authStore";
 
 type Props = {
-    paginatedNewsComments: PaginatedCommentTree
+    paginatedComments: PaginatedCommentTree
     itemId: number
     isLoading: boolean
     isSendingComment: boolean
     totalPages: null | number
+    isNews: boolean
 }
 type CommentsForm = {
     comment: string
 }
 
-export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isSendingComment, totalPages}: Props) => {
-        const [selectedCommentId, setSelectedCommentId] = useState<null | number>(null)
-        const [page, setPage] = useState(1)
-        const [isShowTop, setIsShowTop] = useState(false)
-        useEffect(() => {
-            commentsStore.clearComments()
-        }, [])
-        useEffect(() => {
-            commentsStore.getNewsComments(itemId, page)
-            // eslint-disable-next-line
-        }, [page])
-        const buttonRef = useRef(null)
-        const {register, handleSubmit, formState: {errors}, setValue} = useForm<CommentsForm>();
-        const onSubmit: SubmitHandler<CommentsForm> = data => {
-            const request = {content: data.comment, news_item: itemId}
-            commentsStore.sendingComment(request)
-                .then(() => {
-                    toast.success('Комментарий успешно добавлен.')
-                    setValue('comment', '')
-                })
-                .catch(() => toast.error('При отправке комментария произошла ошибка.'))
-        }
+export const Comments = observer(({
+                                      paginatedComments,
+                                      itemId,
+                                      isLoading,
+                                      isSendingComment,
+                                      totalPages,
+                                      isNews
+                                  }: Props) => {
+    const [selectedCommentId, setSelectedCommentId] = useState<null | number>(null)
+    const [page, setPage] = useState(1)
+    const [isShowTop, setIsShowTop] = useState(false)
+    useEffect(() => {
+        commentsStore.clearComments()
+    }, [])
+    useEffect(() => {
+        commentsStore.getComments(itemId, page, isNews)
+        // eslint-disable-next-line
+    }, [page])
+    const buttonRef = useRef(null)
+    const {register, handleSubmit, formState: {errors}, setValue} = useForm<CommentsForm>();
+    const onSubmit: SubmitHandler<CommentsForm> = data => {
+        const item = isNews ?
+            {news_item: itemId} :
+            {blog_item: itemId}
+        const request = {content: data.comment, ...item}
+        commentsStore.sendComment(request, isNews)
+            .then(() => {
+                toast.success('Комментарий успешно добавлен.')
+                setValue('comment', '')
+            })
+            .catch(() => toast.error('При отправке комментария произошла ошибка.'))
+    }
 
         const lastElement = useRef(null)
         useObserver(lastElement, page < totalPages!, isLoading, () => {
@@ -60,7 +71,7 @@ export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isS
                             className={styles.actionBtn}>
                         <span>написать комментарий</span></button>
                 </div>
-                <h2 className={styles.heading}>Комментарии ({paginatedNewsComments?.comments_count || 0})</h2>
+                <h2 className={styles.heading}>Комментарии ({paginatedComments?.comments_count || 0})</h2>
                 {
                     isShowTop && !selectedCommentId &&
                     <>
@@ -88,14 +99,15 @@ export const Comments = observer(({paginatedNewsComments, itemId, isLoading, isS
 
                 }
                 <div id="comments" className={styles.wrapper}>
-                    {paginatedNewsComments?.results.map(comment => <Comment
+                    {paginatedComments?.results.map(comment => <Comment
                         isSendingComment={isSendingComment}
                         setSelectedCommentId={setSelectedCommentId}
                         selectedCommentId={selectedCommentId}
                         newsId={itemId}
                         key={comment.id}
                         isChildren={false}
-                        comment={comment}/>)}
+                        comment={comment}
+                        isNews={isNews}/>)}
                     {isLoading ? <FormLoader/> : <div ref={lastElement} style={{height: 1}}/>}
                 </div>
                 {

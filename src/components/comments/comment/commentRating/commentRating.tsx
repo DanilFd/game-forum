@@ -10,9 +10,10 @@ type Props = {
     score: number
     initialRate: 'Like' | 'Dislike' | null
     commentId: number
+    isNews: boolean
 }
 
-export const CommentRating = observer(({initialRate, score, commentId}: Props) => {
+export const CommentRating = observer(({initialRate, score, commentId, isNews}: Props) => {
     const [rate, setRate] = useState<"Like" | "Dislike" | null>(initialRate)
     const [rating, setRating] = useState<number>(score)
     useEffect(() => {
@@ -24,7 +25,7 @@ export const CommentRating = observer(({initialRate, score, commentId}: Props) =
             return toast.info('Для этого необходимо авторизоваться.')
         }
         const newRate = rate === rateType ? null : rateType
-        commentsStore.rateComment({comment: commentId, rate: newRate})
+        commentsStore.rateNewsComment({comment: commentId, rate: newRate}, isNews)
             .then(res => {
                 setRating(res.data.rating)
                 setRate(res.data.rate)

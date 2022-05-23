@@ -13,9 +13,10 @@ type CreateReportForm = {
 type Props = {
     commentId: number
     setIsShow: SetState<boolean>
+    isNews: boolean
 }
 
-export const ReportForm = ({commentId, setIsShow}: Props) => {
+export const ReportForm = ({commentId, setIsShow, isNews}: Props) => {
     const {register, handleSubmit, formState: {errors}} = useForm<CreateReportForm>({
         defaultValues: {reason: 'Спам'}
     });
@@ -31,7 +32,7 @@ export const ReportForm = ({commentId, setIsShow}: Props) => {
     ]
     const onSubmit: SubmitHandler<CreateReportForm> = data => {
         const payload = {comment: commentId, reason: data.reason, description: data.description}
-        commentsStore.createCommentComplaint(payload)
+        commentsStore.createCommentComplaint(payload, isNews)
             .then(() => {
                 toast.success('Спасибо, ваша жалоба отправлена модераторам.')
                 setIsShow(false)
