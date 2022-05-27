@@ -11,7 +11,7 @@ type Props = {
 export const BlogList = ({blogs, totalPages, slug}: Props) => {
     return (
         <div>
-            {blogs.map(blog => <BlogCard slug={slug} key={blog.id} blog={blog}/>)}
+            {blogs.map(blog => <BlogCard slug={slug} key={blog.id} item={blog}/>)}
             <Pagination pagesCount={totalPages}/>
         </div>
     );

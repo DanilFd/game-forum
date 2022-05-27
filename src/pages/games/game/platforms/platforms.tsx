@@ -12,7 +12,7 @@ export const Platforms = ({game, navigation}: Props) => {
     const pushQuery = usePushQuery()
     return (
         <div>
-            Платформа: {game.platforms.map((p, index) =>
+            Платформа: {game.platforms?.map((p, index) =>
             <React.Fragment key={p.slug}>
                             <span onClick={() => navigation && pushQuery('platform', p.slug)}
                                   className={styles.platform}

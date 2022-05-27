@@ -12,7 +12,7 @@ export const Genres = ({game, navigation = true}: Props) => {
     const pushQuery = usePushQuery()
     return (
         <div>
-            Жанр: {game.genres.map((g, index) =>
+            Жанр: {game.genres?.map((g, index) =>
             <React.Fragment key={g.slug}>
                             <span onClick={() => navigation && pushQuery('genre', g.slug)} className={styles.genre}
                                   key={g.id}>{g.title}</span>

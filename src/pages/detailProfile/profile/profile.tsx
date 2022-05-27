@@ -43,17 +43,20 @@ export const Profile = observer(({userProfile, authenticatedUser}: Props) => {
                         className={styles.lastVisit}>Последнее посещение:
                                  <b>{userProfile.last_visit}</b>
                             </span>
-                    <div className={styles.writeMessage}>
-                        <NavLink
-                            onClick={e => {
-                                if (!authenticatedUser) {
-                                    toast.info("Для этого необходимо авторизоваться.")
-                                    return e.preventDefault()
-                                }
-                                usersStore.setUserLoginFromProfile(userProfile.login)
-                            }}
-                            to="/pm/new">написать сообщение</NavLink>
-                    </div>
+                    {
+                        authenticatedUser?.login !== userProfile.login &&
+                        <div className={styles.writeMessage}>
+                            <NavLink
+                                onClick={e => {
+                                    if (!authenticatedUser) {
+                                        toast.info("Для этого необходимо авторизоваться.")
+                                        return e.preventDefault()
+                                    }
+                                    usersStore.setUserLoginFromProfile(userProfile.login)
+                                }}
+                                to="/pm/new">написать сообщение</NavLink>
+                        </div>
+                    }
                 </div>
             </div>
             {

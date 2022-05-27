@@ -9,11 +9,11 @@ import {AxiosError} from "axios";
 import {toast} from "react-toastify";
 import {Profile} from "./profile/profile";
 import authStore from "../../store/authStore";
+import {MainUserInfo} from "./mainUserInfo/mainUserInfo";
 
 export const DetailProfile = observer(() => {
         const history = useHistory()
         const params = useParams<{ login: string }>()
-
         useEffect(() => {
             usersStore.getProfile(params.login)
                 .catch((err: AxiosError<{ detail: string }>) => {
@@ -26,8 +26,10 @@ export const DetailProfile = observer(() => {
         return (
             <div className={styles.page}>
                 {usersStore.isLoadingProfile ? <Loader/> :
-                    <Profile userProfile={usersStore.userProfile} authenticatedUser={authStore.user!}/>
-
+                    <>
+                        <Profile userProfile={usersStore.userProfile} authenticatedUser={authStore.user!}/>
+                        <MainUserInfo/>
+                    </>
                 }
             </div>
         )

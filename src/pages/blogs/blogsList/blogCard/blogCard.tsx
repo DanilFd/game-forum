@@ -5,38 +5,38 @@ import React, {useCallback} from "react";
 import {FaRegComment} from "react-icons/all";
 
 type Props = {
-    blog: BlogItem
-    slug: string
+    item: BlogItem
+    slug?: string
 }
 
-export const BlogCard = ({blog, slug}: Props) => {
+export const BlogCard = ({item, slug}: Props) => {
     const backgroundColorForScore = useCallback(() => {
-        if (blog.rating > 0)
+        if (item.rating > 0)
             return "#008000"
-        if (blog.rating < 0)
+        if (item.rating < 0)
             return "#ed0d11"
         return "#626262FF"
-    }, [blog.rating])
+    }, [item.rating])
     return (
         <div className={styles.card}>
-            <NavLink to={`/blogs/${slug}/${blog.id}`} className={styles.img}>
+            <NavLink to={`/blogs/${slug}/${item.id}`} className={styles.img}>
                 <span style={{backgroundColor: backgroundColorForScore()}}
-                      className={styles.rating}>{blog.rating > 0 && '+'}{blog.rating}</span>
-                <img src={blog.img} alt=""/>
+                      className={styles.rating}>{item.rating > 0 && '+'}{item.rating}</span>
+                <img src={item.img} alt=""/>
             </NavLink>
             <div className={styles.description}>
                 <div>
-                    <NavLink to={`/blogs/${slug}/${blog.id}`} className={styles.title}>
-                        {blog.title}
+                    <NavLink to={`/blogs/${slug}/${item.id}`} className={styles.title}>
+                        {item.title}
                     </NavLink>
                 </div>
                 <div className={styles.info}>
                     <div className={styles.user}>
-                        <img src={blog.creator.profile_img} alt=""/>
+                        <img src={item.creator.profile_img} alt=""/>
                         <span>Блог</span>
-                        <span>{blog.creator.login}</span>
+                        <span>{item.creator.login}</span>
                     </div>
-                    <span className={styles.creationDate}>{blog.creation_date}</span>
+                    <span className={styles.creationDate}>{item.creation_date}</span>
                     <div className={styles.commentsCount}>
                         <FaRegComment/>
                         <span>0</span>
@@ -44,7 +44,7 @@ export const BlogCard = ({blog, slug}: Props) => {
                 </div>
                 <span className={styles.articleBeginning}>
                     <div
-                        dangerouslySetInnerHTML={{__html: blog.content.replaceAll(/<iframe.*>.*<\/iframe>|<ul.*>.*<\/ul>|<ol.*>.*<\/ol>|<img.*\/>|<blockquote.*>.*<\/blockquote>\s-\s[\w\s]*/g, '')}}/></span>
+                        dangerouslySetInnerHTML={{__html: item.content.replaceAll(/<iframe.*>.*?<\/iframe>|<ul.*>.*?<\/ul>|<ol.*>.*?<\/ol>|<img.*\/>|<blockquote.*>.*?<\/blockquote>\s-\s[\w\s]*/g, '')}}/></span>
             </div>
         </div>
     );

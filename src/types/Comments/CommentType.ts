@@ -15,3 +15,5 @@ type Comment = {
 export type CommentType = Comment & { children: CommentType[] }
 
 export type NewCommentType = Comment
+
+export type CommentWithSource = Comment & { source: { id: number, title: string, is_news_comment: boolean } }

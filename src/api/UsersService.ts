@@ -6,6 +6,7 @@ import {FoundUser} from "../types/Users/FoundUser";
 import {RateUserData} from "../types/Users/RateUserData";
 import {AvailableUserActions} from "../types/Users/AvailableUserActions";
 import {PaginatedModestUsers} from "../types/Users/ModestUser";
+import {IsActiveType} from "../pages/detailProfile/mainUserInfo/mainUserInfo";
 
 export const getUserProfile = (login: string) => {
     return api.get<ProfileResponse>(`users/profile/${login}/`)
@@ -40,3 +41,8 @@ export const searchUsers = (login: string) => {
         })
 }
 
+export const getAdditionalUserInfoList = (userId: number, type: IsActiveType, page: number) => {
+    return api.get<{ results: [], count: number }>(`users/${type}/${userId}/`, {
+        params: {page}
+    })
+}

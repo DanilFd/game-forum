@@ -12,38 +12,38 @@ import authStore from "../../../store/authStore";
 import {useBackColorForScore} from "../../../hooks/useBackColorForScore";
 
 type Props = {
-    game: GameType
+    item: GameType
     className?: string
 }
 export const subNotify = () => toast.info("Вы добавили игру в избранное")
 export const unsubNotify = () => toast.info("Вы удалили игру из избранного")
-export const Game = observer(({game, className}: Props) => {
+export const Game = observer(({item, className}: Props) => {
     useError(gamesStore.error)
     return (
         <div className={`${styles.item} ${className}`}>
-            <NavLink to={`/game/${game.slug}`} className={styles.img}>
-                <img src={game.img} alt=""/>
+            <NavLink to={`/game/${item.slug}`} className={styles.img}>
+                <img src={item.img} alt=""/>
             </NavLink>
             <div className={styles.info}>
                 <div>
-                    <NavLink to={`/game/${game.slug}`}>
-                        {game.title}
+                    <NavLink to={`/game/${item.slug}`}>
+                        {item.title}
                     </NavLink>
                 </div>
                 <div className={styles.detail}>
-                    <Platforms game={game} navigation={true}/>
-                    <Genres game={game} navigation={true}/>
+                    <Platforms game={item} navigation={true}/>
+                    <Genres game={item} navigation={true}/>
                     <div>
-                        Дата выхода: {game.release_date}
+                        Дата выхода: {item.release_date}
                     </div>
                 </div>
                 <div className={styles.score}>
-                    <span style={{backgroundColor: useBackColorForScore(game.rating)}}>{game.rating}</span>
+                    <span style={{backgroundColor: useBackColorForScore(item.rating)}}>{item.rating}</span>
                 </div>
                 <div className={styles.subForGame}>
                     <span>Следить за игрой</span>
-                    <Switch isChecked={game.is_following}
-                            toggle={() => authStore.isAuth ? gamesStore.toggleFollowing(game) :
+                    <Switch isChecked={item.is_following}
+                            toggle={() => authStore.isAuth ? gamesStore.toggleFollowing(item) :
                                 toast.info('Для этого необходимо авторизоваться.')}
                     />
                 </div>

@@ -1,0 +1,10 @@
+.game {
+  width: 90%;
+  margin: 0 !important;
+}
+
+@media (max-width: 550px) {
+  .game {
+    width: 100%;
+  }
+}

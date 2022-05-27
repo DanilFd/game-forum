@@ -35,7 +35,7 @@ export const Games = observer(() => {
                         <section className={styles.items}>
                             {
 
-                                gamesStore.games.map(game => <Game game={game} key={game.id}/>)
+                                gamesStore.games.map(game => <Game item={game} key={game.id}/>)
                             }
                         </section>
                         <section>

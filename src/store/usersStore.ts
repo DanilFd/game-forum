@@ -5,7 +5,7 @@ import {
     postSetUserPassword,
     putProfileEdit,
     rateUser,
-    usersSearch
+    usersSearch, getAdditionalUserInfoList
 } from "../api/UsersService";
 import {ProfileResponse} from "../types/Users/ProfileResponse";
 import {convertToTodayYesterday} from "../utils/convertToTodayYesterday";
@@ -13,6 +13,8 @@ import {DataForSetUserPassword} from "../types/Users/DataForSetUserPassword";
 import {FoundUser} from "../types/Users/FoundUser";
 import {RateUserData} from "../types/Users/RateUserData";
 import {AvailableUserActions} from "../types/Users/AvailableUserActions";
+import {IsActiveType} from "../pages/detailProfile/mainUserInfo/mainUserInfo";
+import {calcNumberPages} from "../utils/calcNumberPages";
 
 class UsersStore {
     constructor() {
@@ -27,6 +29,11 @@ class UsersStore {
     foundUsers = [] as FoundUser[]
     userActions = null as null | AvailableUserActions
     userLoginFromProfile = null as null | string
+    isLoadingAdditionalData = true
+    additionalUserInfoList = []
+    loadedDataType = 'comments' as IsActiveType
+    totalPages = 0
+    currentPage = 1
 
     getProfile = (login: string) => {
         return getUserProfile(login)
@@ -81,6 +88,25 @@ class UsersStore {
 
     setUserLoginFromProfile = (login: string) => {
         this.userLoginFromProfile = login
+    }
+
+    getAdditionalUserInfoList = (userId: number, type: IsActiveType) => {
+        this.isLoadingAdditionalData = true
+        getAdditionalUserInfoList(userId, type, this.currentPage)
+            .then(res => runInAction(() => {
+                this.loadedDataType = type
+                this.totalPages = calcNumberPages(res.data.count)
+                if (this.currentPage === 1)
+                    return this.additionalUserInfoList = res.data.results
+                this.additionalUserInfoList = [...this.additionalUserInfoList, ...res.data.results]
+            }))
+            .catch(e => runInAction(() => this.error = e.message))
+            .finally(() => runInAction(() => {
+                this.isLoadingAdditionalData = false
+            }))
+    }
+    setCurrentPage = (page: number) => {
+        this.currentPage = page
     }
 }
 
