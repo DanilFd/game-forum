@@ -139,6 +139,9 @@ class GamesStore {
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoadingNewsForGame = false))
     }
+    clearError = () => {
+        this.error = ''
+    }
 
 }
 

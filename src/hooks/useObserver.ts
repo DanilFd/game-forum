@@ -9,7 +9,6 @@ export const useObserver = (ref: MutableRefObject<null>, canLoad: boolean, isLoa
             if (entries[0].isIntersecting && canLoad) {
                 callback()
             }
-
         }
         observer.current = new IntersectionObserver(cb)
         if (ref.current) {

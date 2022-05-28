@@ -44,7 +44,7 @@
   cursor: pointer;
   border-radius: 8px;
   color: white;
-  padding: 10px 12px;
+  padding: 10px 35px 10px 12px;
   text-transform: uppercase;
   border: none !important;
   box-shadow: none !important;
@@ -52,7 +52,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: #24252A url("./arrow-bottom.svg") no-repeat 115px;
+  background: #24252A url("./arrow-bottom.svg") no-repeat 145px;
 
   &:hover, &:active {
     background-color: #161B1DCC;

@@ -11,7 +11,6 @@ class BlogStore {
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true})
     }
-
     allBlogs = null as null | PaginatedBlogs
     isLoading = true
     error = ''
@@ -45,6 +44,9 @@ class BlogStore {
     }
     rateBlog = (data: RateBlogData) => {
         return rateBlog(data)
+    }
+    clearError = () => {
+        this.error = ''
     }
 
 }

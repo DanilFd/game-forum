@@ -73,7 +73,9 @@ export const Comment = observer(({
                                 {
                                     !isShow && <div className={styles.answerButton}>
                                         <CgMailReply/>
-                                        <button onClick={() => setSelectedCommentId(comment.id)}><span>Ответить</span>
+                                        <button
+                                            onClick={() => authStore.isAuth ? setSelectedCommentId(comment.id) : authStore.setIsActiveAuthForm(true)}>
+                                            <span>Ответить</span>
                                         </button>
                                     </div>
                                 }

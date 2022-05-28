@@ -12,7 +12,7 @@ export type IsActiveType = 'comments' | 'favorite_games' | 'rated_games' | 'blog
 
 export const MainUserInfo = observer(() => {
     const [isActive, setIsActive] = useState<IsActiveType>("comments")
-    const {blogs_count, games_count, comments_count, id} = usersStore.userProfile
+    const {blogs_count, games_count, comments_count, id} = usersStore.userProfile!
     useEffect(() => {
         usersStore.setCurrentPage(1)
     }, [isActive])

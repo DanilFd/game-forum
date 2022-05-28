@@ -36,13 +36,14 @@ class UsersStore {
     currentPage = 1
 
     getProfile = (login: string) => {
-        return getUserProfile(login)
+        getUserProfile(login)
             .then(res => {
                 runInAction(() => {
                     res.data.last_visit = convertToTodayYesterday(res.data.last_visit)
                     this.userProfile = res.data
                 })
             })
+            .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoadingProfile = false))
     }
     profileEdit = (data: FormData) => {
@@ -107,6 +108,9 @@ class UsersStore {
     }
     setCurrentPage = (page: number) => {
         this.currentPage = page
+    }
+    clearError = () => {
+        this.error = ''
     }
 }
 

@@ -9,7 +9,6 @@ import authStore from "../../store/authStore";
 import {toast} from "react-toastify";
 import {Genres} from "../games/game/genres/genres";
 import {Platforms} from "../games/game/platforms/platforms";
-import {useError} from "../../hooks/useError";
 import {useBackColorForScore} from "../../hooks/useBackColorForScore";
 import {Modal} from "../../components/modal/modal";
 import {StarRatingControl} from "./startRatingControl/starRatingControl";
@@ -18,6 +17,7 @@ import {GameGallery} from "./gameGallery/gameGallery";
 import {FormLoader} from "../../components/header/formLoader/formLoader";
 import {InfoBar} from "./infoBar/infoBar";
 import {NewsForGameDetail} from "./newsForGameDetail/newsForGameDetail";
+import {useErrorRedirect} from "../../hooks/useErrorRedirect";
 
 export const GameDetail = observer(() => {
         const params = useParams<{ gameSlug: string }>()
@@ -25,8 +25,8 @@ export const GameDetail = observer(() => {
         const [isActive, setIsActive] = useState<'news' | 'gallery' | 'blogs'>('gallery')
         useEffect(() => {
             gamesStore.getGameDetail(params.gameSlug)
-        }, [params.gameSlug])
-        useError(gamesStore.error)
+            // eslint-disable-next-line
+        }, [params.gameSlug, authStore.isAuth])
         const color = useBackColorForScore(gamesStore.gameDetail ? gamesStore.gameDetail.rating : 0)
         const rateGame = (rating: number) => {
             gamesStore.rateGame(gamesStore.gameDetail!.id, rating)
@@ -37,11 +37,13 @@ export const GameDetail = observer(() => {
                 .catch(() => toast.error('При оценке игры произошла ошибка.'))
         }
         const ratingOfOtherUsers = gamesStore.gameDetail?.rating_of_other_users
+    useErrorRedirect(gamesStore.error, gamesStore.clearError)
         return (
             <main className={styles.layout}>
                 {
                     gamesStore.isLoadingGameDetail ?
                         <Loader/> :
+                        gamesStore.gameDetail &&
                         <>
                             <section className={styles.gameOverview}>
                                 <div className={styles.gameDetails}>

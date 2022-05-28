@@ -12,8 +12,9 @@ class NewsStore {
     isLoading = false
     isLoadingCategoriesAndNewsItemDetail = true
     error = ''
-    newsItemDetail = {} as NewsItemDetailType
+    newsItemDetail = null as null | NewsItemDetailType
     totalPages = null as number | null
+
     constructor() {
         makeAutoObservable(this, {}, {autoBind: true})
     }
@@ -67,6 +68,7 @@ class NewsStore {
             .catch(e => runInAction(() => this.error = e.message))
             .finally(() => runInAction(() => this.isLoading = false))
     }
+    clearErrorNewsItemDetail = () => this.error = ''
 }
 
 export default new NewsStore()
