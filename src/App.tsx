@@ -7,6 +7,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 import authStore from "./store/authStore";
 import {PageNotFound} from "./components/pageNotFound/pageNotFound";
+import {Footer} from "./components/footer/footer";
 
 function App() {
     useEffect(() => authStore.checkAuth(), [])
@@ -18,6 +19,7 @@ function App() {
                     <div className="container">
                         <Header/>
                         <Routes/>
+                        <Footer/>
                     </div> :
                     <PageNotFound/>
             }

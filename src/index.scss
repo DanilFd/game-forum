@@ -5,6 +5,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $mainBackgroundColor;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 * {

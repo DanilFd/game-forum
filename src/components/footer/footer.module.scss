@@ -1,0 +1,102 @@
+.footer {
+  background-color: #24252A;
+  padding: 32px;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+
+.raw {
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  font-size: 16px;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+}
+
+.logoImg {
+  width: 135px;
+  height: 70px;
+}
+
+.logoTitle {
+  color: #FFFFFF80;
+}
+
+.socialLinksWrapper {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  width: 333px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+
+    &:hover {
+      fill: rgb(146, 146, 146);
+    }
+  }
+}
+
+.navLinksWrapper {
+  display: flex;
+  gap: 15px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: rgb(146, 146, 146);
+  }
+}
+
+.contactsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactTitle {
+  color: white;
+  font-weight: 500;
+  display: flex;
+  gap: 2px;
+  font-size: 18px;
+}
+
+.contactDescription {
+  font-size: 14px;
+  color: #929292;
+}
+
+@media (max-width: 620px) {
+  .footer {
+    padding: 32px 16px;
+  }
+  .raw {
+    align-items: center;
+    flex-direction: column;
+  }
+  .logoWrapper {
+    align-self: flex-start;
+  }
+  .contactsWrapper {
+    align-self: flex-start;
+  }
+  .navLinksWrapper {
+    gap: 50px;
+  }
+  .socialLinksWrapper {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
