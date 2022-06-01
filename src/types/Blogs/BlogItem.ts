@@ -9,6 +9,7 @@ export type BlogItem = {
     vies_count: number
     content: string
     creator: ModestUserForBlog
+    comments_count: number
 
 }
 

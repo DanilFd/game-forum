@@ -39,7 +39,7 @@ export const BlogCard = ({item, slug}: Props) => {
                     <span className={styles.creationDate}>{item.creation_date}</span>
                     <div className={styles.commentsCount}>
                         <FaRegComment/>
-                        <span>0</span>
+                        <span>{item.comments_count}</span>
                     </div>
                 </div>
                 <span className={styles.articleBeginning}>

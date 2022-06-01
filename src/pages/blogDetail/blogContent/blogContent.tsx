@@ -18,7 +18,7 @@ export const BlogContent = ({blogContent}: Props) => {
                     <div className={styles.infoWrapper}>
                         <CompactProfile user={blogContent.creator}/>
                         <div className={styles.creationDate}><span>{blogContent.creation_date}</span></div>
-                        <div className={styles.comments}><span>{0}</span> <FaRegComment/></div>
+                        <div className={styles.comments}><span>{blogContent.comments_count}</span> <FaRegComment/></div>
                         <div className={styles.views}><span>{blogContent.views_count}</span> <AiOutlineEye/></div>
                         <div className={styles.favorite}><BsBookmark/><span>Избранное(0)</span></div>
                     </div>
