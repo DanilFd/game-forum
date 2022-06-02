@@ -12,11 +12,11 @@ export type GameDetailType = {
     is_following: boolean
     slug: string
     developer: string
-    user_rating: number
+    user_rating: number | null
     rating_of_other_users: {
         users_count: number,
         users_rating: number
-    }
+    } | null
     screenshots: string[]
     news_count: number
 }

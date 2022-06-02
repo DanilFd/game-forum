@@ -12,7 +12,7 @@ type Props = {
 export const ModestNewsItem = ({item, setIsSearchActive}: Props) => {
     return (
         <NavLink to={`/news/all/${item.id}`} onClick={() => setIsSearchActive(false)} className={styles.card}>
-            <img className={styles.image} src={item.image} alt=""/>
+            <img className={styles.image} src={item.img} alt=""/>
             <div className={styles.info}>
                 <span className={styles.cardType}>Новость</span>
                 <h3 className={styles.title}>{item.title}</h3>

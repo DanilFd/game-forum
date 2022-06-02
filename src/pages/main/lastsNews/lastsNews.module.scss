@@ -1,0 +1,31 @@
+.lastsNews {
+  border-radius: 16px;
+  padding: 24px 32px;
+  background-color: white;
+}
+
+.newsList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+  font-size: 20px;
+  color: black;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+@media (max-width: 770px) {
+  .newsList {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .lastsNews {
+    padding: 10px;
+  }
+}
+

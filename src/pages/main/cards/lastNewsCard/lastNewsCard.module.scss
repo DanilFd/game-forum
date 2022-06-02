@@ -1,0 +1,66 @@
+.newsCard {
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
+  padding: 24px 0 24px 32px;
+  border-bottom: 1px solid rgb(246, 246, 246);
+  flex: 0 1 50%;
+}
+
+.newsCard:nth-child(odd) {
+  padding: 24px 32px 24px 0;
+  border-right: 1px solid rgb(246, 246, 246);
+}
+
+.img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #929292;
+}
+
+.commentsCount {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  svg {
+    font-size: 18px;
+  }
+}
+
+.title {
+  color: black;
+  font-size: 16px;
+  line-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
+@media (max-width: 770px) {
+  .newsCard {
+    padding: 10px 0;
+    border-right: none !important;
+
+  }
+}

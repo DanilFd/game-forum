@@ -6,7 +6,7 @@ type Game = {
 export type NewsItemType = {
     id: number
     title: string,
-    image: string,
+    img: string,
     creation_date: string
     categories?: [
         {

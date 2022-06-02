@@ -16,7 +16,7 @@ function App() {
         <>
             {
                 pathname !== "/not_found" ?
-                    <div className="container">
+                    <div className="appContainer">
                         <Header/>
                         <Routes/>
                         <Footer/>

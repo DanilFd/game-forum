@@ -20,7 +20,7 @@ export const NewsItem = ({item, categorySlug, games}: Props) => {
             <div className={styles.newsItem}>
                 <NavLink className={styles.articleImg}
                          to={`/news/${categorySlug ? categorySlug : "all"}/${item.id}`}>
-                    <img src={item.image} alt=""/>
+                    <img src={item.img} alt=""/>
                 </NavLink>
                 <div className={styles.articleDescription}>
                     <div className={styles.description}>

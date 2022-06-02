@@ -5,9 +5,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $mainBackgroundColor;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
 
 * {
@@ -28,6 +25,14 @@ code {
 .container {
   max-width: 1170px;
   margin: auto;
+}
+
+.appContainer {
+  max-width: 1170px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 button {

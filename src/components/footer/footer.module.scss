@@ -1,9 +1,10 @@
 .footer {
   background-color: #24252A;
-  padding: 32px;
+  padding: 32px 32px 10px;
   display: flex;
   gap: 30px;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .raw {

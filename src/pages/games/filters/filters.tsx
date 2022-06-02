@@ -19,8 +19,8 @@ export type FiltersForm = {
     slider2: { value: number }
 }
 
-const DEFAULT_MIN_YEAR = 2015
-const DEFAULT_MAX_YEAR = 2021
+const DEFAULT_MIN_YEAR = 2021
+const DEFAULT_MAX_YEAR = 2022
 export const Filters = observer(() => {
     const history = useHistory()
     const query = useQuery()

@@ -37,7 +37,7 @@ export const GameDetail = observer(() => {
                 .catch(() => toast.error('При оценке игры произошла ошибка.'))
         }
         const ratingOfOtherUsers = gamesStore.gameDetail?.rating_of_other_users
-    useErrorRedirect(gamesStore.error, gamesStore.clearError)
+        useErrorRedirect(gamesStore.error, gamesStore.clearError)
         return (
             <main className={styles.layout}>
                 {
@@ -61,29 +61,37 @@ export const GameDetail = observer(() => {
                                     </div>
                                     <div className={styles.gameRating}
                                          style={{backgroundColor: color}}>
-                                        <span className={styles.rating}>{gamesStore.gameDetail?.rating}</span>
-                                        <div className={styles.rateGame}>
+                                        {
+                                            gamesStore.gameDetail.user_rating ?
+                                                <>
+                                                    <span
+                                                        className={styles.rating}>{gamesStore.gameDetail?.rating}</span>
+                                                    <div className={styles.rateGame}>
                                         <span
                                             onClick={() => authStore.isAuth ? setIsActiveModal(true) :
                                                 toast.info('Для этого необходимо авторизоваться.')}>оценить игру</span>
-                                            <Modal active={isActiveModal} setActive={setIsActiveModal}>
-                                                {
-                                                    gamesStore.isLoadingRateGame ?
-                                                        <FormLoader/> :
-                                                        <>
-                                                            <p className={styles.other_users_rating}>
-                                                                <strong>{ratingOfOtherUsers!.users_count}</strong>
-                                                                {declOfNum(ratingOfOtherUsers!.users_count, ['пользователь', 'пользователя', 'пользователей'])} уже {declOfNum(ratingOfOtherUsers!.users_count, ['оценил', 'оценили', 'оценили'])}
-                                                                <strong>{gamesStore.gameDetail?.title}</strong> на {gamesStore.gameDetail?.rating_of_other_users.users_rating} из
-                                                                10
-                                                            </p>
-                                                            <span className={styles.modalHeading}>Ваша оценка:</span>
-                                                            <StarRatingControl changeRating={rateGame}
-                                                                               userRating={gamesStore.gameDetail!.user_rating}/>
-                                                        </>
-                                                }
-                                            </Modal>
-                                        </div>
+                                                        <Modal active={isActiveModal} setActive={setIsActiveModal}>
+                                                            {
+                                                                gamesStore.isLoadingRateGame ?
+                                                                    <FormLoader/> :
+                                                                    <>
+                                                                        <p className={styles.other_users_rating}>
+                                                                            <strong>{ratingOfOtherUsers!.users_count}</strong>
+                                                                            {declOfNum(ratingOfOtherUsers!.users_count, ['пользователь', 'пользователя', 'пользователей'])} уже {declOfNum(ratingOfOtherUsers!.users_count, ['оценил', 'оценили', 'оценили'])}
+                                                                            <strong>{gamesStore.gameDetail?.title}</strong> на {gamesStore.gameDetail!.rating_of_other_users!.users_rating} из
+                                                                            10
+                                                                        </p>
+                                                                        <span
+                                                                            className={styles.modalHeading}>Ваша оценка:</span>
+                                                                        <StarRatingControl changeRating={rateGame}
+                                                                                           userRating={gamesStore.gameDetail!.user_rating!}/>
+                                                                    </>
+                                                            }
+                                                        </Modal>
+                                                    </div>
+                                                </> : <span
+                                                    className={styles.releaseDate}>Дата выхода {gamesStore.gameDetail.release_date}</span>
+                                        }
                                     </div>
                                 </div>
                             </section>

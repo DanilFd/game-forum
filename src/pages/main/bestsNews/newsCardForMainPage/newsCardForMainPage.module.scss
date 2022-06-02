@@ -1,0 +1,106 @@
+.newsCard {
+  color: white;
+  overflow: hidden;
+  position: relative;
+  border-radius: 16px;
+}
+
+.mobile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 300px;
+}
+
+@media (max-width: 500px) {
+  .mobile {
+    height: 200px;
+  }
+}
+
+.normal {
+  height: 222px;
+  flex: 0 1 32%;
+}
+
+.big {
+  flex: 0 1 49%;
+  height: 341px;
+  margin-bottom: 2%;
+
+  .title {
+    font-size: 24px;
+    line-height: 25px;
+    margin-bottom: 16px;
+  }
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(2, 8, 16, .1) 55%, rgba(4, 8, 13, .46) 74%, #090909 100%),
+  linear-gradient(to top, rgba(2, 8, 16, .1) 55%, rgba(4, 8, 13, .10) 74%, #090909 100%);
+
+}
+
+
+.cardBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 24px;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.info {
+  color: #ffffff80;
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.countsInfo {
+  display: flex;
+  gap: 5px;
+}
+
+.countsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  svg {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+
+}
