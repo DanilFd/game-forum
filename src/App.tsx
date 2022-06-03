@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import authStore from "./store/authStore";
 import {PageNotFound} from "./components/pageNotFound/pageNotFound";
 import {Footer} from "./components/footer/footer";
+import {ErrorBoundary} from "react-error-boundary";
+import {UnexpectedError} from "./pages/unexpectedError/unexpectedError";
 
 function App() {
     useEffect(() => authStore.checkAuth(), [])
@@ -17,9 +19,11 @@ function App() {
             {
                 pathname !== "/not_found" ?
                     <div className="appContainer">
-                        <Header/>
-                        <Routes/>
-                        <Footer/>
+                        <ErrorBoundary FallbackComponent={UnexpectedError}>
+                            <Header/>
+                            <Routes/>
+                            <Footer/>
+                        </ErrorBoundary>
                     </div> :
                     <PageNotFound/>
             }

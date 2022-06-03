@@ -18,6 +18,7 @@ import {GameDetail} from "../pages/gameDetail/gameDetail";
 import {Blogs} from "../pages/blogs/blogs";
 import {CreateBlog} from "../pages/createBlog/createBlog";
 import {BlogDetail} from "../pages/blogDetail/blogDetail";
+import {AdminRedirectPage} from "../pages/adminRedirectPage/adminRedirectPage";
 
 
 export const Routes = observer(() => {
@@ -40,6 +41,7 @@ export const Routes = observer(() => {
                 {authStore.isAuth && <Route exact path="/pm" component={Messages}/>}
                 {authStore.isAuth && <Route exact path="/pm/new" component={NewDialog}/>}
                 {authStore.isAuth && <Route exact path="/pm/read/:dialogId" component={DialogDetail}/>}
+                <Route exact path="/admin" component={AdminRedirectPage}/>
                 <Route path='/not_found' component={PageNotFound}/>
                 {!authStore.isLoading && <Route path='*' component={() => <Redirect to={'/not_found'}/>}/>}
             </Switch>
