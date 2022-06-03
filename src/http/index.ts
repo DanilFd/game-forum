@@ -3,7 +3,7 @@ import authStore, {ACCESS_TOKEN, isDeprecated} from "../store/authStore";
 import jwtDecode from "jwt-decode";
 import {DecodedToken} from "../types/Auth/DecodedToken";
 
-const API_URL = 'https://react-bac.herokuapp.com/api/'
+const API_URL = 'http://localhost:8000/api/'
 
 export const api = axios.create({
     withCredentials: true,
