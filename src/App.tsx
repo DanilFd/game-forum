@@ -14,6 +14,9 @@ import {UnexpectedError} from "./pages/unexpectedError/unexpectedError";
 function App() {
     useEffect(() => authStore.checkAuth(), [])
     const {pathname} = useLocation()
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
     return (
         <>
             {
