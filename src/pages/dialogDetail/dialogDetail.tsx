@@ -54,7 +54,13 @@ export const DialogDetail = observer(() => {
                                                 <FormLoader/> :
                                                 <form onSubmit={handleSubmit(onSubmit)} className={styles.sendingMessage}>
                                                 <textarea {...register('message',
-                                                    {required: "Сообщение не должно быть пустым."})}
+                                                    {
+                                                        required: "Сообщение не должно быть пустым.",
+                                                        maxLength: {
+                                                            value: 150,
+                                                            message: "Максимальная длинна сообщения равна 150 символам."
+                                                        }
+                                                    })}
                                                           name="message"/>
                                                     {errors.message &&
                                                     <span className={styles.error}>{errors.message.message}</span>}
