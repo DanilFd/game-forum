@@ -62,7 +62,7 @@ export const GameDetail = observer(() => {
                                     <div className={styles.gameRating}
                                          style={{backgroundColor: color}}>
                                         {
-                                            gamesStore.gameDetail.user_rating || gamesStore.gameDetail.user_rating === 0 ?
+                                            gamesStore.gameDetail.is_released ?
                                                 <>
                                                     <span
                                                         className={styles.rating}>{gamesStore.gameDetail?.rating}</span>

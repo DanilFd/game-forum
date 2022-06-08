@@ -19,4 +19,5 @@ export type GameDetailType = {
     } | null
     screenshots: string[]
     news_count: number
+    is_released: boolean
 }
