@@ -7,7 +7,7 @@ import NestedList from '@editorjs/nested-list';
 // @ts-ignore
 import ImageTool from '@editorjs/image';
 
-const URL_BY_FILE = 'http://localhost:8000/api/blogs/upload-img/'
+const URL_BY_FILE = 'https://react-bac.herokuapp.com/api/blogs/upload-img/'
 export const toolsConfiguration = {
     list: {
         class: NestedList,
