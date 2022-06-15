@@ -5,11 +5,12 @@ import {FaRegComments} from "react-icons/all";
 
 type Props = {
     item: BestBlogForWeek
+    isNews:boolean
 }
 
-export const CardFowWidget = ({item}: Props) => {
+export const CardFowWidget = ({item,isNews}: Props) => {
     return (
-        <NavLink to={`/blogs/new/${item.id}`} className={styles.blogCard}>
+        <NavLink to={`/${isNews ? 'news/all' : 'blogs/new'}/${item.id}`} className={styles.blogCard}>
             <img className={styles.img} src={item.img} alt=""/>
             <span className={styles.creationDate}>{item.creation_date}</span>
             <span className={styles.title}>{item.title}</span>

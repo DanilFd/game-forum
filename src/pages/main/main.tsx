@@ -18,9 +18,9 @@ export const Main = observer(() => {
     return (
         <div className={styles.homePage}>
             <BestsNews/>
-            <Widget title="Популярные блоги" items={homePageStore.bestsBlogsForWeek}/>
+            <Widget title="Популярные блоги" items={homePageStore.bestsBlogsForWeek} isNews={false}/>
             <LastsNews/>
-            <Widget title="Все обсуждают" items={homePageStore.discussedNews}/>
+            <Widget title="Все обсуждают" items={homePageStore.discussedNews} isNews={true}/>
         </div>
     );
 });

@@ -7,12 +7,13 @@ import 'swiper/swiper-bundle.css';
 type Props = {
     title: string
     items: any[]
+    isNews:boolean
 }
 
-export const Widget = ({items, title}: Props) => {
+export const Widget = ({items, title,isNews}: Props) => {
     return (
         <div className={styles.widget}>
-            <Slider title={title} renderItem={(item) => <CardFowWidget item={item}/>}
+            <Slider title={title} renderItem={(item) => <CardFowWidget isNews={isNews} item={item}/>}
                     items={items}/>
         </div>
     );
